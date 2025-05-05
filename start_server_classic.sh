@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo ./installs/openssl/bin/openssl s_server -cert certificates/classic/server.crt -CAfile certificates/classic/ca.crt -key certificates/classic/server.key -accept 0.0.0.0:443 -trace -verify 1 -verify_return_error

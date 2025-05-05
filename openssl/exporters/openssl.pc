@@ -1,0 +1,9 @@
+prefix=/home/secpat/Desktop/QUBIP/qubip_csic_mbedtls/installs/openssl
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib64
+includedir=${prefix}/include 
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Version: 3.3.2
+Requires: libssl libcrypto

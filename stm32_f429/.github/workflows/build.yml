@@ -1,0 +1,33 @@
+name: STM32 Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: STM32CubeIDE build
+      uses: xanderhendriks/action-build-stm32cubeide@v13.0
+      with:
+        project-path: '.'  # Specifica la cartella principale del progetto
+        project-target: 'qubip-mqtt-client-mbedtls1v3/Release'  # Specifica il target di build (es. Debug o Release)
+
+    - name: List Release directory contents
+      run: ls Release/ -lha
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: artifact
+        path: Release/qubip-mqtt-client-mbedtls1v3.elf
+
