@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2024-2025, Security Pattern srl. All rights reserved.
- */
+Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
+SPDX-License-Identifier: MIT
+*/
 
 #include "mbedtls/qubip.h"
 #include "mbedtls/ecp.h"
