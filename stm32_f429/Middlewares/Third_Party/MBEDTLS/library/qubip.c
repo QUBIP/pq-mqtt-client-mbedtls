@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024-2025, Security Pattern srl. All rights reserved.
+ */
+
 #include "mbedtls/qubip.h"
 #include "mbedtls/ecp.h"
 #include "se-qubip.h"
