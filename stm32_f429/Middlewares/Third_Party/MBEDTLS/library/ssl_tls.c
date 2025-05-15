@@ -9571,7 +9571,7 @@ int mbedtls_ssl_write_sig_alg_ext(mbedtls_ssl_context *ssl, unsigned char *buf,
      * Write supported_signature_algorithms
      */
     supported_sig_alg = p;
-    const uint16_t *sig_alg = mbedtls_ssl_get_sig_algs(ssl); //TODO: AGGIUNGERE ID CORRISPONDENTE A ED25519+DLITHIUM
+    const uint16_t *sig_alg = mbedtls_ssl_get_sig_algs(ssl); 
     if (sig_alg == NULL) {
         return MBEDTLS_ERR_SSL_BAD_CONFIG;
     }

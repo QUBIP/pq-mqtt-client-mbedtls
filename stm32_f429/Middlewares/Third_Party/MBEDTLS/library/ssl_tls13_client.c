@@ -298,7 +298,7 @@ int qubip_generate_and_write_key_exchange(
 	memcpy(buf + keypair->x25519_pk_size, keypair->mlkem_768_pk,keypair->mlkem_768_pk_size);
 #endif
 	ssl->handshake->xxdh_psa_bits = (keypair->x25519_pk_size + keypair->mlkem_768_pk_size) * 8;
-	ssl->handshake->xxdh_psa_privkey = keypair; //TODO: RICORDATI DI CAMBIARE QUANDO RECUPERA L'ID (ssl_tsl13_client.c:287
+	ssl->handshake->xxdh_psa_privkey = keypair; 
 
 	return 0;
 }
