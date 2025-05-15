@@ -1,3 +1,8 @@
+/*
+Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
+SPDX-License-Identifier: MIT
+*/
+
 #ifndef QUBIP_H
 #define QUBIP_H
 
