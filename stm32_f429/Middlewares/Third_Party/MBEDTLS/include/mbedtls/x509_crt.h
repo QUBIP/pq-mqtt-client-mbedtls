@@ -335,7 +335,7 @@ extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next;
  */
 extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb;
 
-extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suite_custom; //DAVIDE ADDED CUSTOM CRT SUITE
+extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suite_custom;
 
 /**
  * Empty profile that allows nothing. Useful as a basis for constructing

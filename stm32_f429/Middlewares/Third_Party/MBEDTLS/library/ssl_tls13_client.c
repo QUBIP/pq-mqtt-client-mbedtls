@@ -226,7 +226,7 @@ static int ssl_tls13_get_default_group_id(mbedtls_ssl_context *ssl,
     }
 
     for (; *group_list != 0; group_list++) {
-    	if(*group_list != MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768) //DAVIDE: FORCE HYBRID GROUP EXT
+    	if(*group_list != MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768) 
     		continue;
 
     	*group_id =*group_list;
@@ -268,7 +268,6 @@ static int ssl_tls13_get_default_group_id(mbedtls_ssl_context *ssl,
  *      } KeyShareClientHello;
  */
 
-//DAVIDE create pq keyshare
 
 int qubip_generate_and_write_key_exchange(
     mbedtls_ssl_context *ssl,
@@ -345,7 +344,7 @@ static int ssl_tls13_write_key_share_ext(mbedtls_ssl_context *ssl,
      * only one key share entry is allowed.
      */
 
-    //DAVIDE GUARDARE QUI
+
     client_shares = p;
 #if defined(PSA_WANT_ALG_ECDH) || defined(PSA_WANT_ALG_FFDH)
     if (mbedtls_ssl_tls13_named_group_is_ecdhe(group_id) ||
@@ -374,7 +373,7 @@ static int ssl_tls13_write_key_share_ext(mbedtls_ssl_context *ssl,
         MBEDTLS_PUT_UINT16_BE(key_exchange_len, group, 2);
     } else
 #endif /* PSA_WANT_ALG_ECDH || PSA_WANT_ALG_FFDH */
-    if (group_id == MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768) { //DAVIDE CREATE SHARE HYBRID KEM
+    if (group_id == MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768) { 
         /* Do something */
     	//SEGUIRE FALSARIGA DI  mbedtls_ssl_tls13_generate_and_write_xxdh_key_exchange NECESSaRIO AGIUNGERE ALG TYPE E KEY TYPE
     	unsigned char *group = p;
@@ -683,7 +682,7 @@ static int ssl_tls13_write_psk_key_exchange_modes_ext(mbedtls_ssl_context *ssl,
     /* Skip writing extension if no PSK key exchange mode
      * is enabled in the config.
      */
-    if (!mbedtls_ssl_conf_tls13_is_some_psk_enabled(ssl)){// || ssl->handshake->offered_group_id == 0x6399) { //DAVIDE REMOVE PSK STUFF
+    if (!mbedtls_ssl_conf_tls13_is_some_psk_enabled(ssl)){
         MBEDTLS_SSL_DEBUG_MSG(3, ("skip psk_key_exchange_modes extension"));
         return 0;
     }
@@ -2059,7 +2058,7 @@ static int ssl_tls13_process_server_hello(mbedtls_ssl_context *ssl)
 
     MBEDTLS_SSL_DEBUG_MSG(2, ("=> %s", __func__));
 
-    MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_tls13_fetch_handshake_msg( //DAVIDE: DA CHECKARE SE QUALCOSA NON VA DOWN thE LINE
+    MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_tls13_fetch_handshake_msg( 
                              ssl, MBEDTLS_SSL_HS_SERVER_HELLO, &buf, &buf_len));
 
     ret = ssl_tls13_preprocess_server_hello(ssl, buf, buf + buf_len);

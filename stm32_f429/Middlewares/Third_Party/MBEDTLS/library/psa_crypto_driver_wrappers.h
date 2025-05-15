@@ -2665,7 +2665,6 @@ static inline psa_status_t psa_driver_wrapper_key_agreement(
     psa_status_t status = PSA_ERROR_CORRUPTION_DETECTED;
     psa_key_location_t location;
 
-    //DAVIDE: IDEM COME SOPRA DA TOGLIERE SE PASSIAMO A SLOT
     if(alg == PSA_ALG_PQ_ECDH_MLKEM){
     	location = PSA_KEY_LOCATION_LOCAL_STORAGE;
     } else {

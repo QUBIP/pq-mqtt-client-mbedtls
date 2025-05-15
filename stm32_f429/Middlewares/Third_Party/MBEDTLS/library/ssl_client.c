@@ -672,7 +672,7 @@ static int ssl_write_client_hello_body(mbedtls_ssl_context *ssl,
      * MUST be the last extension in the ClientHello.
      */
     if (propose_tls13 && mbedtls_ssl_conf_tls13_is_some_psk_enabled(ssl)) {
-        ret = mbedtls_ssl_tls13_write_identities_of_pre_shared_key_ext( //TODO: DAVIDE DACCI UN OCCHIO
+        ret = mbedtls_ssl_tls13_write_identities_of_pre_shared_key_ext( 
             ssl, p, end, &output_len, binders_len);
         if (ret != 0) {
             return ret;
@@ -927,7 +927,7 @@ int mbedtls_ssl_write_client_hello(mbedtls_ssl_context *ssl)
                              ssl, MBEDTLS_SSL_HS_CLIENT_HELLO,
                              &buf, &buf_len));
 
-    MBEDTLS_SSL_PROC_CHK(ssl_write_client_hello_body(ssl, buf, //DAVIDE QUI ALloca BUF
+    MBEDTLS_SSL_PROC_CHK(ssl_write_client_hello_body(ssl, buf,
                                                      buf + buf_len,
                                                      &msg_len,
                                                      &binders_len));

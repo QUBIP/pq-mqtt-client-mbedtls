@@ -142,11 +142,11 @@ const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
     MBEDTLS_X509_ID_FLAG(MBEDTLS_MD_SHA384),
     /* Only ECDSA */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_PK_ECDSA) |
-    MBEDTLS_X509_ID_FLAG(MBEDTLS_PK_ECKEY), //DAVIDE ADD PK EDDSA SUPPORT TO SUITE
+    MBEDTLS_X509_ID_FLAG(MBEDTLS_PK_ECKEY),
 #if defined(MBEDTLS_PK_HAVE_ECC_KEYS)
     /* Only NIST P-256 and P-384 */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_ECP_DP_SECP256R1) |
-    MBEDTLS_X509_ID_FLAG(MBEDTLS_ECP_DP_SECP384R1), //DAVIDE ADD Ed22519 CURVE SUPPORT TO SUITE
+    MBEDTLS_X509_ID_FLAG(MBEDTLS_ECP_DP_SECP384R1), 
 #else /* MBEDTLS_PK_HAVE_ECC_KEYS */
     0,
 #endif /* MBEDTLS_PK_HAVE_ECC_KEYS */
@@ -155,17 +155,17 @@ const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
 
 
 /*
- * DAVIDE CUSTOM PROFILE
+ *  CUSTOM PROFILE
  */
 const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suite_custom =
 {
     /* Only SHA-256 and 384 */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_MD_EDDSA),
     /* Only ECDSA */
-	MBEDTLS_X509_ID_FLAG(MBEDTLS_PK_EDDSA), //DAVIDE ADD PK EDDSA SUPPORT TO SUITE
+	MBEDTLS_X509_ID_FLAG(MBEDTLS_PK_EDDSA),
 #if defined(MBEDTLS_PK_HAVE_ECC_KEYS)
     /* Only NIST P-256 and P-384 */
-	MBEDTLS_X509_ID_FLAG(MBEDTLS_ECP_DP_ED25519), //DAVIDE ADD Ed22519 CURVE SUPPORT TO SUITE
+	MBEDTLS_X509_ID_FLAG(MBEDTLS_ECP_DP_ED25519), 
 #else /* MBEDTLS_PK_HAVE_ECC_KEYS */
     0,
 #endif /* MBEDTLS_PK_HAVE_ECC_KEYS */
@@ -191,7 +191,7 @@ const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_none =
 static int x509_profile_check_md_alg(const mbedtls_x509_crt_profile *profile,
                                      mbedtls_md_type_t md_alg)
 {
-    if (md_alg == MBEDTLS_MD_NONE) { //DAVIDE: WE SHOULD ALLOW NONE ALGO CAUSE ED25519 HASHES INTERNALLY
+    if (md_alg == MBEDTLS_MD_NONE) { 
         return -1;
     }
 
@@ -213,11 +213,11 @@ static int x509_profile_check_pk_alg(const mbedtls_x509_crt_profile *profile,
         return -1;
     }
 
-    if ((profile->allowed_pks & MBEDTLS_X509_ID_FLAG(pk_alg)) != 0 || pk_alg == MBEDTLS_PK_ED25519_MLDSA65) { //DAVIDE PK_ALG ID FOLLOW OQS NUMBERING, FORCE CHECK INSTEAD OF CHANGING CHECK CAUSE ID MAY BE ALTERED IN THE FUTURE
+    if ((profile->allowed_pks & MBEDTLS_X509_ID_FLAG(pk_alg)) != 0 || pk_alg == MBEDTLS_PK_ED25519_MLDSA65) { 
         return 0;
     }
 
-    if ((profile->allowed_pks & MBEDTLS_X509_ID_FLAG(pk_alg)) != 0 || pk_alg == MBEDTLS_PK_ED25519_MLDSA44) { //DAVIDE PK_ALG ID FOLLOW OQS NUMBERING, FORCE CHECK INSTEAD OF CHANGING CHECK CAUSE ID MAY BE ALTERED IN THE FUTURE
+    if ((profile->allowed_pks & MBEDTLS_X509_ID_FLAG(pk_alg)) != 0 || pk_alg == MBEDTLS_PK_ED25519_MLDSA44) { 
         return 0;
     }
 
@@ -247,7 +247,7 @@ static int x509_profile_check_key(const mbedtls_x509_crt_profile *profile,
     if (pk_alg == MBEDTLS_PK_ECDSA ||
         pk_alg == MBEDTLS_PK_ECKEY ||
         pk_alg == MBEDTLS_PK_ECKEY_DH ||
-		pk_alg == MBEDTLS_PK_EDDSA) { //DAVIDE ADD CHECK FOR EDDSA
+		pk_alg == MBEDTLS_PK_EDDSA) { 
 
         const mbedtls_ecp_group_id gid = mbedtls_pk_get_ec_group_id(pk);
 
@@ -2169,7 +2169,7 @@ static int x509_crt_check_signature(const mbedtls_x509_crt *child,
     psa_algorithm_t hash_alg = mbedtls_md_psa_alg_from_type(child->sig_md);
     psa_status_t status = PSA_ERROR_CORRUPTION_DETECTED;
 
-    //DAVIDE HANDLE WETHER WE SHOULD COPY THE INPUT OR USE A HASH FUNC
+    
     if(hash_alg == MBEDTLS_MD_EDDSA){
     	hash = malloc(child->tbs.len);
     	hash_size = child->tbs.len;
@@ -2620,7 +2620,7 @@ static int x509_crt_verify_chain(
         }
 
         /* Check signature algorithm: MD & PK algs */
-        if (x509_profile_check_md_alg(profile, child->sig_md) != 0){// && !(child->sig_pk == MBEDTLS_PK_EDDSA && child->sig_md == MBEDTLS_MD_NONE)) { //DAVIDE: DA CAPIRE MA IIRC IN EDDSA E` IMPLICITO SHA512 QUINDI NEL PARSING NON VIENE DICHIARATO ESPLICITAMENTE
+        if (x509_profile_check_md_alg(profile, child->sig_md) != 0){
             *flags |= MBEDTLS_X509_BADCERT_BAD_MD;
         }
 

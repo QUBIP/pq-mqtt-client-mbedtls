@@ -63,7 +63,7 @@ static inline const mbedtls_ecp_keypair *mbedtls_pk_ec_ro(const mbedtls_pk_conte
         case MBEDTLS_PK_ECKEY:
         case MBEDTLS_PK_ECKEY_DH:
         case MBEDTLS_PK_ECDSA:
-        case MBEDTLS_PK_EDDSA: //DAVIDE: ADDING EDDSA ALGORITHM
+        case MBEDTLS_PK_EDDSA:
             return (const mbedtls_ecp_keypair *) (pk).MBEDTLS_PRIVATE(pk_ctx);
         default:
             return NULL;

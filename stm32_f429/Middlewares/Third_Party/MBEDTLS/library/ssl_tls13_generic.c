@@ -270,7 +270,6 @@ static int ssl_tls13_parse_certificate_verify(mbedtls_ssl_context *ssl,
         goto error;
     }
 
-    //DAVIDE: REMEMBER TO CHECK SIZES AND STUFF WHEN ALG IS MBEDTLS_MD_EDDSA SINCE NO HASH SHOULD BE PERFROMED
     hash_alg = mbedtls_md_psa_alg_from_type(md_alg);
     if (hash_alg == 0) {
         goto error;
@@ -292,7 +291,6 @@ static int ssl_tls13_parse_certificate_verify(mbedtls_ssl_context *ssl,
     p += 2;
     MBEDTLS_SSL_CHK_BUF_READ_PTR(p, end, signature_len);
 
-    //DAVIDE: NECESSARY CAUSE ED DOESN'T HASH
     size_t verify_hash_size;
     if(md_alg == MBEDTLS_MD_EDDSA){
     		verify_hash = malloc(verify_buffer_len);

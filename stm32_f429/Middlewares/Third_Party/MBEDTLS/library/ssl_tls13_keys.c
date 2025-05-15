@@ -1497,7 +1497,7 @@ static int ssl_tls13_key_schedule_stage_handshake(mbedtls_ssl_context *ssl)
             psa_status_t status = PSA_ERROR_GENERIC_ERROR;
             psa_key_attributes_t key_attributes = PSA_KEY_ATTRIBUTES_INIT;
 
-            if(handshake->offered_group_id != MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768){ //DAVIDE: NON DOBBIAMO PER PQ PERCHE ABBIAMO MESSO IN xxdh_privkey direttamente la chiave e non l'id
+            if(handshake->offered_group_id != MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768){
 				status = psa_get_key_attributes(handshake->xxdh_psa_privkey,
 												&key_attributes);
 				if (status != PSA_SUCCESS) {

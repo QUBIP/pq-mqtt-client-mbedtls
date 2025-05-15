@@ -116,9 +116,9 @@ extern const mbedtls_pk_info_t mbedtls_eckeydh_info;
 #if defined(MBEDTLS_PK_CAN_ECDSA_SOME)
 extern const mbedtls_pk_info_t mbedtls_ecdsa_info;
 #endif
-//DAVIDE EDDSA
+
 extern const mbedtls_pk_info_t mbedtls_eddsa_info;
-//DAVIDE PQ (MIGRARE IN QBIP EVENTUALMENTE
+
 extern const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info;
 typedef struct  {
 	unsigned char *ed_pub_key;

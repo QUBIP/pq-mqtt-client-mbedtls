@@ -3979,7 +3979,7 @@ int mbedtls_ecp_read_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
 #endif
 #if defined(MBEDTLS_ECP_EDWARDS_ENABLED)
     if (mbedtls_ecp_get_type(&key->grp) == MBEDTLS_ECP_TYPE_EDWARDS) {
-        MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary_le(&key->d, buf, buflen)); //DAVIDE QUI LEGGE PRIVKEY DA BINARIO
+        MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary_le(&key->d, buf, buflen));
     }
 #endif
 

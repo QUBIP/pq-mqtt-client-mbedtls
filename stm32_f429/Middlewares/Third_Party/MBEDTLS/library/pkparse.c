@@ -507,7 +507,7 @@ static int pk_get_pk_alg(unsigned char **p, const unsigned char *end,
 		return MBEDTLS_ERR_PK_INVALID_ALG;
 	}
 
-	if (*pk_alg == MBEDTLS_PK_EDDSA) { //DAVIDE: MAYBE ADD ALSO PQ
+	if (*pk_alg == MBEDTLS_PK_EDDSA) { 
 		*ec_grp_id = MBEDTLS_ECP_DP_ED25519;
 	}
 
@@ -574,7 +574,7 @@ int mbedtls_pk_parse_subpubkey(unsigned char **p, const unsigned char *end,
 #endif /* MBEDTLS_RSA_C */
 #if defined(MBEDTLS_PK_HAVE_ECC_KEYS)
 	if (pk_alg == MBEDTLS_PK_ECKEY_DH || pk_alg == MBEDTLS_PK_ECKEY
-			|| pk_alg == MBEDTLS_PK_EDDSA) { //DAVIDE NON SONO CERTO ABBIA SENSO MA PROVO
+			|| pk_alg == MBEDTLS_PK_EDDSA) { 
 #if defined(MBEDTLS_PK_HAVE_RFC8410_CURVES)
 		if (MBEDTLS_PK_IS_RFC8410_GROUP_ID(ec_grp_id)
 				|| ec_grp_id == MBEDTLS_ECP_DP_ED25519) {
@@ -593,7 +593,7 @@ int mbedtls_pk_parse_subpubkey(unsigned char **p, const unsigned char *end,
 
 	if (pk_alg == MBEDTLS_PK_ED25519_MLDSA65
 			|| pk_alg == MBEDTLS_PK_ED25519_MLDSA44) {
-		//DAVIDE QUI PARSING TUTTE COSE: Iniziamo hardcoded e poi passiamo ad asn1
+		
 		ret = qubip_parse_hybrid_public_key(pk, p, end);
 	} else {
 		ret = MBEDTLS_ERR_PK_UNKNOWN_PK_ALG;
@@ -784,7 +784,6 @@ int qubip_parse_hybrid_private_key(mbedtls_pk_context *pk, unsigned char *p,
 	return 0;
 }
 
-//DAVIDE MIGRARE IN qubip.c / qbip.c
 
 int qubip_parse_hybrid_public_key(mbedtls_pk_context *pk, unsigned char **p,
 		unsigned char *end) {
