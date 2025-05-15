@@ -118,4 +118,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
 		const unsigned char *sig, size_t sig_len);
 ```
-  
+
+Furthermore, the certificate parsing functionalities have been expanded to include support for Hybrid PQ certificates in file [pk_parse.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/3630bfed4f078bb3ca768471d9a94a54948cf460/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/pkparse.c#L594)
+
+A few examples of Hybrid PQ certificates have been hardcoded in file [MQTTInterfacte.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/3630bfed4f078bb3ca768471d9a94a54948cf460/stm32_f429/Middlewares/Third_Party/MQTT/MQTTInterface.c#L485)
