@@ -96,4 +96,13 @@ The remote server IP and hostname can be configured as:
 
 The STM32 prints its output onto its serial port on PIN PD8 which can be found on the back of the board
 
+## Introduction of Hybrid Post-Quantum cryptography
 
+The TLS handshake has been agumented with Hybrid PQ capabilities by introducing a new KEM and a new signature mechanism. \
+These are, respectively X25519-MLKEM768 and Ed25519-MLDSA.
+
+The functions responsible for the KEM can be found in [qubip.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/qubip.c):
+```
+HybridKeyKEM *hybrid_key_gen();
+void hybrid_key_free(HybridKeyKEM *);
+```
