@@ -1,6 +1,6 @@
 # MQTTs client with Post-Quantum TLS Using mbedtls
 The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3.  \
-A local PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support of PQ cryptography. \
+A local PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support of PQ cryptography.
 
 To do so, the following components need to be compiled: 
 
@@ -63,18 +63,17 @@ The options differ in the certificates used to perform mutual authentication.
 - MLDSA65
 - Production-like PKI setup by PoliTO
 
-The certificates are provided in the relative folders under certificates/
+The certificates are provided in the relative folders under certificates
 
 ## CSIC Post-Quantum Software Library
-- A precompiled binary for the STM32F4 is provided under stm32_f429/crypto_api_sw/CRYPTO_API_SW/build/libcryptoapialt-static-arm.a
+- A precompiled binary for the STM32F4 is provided in [libcryptoapialt-static-arm.a](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/crypto_api_sw/CRYPTO_API_SW/build/libcryptoapialt-static-arm.a)
 - This is linked with the binary that will run onto the STM32F4 in the CubeIDE project 
 
 ## STM32 CUBE Ide Project
 
-The project can be imported into CubeIDE and run onto the STM32F4 \
+The project can be imported into CubeIDE and run onto the STM32F4
 
-A few parameters can be configured in the follwoing file:
-stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/qubip.h
+A few parameters can be configured in the file [qubip.h](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/qubip.h)
 
 To choose whether or not to use the physical SE
 ```
