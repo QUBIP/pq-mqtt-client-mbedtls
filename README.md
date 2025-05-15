@@ -1,11 +1,11 @@
 # MQTTs client with Post-Quantum TLS Using mbedtls
 The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3 and the mbedtls library.  \
-A local PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support of PQ cryptography. \
-The server can be only used to test the handshake as it is not a MQTTs client. 
+A local PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support for PQ cryptography. \
+The server can only be used to test the handshake as it is not a MQTTs server. 
 
 To do so, the following components need to be compiled: 
 
-## Build OQS-Components
+## Install necessary dependencies
 
 ```
 mkdir -p installs/{openssl,liboqs}
@@ -30,7 +30,7 @@ cd ..
 
 ```
 
-## Build Liboqs
+## Build liboqs
 
 ```
 cd liboqs
