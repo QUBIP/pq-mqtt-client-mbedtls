@@ -106,3 +106,16 @@ The functions responsible for the KEM can be found in [qubip.c](https://github.c
 HybridKeyKEM *hybrid_key_gen();
 void hybrid_key_free(HybridKeyKEM *);
 ```
+The signature and signature verification functions are implemented in the already present mbedtls file [pk_wrap.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/8651821b60df32601ef3e36d88d89c398002bf2e/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/pk_wrap.c#L1363) that get called several times during the TLS handshake.
+
+```
+static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
+		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
+		unsigned char *sig, size_t sig_size, size_t *sig_len,
+		int (*f_rng)(void*, unsigned char*, size_t), void *p_rng);
+
+static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
+		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
+		const unsigned char *sig, size_t sig_len);
+```
+  
