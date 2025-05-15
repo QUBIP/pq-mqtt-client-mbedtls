@@ -1,26 +1,12 @@
-# qubip_csic_mbedtls
+# MQTTs client with Post-Quantum TLS Using mbedtls
+The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3
 
-# Generate Keys and Certs
-cd certs/certs_25519
-
-Server Key: `openssl genpkey -algorithm ed25519 -out server.key`
-
-Server Csr: `openssl req -new -key server.key -out server.csr`
-
-Server Crt: `openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 3650`
-
-
-Client Key: `openssl genpkey -algorithm ed25519 -out client.key`
-
-Client Csr: `openssl req -new -key client.key -out client.csr`
-
-Client Crt: `openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 3650`
 
 # Build CSIC
 
 - Change Makefile to use the right **CC** compiler
 - Update Include of machine/endian.h
-
+- A precompiled binary for the STM32F4 is provided under stm32_f429/crypto_api_sw/CRYPTO_API_SW/build/libcryptoapialt-static-arm.a
 
 ```
 cd crypto\_api\_sw
