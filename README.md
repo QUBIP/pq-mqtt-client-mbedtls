@@ -64,7 +64,7 @@ The options differ in the certificates used to perform mutual authentication.
 - MLDSA65
 - Production-like PKI setup by PoliTO
 
-The certificates are provided in the relative folders under certificates
+The certificates are provided in the relative folders under [certificates](https://github.com/QUBIP/pq-mqtt-client-mbedtls/tree/refactor/certificates)
 
 ## CSIC Post-Quantum Software Library
 - A precompiled binary for the STM32F4 is provided in [libcryptoapialt-static-arm.a](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/crypto_api_sw/CRYPTO_API_SW/build/libcryptoapialt-static-arm.a)
