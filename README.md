@@ -1,5 +1,5 @@
 # MQTTs client with Post-Quantum TLS Using mbedtls
-The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3.  \
+The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3 and the mbedtls library.  \
 A local PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support of PQ cryptography. \
 The server can be only used to test the handshake as it is not a MQTTs client. 
 
