@@ -1,0 +1,83 @@
+#ifndef PARAMS_MLDSA_H
+#define PARAMS_MLDSA_H
+
+// #include "config.h"
+
+#define SEEDBYTES 32
+#define CRHBYTES 64
+#define TRBYTES 64
+#define RNDBYTES 32
+#define N_MLDSA 256
+#define Q_MLDSA 8380417
+#define D_MLDSA 13
+#define ROOT_OF_UNITY 1753
+#define POLYT1_PACKEDBYTES  320
+#define POLYT0_PACKEDBYTES  416
+
+#define K_44 4
+#define L_44 4
+#define ETA_44 2
+#define TAU_44 39
+#define BETA_44 78
+#define GAMMA1_44 (1 << 17)
+#define GAMMA2_44 ((Q_MLDSA-1)/88)
+#define OMEGA_44 80
+#define CTILDEBYTES_44 32
+#define POLYVECH_PACKEDBYTES_44 (OMEGA_44 + K_44)
+#define POLYZ_PACKEDBYTES_44   576
+#define POLYW1_PACKEDBYTES_44  192
+#define POLYETA_PACKEDBYTES_44  96
+#define CRYPTO_PUBLICKEYBYTES_44 (SEEDBYTES + K_44*POLYT1_PACKEDBYTES)
+#define CRYPTO_SECRETKEYBYTES_44 (2*SEEDBYTES \
+                               + TRBYTES \
+                               + L_44*POLYETA_PACKEDBYTES_44 \
+                               + K_44*POLYETA_PACKEDBYTES_44 \
+                               + K_44*POLYT0_PACKEDBYTES)
+#define CRYPTO_BYTES_44 (CTILDEBYTES_44 + L_44*POLYZ_PACKEDBYTES_44 + POLYVECH_PACKEDBYTES_44)
+
+
+#define K_65 6
+#define L_65 5
+#define ETA_65 4
+#define TAU_65 49
+#define BETA_65 196
+#define GAMMA1_65 (1 << 19)
+#define GAMMA2_65 ((Q_MLDSA-1)/32)
+#define OMEGA_65 55
+#define CTILDEBYTES_65 48
+#define POLYVECH_PACKEDBYTES_65 (OMEGA_65 + K_65)
+#define POLYZ_PACKEDBYTES_65   640
+#define POLYW1_PACKEDBYTES_65  128
+#define POLYETA_PACKEDBYTES_65 128
+#define CRYPTO_PUBLICKEYBYTES_65 (SEEDBYTES + K_65*POLYT1_PACKEDBYTES)
+#define CRYPTO_SECRETKEYBYTES_65 (2*SEEDBYTES \
+                               + TRBYTES \
+                               + L_65*POLYETA_PACKEDBYTES_65 \
+                               + K_65*POLYETA_PACKEDBYTES_65 \
+                               + K_65*POLYT0_PACKEDBYTES)
+#define CRYPTO_BYTES_65 (CTILDEBYTES_65 + L_65*POLYZ_PACKEDBYTES_65 + POLYVECH_PACKEDBYTES_65)
+
+
+#define K_87 8
+#define L_87 7
+#define ETA_87 2
+#define TAU_87 60
+#define BETA_87 120
+#define GAMMA1_87 (1 << 19)
+#define GAMMA2_87 ((Q_MLDSA-1)/32)
+#define OMEGA_87 75
+#define CTILDEBYTES_87 64
+#define POLYVECH_PACKEDBYTES_87 (OMEGA_87 + K_87)
+#define POLYZ_PACKEDBYTES_87   640
+#define POLYW1_PACKEDBYTES_87  128
+#define POLYETA_PACKEDBYTES_87  96
+#define CRYPTO_PUBLICKEYBYTES_87 (SEEDBYTES + K_87*POLYT1_PACKEDBYTES)
+#define CRYPTO_SECRETKEYBYTES_87 (2*SEEDBYTES \
+                               + TRBYTES \
+                               + L_87*POLYETA_PACKEDBYTES_87 \
+                               + K_87*POLYETA_PACKEDBYTES_87 \
+                               + K_87*POLYT0_PACKEDBYTES)
+#define CRYPTO_BYTES_87 (CTILDEBYTES_87 + L_87*POLYZ_PACKEDBYTES_87 + POLYVECH_PACKEDBYTES_87)
+
+
+#endif

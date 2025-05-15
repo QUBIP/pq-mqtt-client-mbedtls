@@ -1,0 +1,12 @@
+make build-openssl
+make build-mbedtls
+make build-alt
+make build-static-alt
+make uninstall-openssl
+make uninstall-mbedtls
+make uninstall-alt
+make uninstall-static-alt
+make install-openssl
+make install-mbedtls
+make install-alt
+make install-static-alt
