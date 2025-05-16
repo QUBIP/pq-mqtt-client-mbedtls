@@ -1,6 +1,6 @@
 # MQTTs client with Post-Quantum TLS Using mbedtls
-The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3 and the mbedtls library. 
-
+The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTTs client using TLS 1.3 and the mbedtls library. \
+For info or comments, contact us at hello@securitypattern.com
 # mbedtls
 ## Introduction of Hybrid Post-Quantum cryptography 
 
