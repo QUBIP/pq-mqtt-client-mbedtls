@@ -29,6 +29,13 @@ Furthermore, the certificate parsing functionalities have been expanded to inclu
 
 A few examples of Hybrid PQ certificates have been hardcoded in file [MQTTInterface.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/3630bfed4f078bb3ca768471d9a94a54948cf460/stm32_f429/Middlewares/Third_Party/MQTT/MQTTInterface.c#L485)
 
+The ID definitions for the Hybrid mechanism are as follows:
+```
+#define MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768 0x11ec
+#define MBEDTLS_TLS1_3_SIG_ED25519_MLDSA44 0x090a
+#define MBEDTLS_TLS1_3_SIG_ED25519_MLDSA65 0x090b
+```
+as shown in file [ssl.h](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/ssl.h)
 
 ## OpenSSL server
 A PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support for PQ cryptography. \
