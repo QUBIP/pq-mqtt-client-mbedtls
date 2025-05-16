@@ -2417,7 +2417,7 @@ static inline int mbedtls_ssl_tls13_sig_alg_for_cert_verify_is_supported(
             break;
 #endif /* PSA_WANT_ALG_SHA_512 */
 #endif /* MBEDTLS_PKCS1_V21 */
-        case MBEDTLS_TLS1_3_SIG_ED25519: //DAVIDE: INCLUDE SUPPORT FOR ECDSA AS SUPPORTED ALGO
+        case MBEDTLS_TLS1_3_SIG_ED25519: 
         	break;
         case MBEDTLS_TLS1_3_SIG_ED25519_MLDSA44:
         case MBEDTLS_TLS1_3_SIG_ED25519_MLDSA65:

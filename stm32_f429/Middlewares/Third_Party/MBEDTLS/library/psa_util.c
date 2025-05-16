@@ -337,7 +337,7 @@ mbedtls_ecp_group_id mbedtls_ecc_group_from_psa(psa_ecc_family_t family,
             }
             break;
 
-       case PSA_ECC_FAMILY_TWISTED_EDWARDS: //DAVIDE: QUI VIENE CHIAMATA SIA CON 254 che con 256 come accade in acp_curves.c:4747 (fixare ad un valore o tenerli entrambi)
+       case PSA_ECC_FAMILY_TWISTED_EDWARDS: 
     	   	switch(bits){
     	   		//case 255:
     	   		case 256:

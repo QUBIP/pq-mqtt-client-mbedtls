@@ -7640,7 +7640,6 @@ psa_status_t psa_raw_key_agreement(psa_algorithm_t alg,
     LOCAL_OUTPUT_DECLARE(output_external, output);
     LOCAL_OUTPUT_ALLOC(output_external, output_size, output);
 
-    //TODO: DAVIDE FIXARE USANDO SLOT PER PRIVATE KEY E DEFINENDO CORRETTAMENTE L'ID PER LE MASK
     if (!(PSA_ALG_IS_KEY_AGREEMENT(alg) || alg == PSA_ALG_PQ_ECDH_MLKEM) ) {
         status = PSA_ERROR_INVALID_ARGUMENT;
         goto exit;
@@ -7660,7 +7659,7 @@ psa_status_t psa_raw_key_agreement(psa_algorithm_t alg,
 		}
     } else {
     	slot = malloc(sizeof(psa_key_slot_t));
-    	slot->key.data = private_key; //DAVIDE NON COME POLICY MBEDTLS MA CI RISPARMIAMO COPIARE 1k di Dati inutilmente
+    	slot->key.data = private_key; 
     }
 
     /* PSA_RAW_KEY_AGREEMENT_OUTPUT_SIZE() is in general an upper bound

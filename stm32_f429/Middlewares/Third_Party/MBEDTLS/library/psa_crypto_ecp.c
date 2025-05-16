@@ -88,12 +88,6 @@ static int check_ecc_parameters(psa_ecc_family_t family, size_t *bits)
         		case 256:
         		case 254:
         			return PSA_SUCCESS;
-        		/*case 256: //DAVIDE NON SONO SICURO SIA CORRETTO FARE COME SOPRA, VERIFICARE SIA QUI CHE NELL'ALTRO SWITCH IN CUI RITORNIAMO FAMILY E ASSEGNIAMO BITS
-        			*bits = 255;
-        			return PSA_SUCCESS;
-        		case 255:
-        			return PSA_SUCCESS;
-        		*/
         	}
         	break;
     }
@@ -287,7 +281,6 @@ psa_status_t mbedtls_psa_ecp_export_key(psa_key_type_t type,
                 return status;
             }
         }
-        //DAVIDE
         status = mbedtls_to_psa_error(
             mbedtls_ecp_point_write_binary(&ecp->grp, &ecp->Q,
                                            MBEDTLS_ECP_PF_UNCOMPRESSED,

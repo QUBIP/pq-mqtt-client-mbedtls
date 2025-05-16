@@ -2232,7 +2232,7 @@
  */
 #define PSA_ALG_ECDH                            ((psa_algorithm_t) 0x09020000)
 
-#define PSA_ALG_PQ_ECDH_MLKEM 					((psa_algorithm_t) 0x10000000) //DAVIDE: DEFINITA COSTANTE X25519_MLKEM
+#define PSA_ALG_PQ_ECDH_MLKEM 					((psa_algorithm_t) 0x10000000)
 /** Whether the specified algorithm is an elliptic curve Diffie-Hellman
  * algorithm.
  *

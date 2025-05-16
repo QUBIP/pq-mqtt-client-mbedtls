@@ -5633,7 +5633,7 @@ static const uint16_t ssl_preset_default_groups[] = {
     MBEDTLS_SSL_IANA_TLS_GROUP_FFDHE6144,
     MBEDTLS_SSL_IANA_TLS_GROUP_FFDHE8192,
 #endif
-	MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768, //DAVIDE: AGGIUNTO KYBER A GRUPPI SUPPORTATI
+	MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768,
     MBEDTLS_SSL_IANA_TLS_GROUP_NONE
 };
 
@@ -5644,70 +5644,6 @@ static const int ssl_preset_suiteb_ciphersuites[] = {
 };
 
 #if defined(MBEDTLS_SSL_HANDSHAKE_WITH_CERT_ENABLED)
-
-/* NOTICE:
- *   For ssl_preset_*_sig_algs and ssl_tls12_preset_*_sig_algs, the following
- *   rules SHOULD be upheld.
- *   - No duplicate entries.
- *   - But if there is a good reason, do not change the order of the algorithms.
- *   - ssl_tls12_preset* is for TLS 1.2 use only.
- *   - ssl_preset_* is for TLS 1.3 only or hybrid TLS 1.3/1.2 handshakes.
- */
-
-/*
-static const uint16_t ssl_preset_default_sig_algs[] = {
-
-#if defined(MBEDTLS_KEY_EXCHANGE_ECDSA_CERT_REQ_ANY_ALLOWED_ENABLED) && \
-    defined(MBEDTLS_MD_CAN_SHA256) && \
-    defined(PSA_WANT_ECC_SECP_R1_256)
-    MBEDTLS_TLS1_3_SIG_ECDSA_SECP256R1_SHA256,
-    // == MBEDTLS_SSL_TLS12_SIG_AND_HASH_ALG(MBEDTLS_SSL_SIG_ECDSA, MBEDTLS_SSL_HASH_SHA256)
-#endif
-
-#if defined(MBEDTLS_KEY_EXCHANGE_ECDSA_CERT_REQ_ANY_ALLOWED_ENABLED) && \
-    defined(MBEDTLS_MD_CAN_SHA384) && \
-    defined(PSA_WANT_ECC_SECP_R1_384)
-    MBEDTLS_TLS1_3_SIG_ECDSA_SECP384R1_SHA384,
-    // == MBEDTLS_SSL_TLS12_SIG_AND_HASH_ALG(MBEDTLS_SSL_SIG_ECDSA, MBEDTLS_SSL_HASH_SHA384)
-#endif
-
-#if defined(MBEDTLS_KEY_EXCHANGE_ECDSA_CERT_REQ_ANY_ALLOWED_ENABLED) && \
-    defined(MBEDTLS_MD_CAN_SHA512) && \
-    defined(PSA_WANT_ECC_SECP_R1_521)
-    MBEDTLS_TLS1_3_SIG_ECDSA_SECP521R1_SHA512,
-    // == MBEDTLS_SSL_TLS12_SIG_AND_HASH_ALG(MBEDTLS_SSL_SIG_ECDSA, MBEDTLS_SSL_HASH_SHA512)
-#endif
-
-#if defined(MBEDTLS_X509_RSASSA_PSS_SUPPORT) && defined(MBEDTLS_MD_CAN_SHA512)
-    MBEDTLS_TLS1_3_SIG_RSA_PSS_RSAE_SHA512,
-#endif
-
-#if defined(MBEDTLS_X509_RSASSA_PSS_SUPPORT) && defined(MBEDTLS_MD_CAN_SHA384)
-    MBEDTLS_TLS1_3_SIG_RSA_PSS_RSAE_SHA384,
-#endif
-
-#if defined(MBEDTLS_X509_RSASSA_PSS_SUPPORT) && defined(MBEDTLS_MD_CAN_SHA256)
-    MBEDTLS_TLS1_3_SIG_RSA_PSS_RSAE_SHA256,
-#endif
-
-#if defined(MBEDTLS_RSA_C) && defined(MBEDTLS_MD_CAN_SHA512)
-    MBEDTLS_TLS1_3_SIG_RSA_PKCS1_SHA512,
-#endif // MBEDTLS_RSA_C && MBEDTLS_MD_CAN_SHA512
-
-#if defined(MBEDTLS_RSA_C) && defined(MBEDTLS_MD_CAN_SHA384)
-    MBEDTLS_TLS1_3_SIG_RSA_PKCS1_SHA384,
-#endif // MBEDTLS_RSA_C && MBEDTLS_MD_CAN_SHA384
-
-#if defined(MBEDTLS_RSA_C) && defined(MBEDTLS_MD_CAN_SHA256)
-    MBEDTLS_TLS1_3_SIG_RSA_PKCS1_SHA256,
-#endif // MBEDTLS_RSA_C && MBEDTLS_MD_CAN_SHA256
-	MBEDTLS_TLS1_3_SIG_ED25519, //DAVIDE ADD SUPPORT FOR ED25519
-	MBEDTLS_TLS1_3_SIG_ED25519_MLDSA65,
-
-
-    MBEDTLS_TLS_SIG_NONE
-};
-*/
 
 static const uint16_t ssl_preset_default_sig_algs[] = {
 
@@ -5992,7 +5928,7 @@ int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
             conf->ciphersuite_list = ssl_preset_suiteb_ciphersuites;
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
-            conf->cert_profile = &mbedtls_x509_crt_profile_suite_custom; //&mbedtls_x509_crt_profile_suiteb;  //DAVIDE: SWAPPED SUITE WITH CUSTOM ONE (BRUTALE, POSSIAMO FARLO DINAMICO/ALTRO MODO)
+            conf->cert_profile = &mbedtls_x509_crt_profile_suite_custom; 
 
 
 #endif
@@ -6020,7 +5956,7 @@ int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
             conf->ciphersuite_list = mbedtls_ssl_list_ciphersuites();
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
-            conf->cert_profile = &mbedtls_x509_crt_profile_suite_custom;// &mbedtls_x509_crt_profile_default; //DAVIDE: SWAPPED SUITE WITH CUSTOM ONE (BRUTALE, POSSIAMO FARLO DINAMICO/ALTRO MODO)
+            conf->cert_profile = &mbedtls_x509_crt_profile_suite_custom;
 #endif
 
 #if defined(MBEDTLS_SSL_HANDSHAKE_WITH_CERT_ENABLED)
@@ -9635,7 +9571,7 @@ int mbedtls_ssl_write_sig_alg_ext(mbedtls_ssl_context *ssl, unsigned char *buf,
      * Write supported_signature_algorithms
      */
     supported_sig_alg = p;
-    const uint16_t *sig_alg = mbedtls_ssl_get_sig_algs(ssl); //TODO: AGGIUNGERE ID CORRISPONDENTE A ED25519+DLITHIUM
+    const uint16_t *sig_alg = mbedtls_ssl_get_sig_algs(ssl); 
     if (sig_alg == NULL) {
         return MBEDTLS_ERR_SSL_BAD_CONFIG;
     }

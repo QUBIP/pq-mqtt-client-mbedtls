@@ -35,7 +35,7 @@
 
 #include "mbedtls/qubip.h"
 
-#include "mbedtls/eddsa.h" //DAVIDE: TEST SIGNATURE WITH KEY
+#include "mbedtls/eddsa.h" 
 #include "mbedtls/psa_util.h"
 #include "pk_wrap.h"
 
@@ -1003,7 +1003,7 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 				"[MQTT_INTERFACE] ERROR: mbedtls_pk_parse_key failed.\n");
 		return -1;
 	}
-	//DAVIDE Extract public from client cert: Not a perfect solution but as of now we don't have a way to derive the public from the private
+	// Extract public from client cert: Not a perfect solution but as of now we don't have a way to derive the public from the private
 	// Private and Public for MLDSA are inside the key, for the x25519 we can derive it. For now we import the one from cert (need to check the two keys match) and later we can derive it
 	if (pkey.private_pk_info->type == MBEDTLS_PK_ED25519_MLDSA65) {
 		mbedtls_ed25519_mlds65_ctx *pk_ctx =
