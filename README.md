@@ -7,7 +7,7 @@ The project is meant to showcase the Hybrid Post-Quantum capabilities of an MQTT
 The TLS handshake has been agumented with Hybrid PQ capabilities by introducing a new KEM and a new signature mechanism. \
 These are, respectively X25519-MLKEM768 and Ed25519-MLDSA.
 
-The functions responsible for the KEM can be found in [qubip.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/qubip.c):
+The functions responsible for the KEM can be found in [qubip.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/main/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/qubip.c):
 ```
 HybridKeyKEM *hybrid_key_gen();
 void hybrid_key_free(HybridKeyKEM *);
@@ -25,9 +25,9 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 		const unsigned char *sig, size_t sig_len);
 ```
 
-Furthermore, the certificate parsing functionalities have been expanded to include support for Hybrid PQ certificates in file [pk_parse.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/3630bfed4f078bb3ca768471d9a94a54948cf460/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/pkparse.c#L594)
+Furthermore, the certificate parsing functionalities have been expanded to include support for Hybrid PQ certificates in file [pk_parse.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/main/stm32_f429/Middlewares/Third_Party/MBEDTLS/library/pkparse.c#L594)
 
-A few examples of Hybrid PQ certificates have been hardcoded in file [MQTTInterface.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/3630bfed4f078bb3ca768471d9a94a54948cf460/stm32_f429/Middlewares/Third_Party/MQTT/MQTTInterface.c#L485)
+A few examples of Hybrid PQ certificates have been hardcoded in file [MQTTInterface.c](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/main/stm32_f429/Middlewares/Third_Party/MQTT/MQTTInterface.c#L485)
 
 The ID definitions for the Hybrid mechanism are as follows:
 ```
@@ -35,7 +35,7 @@ The ID definitions for the Hybrid mechanism are as follows:
 #define MBEDTLS_TLS1_3_SIG_ED25519_MLDSA44 0x090a
 #define MBEDTLS_TLS1_3_SIG_ED25519_MLDSA65 0x090b
 ```
-as shown in file [ssl.h](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/ssl.h)
+as shown in file [ssl.h](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/main/stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/ssl.h)
 
 ## OpenSSL server
 A PQ openssl server can be setup to test the TLS handshake between the board and the server by compiling a version of openssl with the support for PQ cryptography. \
@@ -102,11 +102,11 @@ The options differ in the certificates used to perform mutual authentication.
 - MLDSA65
 - Production-like PKI setup by PoliTO
 
-The certificates are provided in the relative folders under [certificates](https://github.com/QUBIP/pq-mqtt-client-mbedtls/tree/refactor/certificates)
+The certificates are provided in the relative folders under [certificates](https://github.com/QUBIP/pq-mqtt-client-mbedtls/tree/main/certificates)
 
 ## Third party Post-Quantum Software Library
 - The library is provided by [CSIC](https://www.csic.es/es)
-- A precompiled binary for the STM32F4 is provided in [libcryptoapialt-static-arm.a](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/crypto_api_sw/CRYPTO_API_SW/build/libcryptoapialt-static-arm.a)
+- A precompiled binary for the STM32F4 is provided in [libcryptoapialt-static-arm.a](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/main/stm32_f429/crypto_api_sw/CRYPTO_API_SW/build/libcryptoapialt-static-arm.a)
 - This is linked with the binary that will run onto the STM32F4 in the CubeIDE project
 - Sources can be found in the corrisponding repository [CSIC Crypto-API](https://github.com/QUBIP/crypto-api)
 
@@ -114,7 +114,7 @@ The certificates are provided in the relative folders under [certificates](https
 
 The project can be imported into CubeIDE and run onto the STM32F4
 
-A few parameters can be configured in the file [qubip.h](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/refactor/stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/qubip.h)
+A few parameters can be configured in the file [qubip.h](https://github.com/QUBIP/pq-mqtt-client-mbedtls/blob/main/stm32_f429/Middlewares/Third_Party/MBEDTLS/include/mbedtls/qubip.h)
 
 To choose whether or not to use the physical SE
 ```
