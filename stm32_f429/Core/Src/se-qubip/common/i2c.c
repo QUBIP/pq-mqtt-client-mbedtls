@@ -1,5 +1,5 @@
 #include "../../../Inc/main.h"
-#include "../../se-qubip/common/i2c.h"
+#include "i2c.h"
 
 //------------------------------------------------------------------
 //-- Check I2C Port is available

@@ -81,46 +81,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "../../se-qubip/common/conf.h"
-#include "../../se-qubip/common/extra_func.h"
-#include "../../se-qubip/common/intf.h"
+#include <stdbool.h>
+#include "intf.h"
+#include "conf.h"
+#include "picorv32.h"
+#include "extra_func.h"
 
 //-- Elements Bit Sizes
 #define AES_128_KEY     16
 #define AES_192_KEY     24
 #define AES_256_KEY     32
 #define AES_BLOCK       16
-#define AXI_BYTES       8
 
-//-- AES Control
-#define AES_DEC         0x0
-#define AES_ENC         0x1
-#define AES_128         0x1
-#define AES_192         0x2
-#define AES_256         0x3
+//-- AES Options
+#define AES_ENCRYPT         1
+#define AES_DECRYPT         0
 
-//-- SE Control Operations
-#define AES_RST_OFF     0x00
-#define AES_RST_ON      0x01
-#define AES_INTF_RST    0x02
-#define AES_INTF_OPER   0x00
-#define AES_INTF_LOAD   0x04
-#define AES_INTF_READ   0x08
+#define AES_LEN_128         1
+#define AES_LEN_192         2
+#define AES_LEN_256         3
 
-//-- I/O Addresses
-#define AES_CONTROL     0x0
-#define AES_KEY         0x1
-#define AES_PLAINTEXT   0x5
-#define AES_CIPHERTEXT  0x0
-
-//-- Debug
-#ifdef I2C
-#define AES_WAIT_TIME 50
-#else
-#define AES_WAIT_TIME 5000
-#endif
-#define AES_N_ITER 1000
+#define AES_MODE_ECB        (1 << 0)
+#define AES_MODE_CBC        (1 << 1)
+#define AES_MODE_CMAC       (1 << 2)
+#define AES_MODE_CCM_8      (1 << 3)
+#define AES_MODE_GCM        (1 << 4)
 
 //-- Misc Operations
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -174,76 +159,58 @@
         (a)[7] = (uint8_t)(((uint64_t)(val)) & 0xff); \
     } while (0)
 
-//-- INTERFACE INIT/START & READ/WRITE & INIT/OPERATE
-void aes_start(INTF interface);
-void aes_write(unsigned long long address, unsigned long long size, void *data, unsigned long long reset, INTF interface);
-void aes_read(unsigned long long address, unsigned long long size, void *data, INTF interface);
-void aes_init(unsigned long long aes_control, unsigned char *key, INTF interface);
-void aes_op(unsigned char *data_in, unsigned char *data_out, INTF interface);
-
-//-- ADDITIONAL FUCNTIONS
-static void aes_block_padding(unsigned int len, unsigned int *complete_len, unsigned int *blocks, unsigned char *data, unsigned char **data_padded);
-static void cmacMul(uint8_t* x, const uint8_t* a, size_t n, uint8_t rb);
-static void GenSubKeys(unsigned char* key, unsigned int key_len, unsigned char K1[AES_BLOCK], unsigned char K2[AES_BLOCK], INTF interface);
-static void ccmFormatBlock0(size_t q, const uint8_t *n, size_t nLen, size_t aLen, size_t tLen, uint8_t *b);
-static void ccmXorBlock(uint8_t *x, const uint8_t *a, const uint8_t *b, size_t n);
-static void ccmFormatCounter0(const uint8_t *n, size_t nLen, uint8_t *ctr);
-static void ccmIncCounter(uint8_t *ctr, size_t n);
-static void gf_mult(const unsigned char *x, const unsigned char *y, unsigned char *z);
-static void ghash(const unsigned char *h, const unsigned char *x, size_t xlen, unsigned char *y);
-static void aes_gctr(const unsigned char *icb, const unsigned char *x, size_t xlen, unsigned char *y, INTF interface);
-static void aes_gcm_init_hash_key(unsigned long long aes_control, unsigned char *key, size_t key_len, unsigned char *H, INTF interface);
-static void aes_gcm_prepare_j0(unsigned char *iv, size_t iv_len, unsigned char *H, unsigned char *J0);
-static void aes_gcm_gctr(const unsigned char *J0, const unsigned char *in, size_t len, unsigned char *out, INTF interface);
-static void aes_gcm_ghash(const unsigned char *H, const unsigned char *aad, size_t aad_len, const unsigned char *crypt, size_t crypt_len, unsigned char *S);
+// --- AES HW --- //
+void aes_ecb_cbc_cmac_hw(unsigned char *key, unsigned char *data_out, unsigned int *data_out_len, unsigned char *data_in, unsigned int data_in_len, unsigned char *IV, unsigned int encrypt, unsigned int aes_len, unsigned int aes_mode, bool ext_key, uint8_t key_id, INTF interface);
+void aes_ccm_8_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *data_out, unsigned int *data_out_len, unsigned char *data_in, unsigned int data_in_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, unsigned int encrypt, unsigned int aes_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_gcm_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *data_out, unsigned int *data_out_len, unsigned char *data_in, unsigned int data_in_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, unsigned int encrypt, unsigned int aes_len, bool ext_key, uint8_t key_id, INTF interface);
 
 // --- AES - ECB --- //
-void aes_128_ecb_encrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, INTF interface);
-void aes_128_ecb_decrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, INTF interface);
-void aes_192_ecb_encrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, INTF interface);
-void aes_192_ecb_decrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, INTF interface);
-void aes_256_ecb_encrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, INTF interface);
-void aes_256_ecb_decrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, INTF interface);
+void aes_128_ecb_encrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_128_ecb_decrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_192_ecb_encrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_192_ecb_decrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_256_ecb_encrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_256_ecb_decrypt_hw(unsigned char *key, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
 
 // --- AES - CBC --- //
-void aes_128_cbc_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, INTF interface);
-void aes_128_cbc_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, INTF interface);
-void aes_192_cbc_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, INTF interface);
-void aes_192_cbc_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, INTF interface);
-void aes_256_cbc_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, INTF interface);
-void aes_256_cbc_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, INTF interface);
+void aes_128_cbc_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_128_cbc_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_192_cbc_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_192_cbc_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_256_cbc_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int *ciphertext_len, unsigned char *plaintext, unsigned int plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_256_cbc_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned char *ciphertext, unsigned int ciphertext_len, unsigned char *plaintext, unsigned int *plaintext_len, bool ext_key, uint8_t key_id, INTF interface);
 
 // --- AES - CMAC --- //
-void aes_128_cmac_hw(unsigned char *key, unsigned char *mac, unsigned int *mac_len, unsigned char *msg, unsigned int msg_len, INTF interface);
-void aes_192_cmac_hw(unsigned char *key, unsigned char *mac, unsigned int *mac_len, unsigned char *msg, unsigned int msg_len, INTF interface);
-void aes_256_cmac_hw(unsigned char *key, unsigned char *mac, unsigned int *mac_len, unsigned char *msg, unsigned int msg_len, INTF interface);
+void aes_128_cmac_hw(unsigned char *key, unsigned char *mac, unsigned int *mac_len, unsigned char *msg, unsigned int msg_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_192_cmac_hw(unsigned char *key, unsigned char *mac, unsigned int *mac_len, unsigned char *msg, unsigned int msg_len, bool ext_key, uint8_t key_id, INTF interface);
+void aes_256_cmac_hw(unsigned char *key, unsigned char *mac, unsigned int *mac_len, unsigned char *msg, unsigned int msg_len, bool ext_key, uint8_t key_id, INTF interface);
 
 // --- AES - CCM_8 --- //
 void aes_128_ccm_8_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int *ciphertext_len, 
-                              unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, INTF interface);
+                              unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, bool ext_key, uint8_t key_id, INTF interface);
 void aes_128_ccm_8_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int ciphertext_len,
-                              unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, INTF interface);
+                              unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, bool ext_key, uint8_t key_id, INTF interface);
 void aes_192_ccm_8_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int *ciphertext_len,
-                              unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, INTF interface);
+                              unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, bool ext_key, uint8_t key_id, INTF interface);
 void aes_192_ccm_8_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int ciphertext_len,
-                              unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, INTF interface);
+                              unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, bool ext_key, uint8_t key_id, INTF interface);
 void aes_256_ccm_8_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int *ciphertext_len,
-                              unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, INTF interface);
+                              unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, bool ext_key, uint8_t key_id, INTF interface);
 void aes_256_ccm_8_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int ciphertext_len,
-                              unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, INTF interface);
+                              unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, bool ext_key, uint8_t key_id, INTF interface);
 
 // --- AES - GCM --- //
 void aes_128_gcm_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int *ciphertext_len,
-                            unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, INTF interface);
+                            unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, bool ext_key, uint8_t key_id, INTF interface);
 void aes_128_gcm_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int ciphertext_len,
-                            unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, INTF interface);
+                            unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, bool ext_key, uint8_t key_id, INTF interface);
 void aes_192_gcm_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int *ciphertext_len,
-                            unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, INTF interface);
+                            unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, bool ext_key, uint8_t key_id, INTF interface);
 void aes_192_gcm_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int ciphertext_len,
-                            unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, INTF interface);
+                            unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, bool ext_key, uint8_t key_id, INTF interface);
 void aes_256_gcm_encrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int *ciphertext_len,
-                            unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, INTF interface);
+                            unsigned char *plaintext, unsigned int plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, bool ext_key, uint8_t key_id, INTF interface);
 void aes_256_gcm_decrypt_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsigned char *ciphertext, unsigned int ciphertext_len,
-                            unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, INTF interface);
+                            unsigned char *plaintext, unsigned int *plaintext_len, unsigned char *aad, unsigned int aad_len, unsigned char *tag, unsigned int *result, bool ext_key, uint8_t key_id, INTF interface);
 
 #endif

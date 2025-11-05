@@ -1,7 +1,7 @@
 /*
-Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
-SPDX-License-Identifier: MIT
-*/
+ Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
+ SPDX-License-Identifier: MIT
+ */
 
 #include "mbedtls/qubip.h"
 #include "mbedtls/ecp.h"
@@ -23,12 +23,30 @@ HybridKeyKEM* hybrid_key_gen() {
 	unsigned int pri_len;
 	unsigned int pub_len;
 
+	uint8_t mlkem_key_slot = 31;
+	uint8_t x25519_key_slot = 31;
+
+
 #if HW_IMPLEMENTATION==1
+
 	printf("HW Hybrid Gen Key...");
 
-	mlkem768_genkeys_hw(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk, 0);
+	secmem_store_key(ID_MLKEM, &mlkem_key_slot, false, NULL, 0, 0);
+	secmem_store_key(ID_X25519, &x25519_key_slot, false, NULL, 0, 0);
+
+	out_keys->x25519_key_slot = x25519_key_slot;
+	out_keys->mlkem_768_key_slot = mlkem_key_slot;
+
+	// void mlkem_768_gen_keys_hw(unsigned char* pk, unsigned char* sk, bool ext_key, uint8_t* key_id, INTF interface);
+	mlkem_768_gen_keys_hw(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk,
+			false, &mlkem_key_slot, 0);
+
+	//void x25519_genkeys_hw(unsigned char **pri_key, unsigned char **pub_key, unsigned int *pri_len,
+	// unsigned int *pub_len,
+	// bool ext_key, uint8_t* key_id, INTF interface);
+
 	x25519_genkeys_hw(&out_keys->x25519_sk, &out_keys->x25519_pk, &pri_len,
-			&pub_len, 0);
+			&pub_len, false, &x25519_key_slot, 0);
 
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -65,11 +83,12 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 
 	uint8_t *server_ecdh_key = malloc(32);
 	uint8_t *server_kyber_ct = malloc(peer_key_length - 32);
-	uint8_t *ssecret_kem = malloc(32);
+	uint8_t *ssecret_mlkem768 = malloc(32);
 	uint8_t *ssecret_x25519;
 	unsigned int out_len;
 	HybridKeyKEM *private_key = (HybridKeyKEM*) key_buffer;
 	unsigned int result = 0;
+
 	printf("#############################################\n");
 
 	printf("Starting X25519_MLKEM768 key agreement...\n");
@@ -97,8 +116,13 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 
 #if HW_IMPLEMENTATION==1
 	printf("HW MLKEM768 Dec...");
-	mlkem768_dec_hw(private_key->mlkem_768_sk, server_kyber_ct, ssecret_kem,
-			&result, 0);
+	/*
+	 * void mlkem_768_dec_hw(unsigned char* sk, unsigned char* ct, unsigned char* ss, unsigned int* result,
+	 * bool ext_key, uint8_t* key_id, INTF interface);
+	 * */
+	mlkem768_dec_hw(private_key->mlkem_768_sk, server_kyber_ct, ssecret_mlkem768,
+			&result, true, &private_key->mlkem_768_key_slot, 0);
+
 	//HW returns 3 (?!?!) on success
 	result = (result == 3 ? 0 : -1);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
@@ -108,7 +132,7 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 
 	printf("SW MLKEM768 Dec...");
 
-	mlkem768_dec(ssecret_kem, server_kyber_ct, private_key->mlkem_768_sk,
+	mlkem768_dec(ssecret_mlkem768, server_kyber_ct, private_key->mlkem_768_sk,
 			&result);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	//printf("Result: %d\n", result);
@@ -118,8 +142,16 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 
 #if HW_IMPLEMENTATION==1
 	printf("HW x25519 SS GEN...");
+
+	/*
+	 void x25519_ss_gen_hw(unsigned char **shared_secret, unsigned int *shared_secret_len, unsigned char *pub_key, unsigned int pub_len, unsigned char *pri_key, unsigned int pri_len,
+	 bool ext_key, uint8_t* key_id, INTF interface);
+	 */
+
 	x25519_ss_gen_hw(&ssecret_x25519, &out_len, server_ecdh_key, 32,
-			private_key->x25519_sk, private_key->x25519_sk_size, 0);
+			private_key->x25519_sk, private_key->x25519_sk_size, true,
+			&private_key->x25519_key_slot, 0);
+
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #else
@@ -132,14 +164,14 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 
 #ifdef SWAP_ORDER
 	memcpy(shared_secret + 32, ssecret_x25519, 32);
-	memcpy(shared_secret, ssecret_kem, 32);
+	memcpy(shared_secret, ssecret_mlkem768, 32);
 #else
 	memcpy(shared_secret,ssecret_x25519,32);
-	memcpy(shared_secret + 32,ssecret_kem,32);
+	memcpy(shared_secret + 32,ssecret_mlkem768,32);
 #endif // SWAP_ORDER
 	free(server_ecdh_key);
 	free(server_kyber_ct);
-	free(ssecret_kem);
+	free(ssecret_mlkem768);
 	free(ssecret_x25519);
 	printf("X25519_MLKEM768 key agreement completed!\n");
 	printf("#############################################\n\n");

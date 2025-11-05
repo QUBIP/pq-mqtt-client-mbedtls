@@ -18,7 +18,7 @@ SPDX-License-Identifier: MIT
 #define X25519_PK_SIZE 32
 #define X25519_SK_SIZE 32
 
-#define HW_IMPLEMENTATION 0 //1=ON, 0=OFF
+#define HW_IMPLEMENTATION 1 //1=ON, 0=OFF
 
 // OPTIONS: CERTS_PQ_44, CERTS_PQ_65, CERTS_CLASSIC
 #define CERTS_PQ_44
@@ -58,6 +58,8 @@ typedef struct {
 	uint8_t *mlkem_768_sk;
 	uint32_t mlkem_768_sk_size;
 
+	uint8_t mlkem_768_key_slot;
+
 	// X25519 Public Key
 	uint8_t *x25519_pk;
 	uint32_t x25519_pk_size;
@@ -66,6 +68,7 @@ typedef struct {
 	uint8_t *x25519_sk;
 	uint32_t x25519_sk_size;
 
+	uint8_t x25519_key_slot;
 } HybridKeyKEM;
 
 HybridKeyKEM *hybrid_key_gen();

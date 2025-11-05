@@ -1,6 +1,6 @@
 /**
-  * @file trng_hw.h
-  * @brief TRNG HW header
+  * @file sha2_hw.h
+  * @brief SHA2 HW header
   *
   * @section License
   *
@@ -57,49 +57,39 @@
   * @author Eros Camacho-Ruiz (camacho@imse-cnm.csic.es)
   * @version 1.0
   **/
-#ifndef TRNG_H
-#define TRNG_H
 
-#include <stdint.h>
-#include <stdio.h>
+#ifndef SHA2_H
+#define SHA2_H
+
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
+#include <math.h>
+#include "intf.h"
+#include "extra_func.h"
+#include "picorv32.h"
+#include "conf.h"
 
-#include "../../se-qubip/common/conf.h"
-#include "../../se-qubip/common/extra_func.h"
-#include "../../se-qubip/common/intf.h"
+/************************ interface Constant Definitions **********************/
 
-//-- Elements Bit Sizes
-#define TRNG_MAX_BYTES          2048
-#define AXI_BYTES              	8
+#define MODE_SHA_2_256              1
+#define MODE_SHA_2_384              2
+#define MODE_SHA_2_512              3
+#define MODE_SHA_2_512_256          4
 
-//-- Control Operations
-#define TRNG_RST_OFF      		0x00
-#define TRNG_RST_ON       		0x01
-#define TRNG_INTF_RST     		0x02
-#define TRNG_INTF_OPER    		0x00
-#define TRNG_INTF_LOAD    		0x04
-#define TRNG_INTF_READ    		0x08
+#define SHA_2_256_DIGEST_LENGTH     32
+#define SHA_2_384_DIGEST_LENGTH     48
+#define SHA_2_512_DIGEST_LENGTH     64
 
-//-- I/O Addresses
-#define TRNG_IN      	 		0x0
-#define TRNG_PUF_ADDW    		0x0
-#define TRNG_PUF_OUT   	 		0x1
+/************************ interface Function Definitions **********************/
 
-//-- Debug
-#ifdef I2C
-    #define TRNG_WAIT_TIME 5000
-#else
-    #define TRNG_WAIT_TIME 500000
-#endif
+void sha2_hw(INTF interface, unsigned char* in, unsigned char* out, unsigned long long int length, unsigned int VERSION, int DBG);
 
-//-- INTERFACE INIT/START & READ/WRITE
-void trng_init(INTF interface);
-void trng_start(unsigned int bytes, INTF interface);
-void trng_read(unsigned char* out, unsigned int bytes, INTF interface);
+/************************ Main Functions **********************/
 
-//-- TRNG Function
-void trng_hw(unsigned char* out, unsigned int bytes, INTF interface);
-
+void sha_256_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
+void sha_384_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
+void sha_512_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
+void sha_512_256_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
 
 #endif

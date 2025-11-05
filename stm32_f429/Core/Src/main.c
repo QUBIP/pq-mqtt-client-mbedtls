@@ -306,6 +306,7 @@ int main(void)
   print_title_demo();
 
   osDelay(1000);
+//#define TEST_SE
 #ifdef TEST_SE
   //demo_mlkem_hw(768, 3, 0);
   //kyber768_kat();

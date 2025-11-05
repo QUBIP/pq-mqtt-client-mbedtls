@@ -1,4 +1,4 @@
-#include "../../se-qubip/common/intf.h"
+#include "intf.h"
 
 //------------------------------------------------------------------
 //-- Open and Close Interface

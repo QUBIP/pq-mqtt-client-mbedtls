@@ -1270,17 +1270,16 @@ static void eddsa_rs_free(void *ctx) {
 	CREATE_STUB("eddsa_rs_free", NULL)
 }
 
-const mbedtls_pk_info_t mbedtls_eddsa_info = {
-		.type = MBEDTLS_PK_EDDSA, .name = "EDDSA", .get_bitlen =
-				eckey_get_bitlen, /* Compatible key structures */
-		.can_do = eddsa_can_do,
+const mbedtls_pk_info_t mbedtls_eddsa_info = { .type = MBEDTLS_PK_EDDSA, .name =
+		"EDDSA", .get_bitlen = eckey_get_bitlen, /* Compatible key structures */
+.can_do = eddsa_can_do,
 #if defined(MBEDTLS_PK_CAN_ECDSA_VERIFY)
-				.verify_func = eddsa_verify_wrap, /* Compatible key structures */
+		.verify_func = eddsa_verify_wrap, /* Compatible key structures */
 #else /* MBEDTLS_PK_CAN_ECDSA_VERIFY */
     .verify_func = NULL,
 #endif /* MBEDTLS_PK_CAN_ECDSA_VERIFY */
 #if defined(MBEDTLS_PK_CAN_ECDSA_SIGN)
-				.sign_func = eddsa_sign_wrap, /* Compatible key structures */
+		.sign_func = eddsa_sign_wrap, /* Compatible key structures */
 #else /* MBEDTLS_PK_CAN_ECDSA_SIGN */
     .sign_func = NULL,
 #endif /* MBEDTLS_PK_CAN_ECDSA_SIGN */
@@ -1290,19 +1289,17 @@ const mbedtls_pk_info_t mbedtls_eddsa_info = {
     .rs_alloc_func = NULL,
     .rs_free_func = NULL,
 #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
-				.decrypt_func = NULL, .encrypt_func = NULL, .check_pair_func =
-						eckey_check_pair_wrap, /* Compatible key structures */
+		.decrypt_func = NULL, .encrypt_func = NULL, .check_pair_func =
+				eckey_check_pair_wrap, /* Compatible key structures */
 #if defined(MBEDTLS_PK_USE_PSA_EC_DATA)
     .ctx_alloc_func = NULL,
     .ctx_free_func = NULL,
 #else /* MBEDTLS_PK_USE_PSA_EC_DATA */
-				.ctx_alloc_func = eckey_alloc_wrap, /* Compatible key structures */
-				.ctx_free_func = eckey_free_wrap, /* Compatible key structures */
+		.ctx_alloc_func = eckey_alloc_wrap, /* Compatible key structures */
+		.ctx_free_func = eckey_free_wrap, /* Compatible key structures */
 #endif /* MBEDTLS_PK_USE_PSA_EC_DATA */
-				.debug_func = eckey_debug, /* Compatible key structures */
-		};
-
-
+		.debug_func = eckey_debug, /* Compatible key structures */
+};
 
 static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
@@ -1362,6 +1359,9 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	char prefix[] = "\x30\x82\x09\xBC\x03\x82\x09\x75";
 	char sig_sep[] = "\x03\x41";
 
+	uint8_t unused = 0;
+	bool external_key = true;
+
 	printf("#############################################\n");
 	printf("Starting MLDSA44 + EDDSA25519 signature...\n");
 
@@ -1379,17 +1379,18 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 
 	memcpy(sig, prefix, 8);
 	sig[8] = 0;
-	printf("SW MLDSA Signature...");
-
-	mldsa44_sig(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
-			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #if HW_IMPLEMENTATION==1
 	printf("HW EDDSA Signature...");
 
 	eddsa25519_sign_hw(msg_to_be_signed, 77, ctx->ed_pri_key, ctx->ed_prisize,
-			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize, 0);
+			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize, external_key, &unused, 0 );
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+	printf("HW MLDSA Signature...");
+	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
+			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0, external_key, &unused, 0);
+
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #else
@@ -1397,6 +1398,12 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 
 	eddsa25519_sign(msg_to_be_signed, MSG_LEN, ctx->ed_pri_key, ctx->ed_prisize,
 			&eddsa_sig, &ed_ssize);
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+	printf("SW MLDSA Signature...");
+
+	mldsa44_sig(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
+			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #endif
@@ -1467,6 +1474,9 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	((void) md_alg);
 	unsigned int result = 0;
 
+	uint8_t unused = 0;
+	bool external_key = true;
+
 	mbedtls_ed25519_mlds65_ctx *ctx = (mbedtls_ed25519_mlds65_ctx*) pk->pk_ctx;
 	unsigned char *new_msg = calloc(13 + 64, sizeof(char));
 	mbedtls_sha512(hash, hash_len, new_msg + 13, 0);
@@ -1478,11 +1488,18 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 #if HW_IMPLEMENTATION==1
 	printf("HW EDDSA Verify...");
 
+
+	/*
+	 void eddsa25519_verify_hw(unsigned char *msg, unsigned int msg_len, unsigned char *pub_key, unsigned int pub_len,
+	 unsigned char *sig, unsigned int sig_len, unsigned int *result,
+	 bool ext_key, uint8_t* key_id, INTF interface);
+
+	 */
 	eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
-			sig + sig_len - 64, 64, &result, 0);
+			sig + sig_len - 64, 64, &result, external_key, &unused, 0);
+
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	//printf("Result: %d\n", result);
-	// I hate you Eros
 	result = !result;
 
 #else
@@ -1687,17 +1704,17 @@ static void ed25519_mlds44_debug(mbedtls_pk_context *pk,
 	//CREATE_STUB("ed25519_mlds44_debug",)
 }
 
-const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info = { 
-		.type = MBEDTLS_PK_ED25519_MLDSA65, .name = "ED25519+MLDS65",
-				.get_bitlen = eckey_get_bitlen, /* Compatible key structures */
-				.can_do = ed25519_mlds65_can_do,
+const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info = { .type =
+		MBEDTLS_PK_ED25519_MLDSA65, .name = "ED25519+MLDS65", .get_bitlen =
+		eckey_get_bitlen, /* Compatible key structures */
+.can_do = ed25519_mlds65_can_do,
 #if defined(MBEDTLS_PK_CAN_ECDSA_VERIFY)
-				.verify_func = ed25519_mlds65_verify_wrap, /* Compatible key structures */
+		.verify_func = ed25519_mlds65_verify_wrap, /* Compatible key structures */
 #else /* MBEDTLS_PK_CAN_ECDSA_VERIFY */
     .verify_func = NULL,
 #endif /* MBEDTLS_PK_CAN_ECDSA_VERIFY */
 #if defined(MBEDTLS_PK_CAN_ECDSA_SIGN)
-				.sign_func = ed25519_mlds65_sign_wrap, /* Compatible key structures */
+		.sign_func = ed25519_mlds65_sign_wrap, /* Compatible key structures */
 #else /* MBEDTLS_PK_CAN_ECDSA_SIGN */
     .sign_func = NULL,
 #endif /* MBEDTLS_PK_CAN_ECDSA_SIGN */
@@ -1707,29 +1724,29 @@ const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info = {
     .rs_alloc_func = NULL,
     .rs_free_func = NULL,
 #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
-				.decrypt_func = NULL, .encrypt_func = NULL, .check_pair_func =
-						ed25519_mlds65_check_pair_wrap, /* Compatible key structures */
+		.decrypt_func = NULL, .encrypt_func = NULL, .check_pair_func =
+				ed25519_mlds65_check_pair_wrap, /* Compatible key structures */
 #if defined(MBEDTLS_PK_USE_PSA_EC_DATA)
     .ctx_alloc_func = NULL,
     .ctx_free_func = NULL,
 #else /* MBEDTLS_PK_USE_PSA_EC_DATA */
-				.ctx_alloc_func = ed25519_mlds65_alloc_wrap, /* Compatible key structures */
-				.ctx_free_func = ed25519_mlds65_free_wrap, /* Compatible key structures */
+		.ctx_alloc_func = ed25519_mlds65_alloc_wrap, /* Compatible key structures */
+		.ctx_free_func = ed25519_mlds65_free_wrap, /* Compatible key structures */
 #endif /* MBEDTLS_PK_USE_PSA_EC_DATA */
-				.debug_func = ed25519_mlds65_debug, /* Compatible key structures */
-		};
+		.debug_func = ed25519_mlds65_debug, /* Compatible key structures */
+};
 
-const mbedtls_pk_info_t mbedtls_ed25519_mlds44_info = { 
-		.type = MBEDTLS_PK_ED25519_MLDSA44, .name = "ED25519+MLDS44",
-				.get_bitlen = eckey_get_bitlen, /* Compatible key structures */
-				.can_do = ed25519_mlds44_can_do,
+const mbedtls_pk_info_t mbedtls_ed25519_mlds44_info = { .type =
+		MBEDTLS_PK_ED25519_MLDSA44, .name = "ED25519+MLDS44", .get_bitlen =
+		eckey_get_bitlen, /* Compatible key structures */
+.can_do = ed25519_mlds44_can_do,
 #if defined(MBEDTLS_PK_CAN_ECDSA_VERIFY)
-				.verify_func = ed25519_mlds44_verify_wrap, /* Compatible key structures */
+		.verify_func = ed25519_mlds44_verify_wrap, /* Compatible key structures */
 #else /* MBEDTLS_PK_CAN_ECDSA_VERIFY */
     .verify_func = NULL,
 #endif /* MBEDTLS_PK_CAN_ECDSA_VERIFY */
 #if defined(MBEDTLS_PK_CAN_ECDSA_SIGN)
-				.sign_func = ed25519_mlds44_sign_wrap, /* Compatible key structures */
+		.sign_func = ed25519_mlds44_sign_wrap, /* Compatible key structures */
 #else /* MBEDTLS_PK_CAN_ECDSA_SIGN */
     .sign_func = NULL,
 #endif /* MBEDTLS_PK_CAN_ECDSA_SIGN */
@@ -1739,18 +1756,17 @@ const mbedtls_pk_info_t mbedtls_ed25519_mlds44_info = {
     .rs_alloc_func = NULL,
     .rs_free_func = NULL,
 #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
-				.decrypt_func = NULL, .encrypt_func = NULL, .check_pair_func =
-						ed25519_mlds44_check_pair_wrap, /* Compatible key structures */
+		.decrypt_func = NULL, .encrypt_func = NULL, .check_pair_func =
+				ed25519_mlds44_check_pair_wrap, /* Compatible key structures */
 #if defined(MBEDTLS_PK_USE_PSA_EC_DATA)
     .ctx_alloc_func = NULL,
     .ctx_free_func = NULL,
 #else /* MBEDTLS_PK_USE_PSA_EC_DATA */
-				.ctx_alloc_func = ed25519_mlds44_alloc_wrap, /* Compatible key structures */
-				.ctx_free_func = ed25519_mlds44_free_wrap, /* Compatible key structures */
+		.ctx_alloc_func = ed25519_mlds44_alloc_wrap, /* Compatible key structures */
+		.ctx_free_func = ed25519_mlds44_free_wrap, /* Compatible key structures */
 #endif /* MBEDTLS_PK_USE_PSA_EC_DATA */
-				.debug_func = ed25519_mlds44_debug, /* Compatible key structures */
-		};
-
+		.debug_func = ed25519_mlds44_debug, /* Compatible key structures */
+};
 
 #if defined(MBEDTLS_PK_RSA_ALT_SUPPORT)
 /*

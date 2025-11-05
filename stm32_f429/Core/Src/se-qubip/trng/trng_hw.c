@@ -58,160 +58,67 @@
   * @version 1.0
   **/
 
-
-#include "../../se-qubip/trng/trng_hw.h"
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-// INTERFACE INIT/START & READ/WRITE
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-void trng_init(INTF interface)
-{
-    unsigned long long control;
-
-    //-- General and Interface Reset
-    control = (ADD_TRNG << 32) + TRNG_INTF_RST + TRNG_RST_ON;
-    write_INTF(interface, &control, CONTROL, AXI_BYTES);
-    control = (ADD_TRNG << 32) + TRNG_INTF_OPER + TRNG_RST_ON;
-    write_INTF(interface, &control, CONTROL, AXI_BYTES);
-	
-	////////
-	/* control = (ADD_TRNG << 32) + TRNG_INTF_LOAD + TRNG_RST_ON;
-    unsigned long long addr = 0;
-
-	write_INTF(interface, &control, CONTROL, AXI_BYTES);
-	write_INTF(interface, &addr, ADDRESS, AXI_BYTES);
-	
-	unsigned long long in_data = 0;	
-	write_INTF(interface, &in_data, DATA_IN, AXI_BYTES); */
-}
-
-void trng_start(unsigned int bytes, INTF interface)
-{
-    unsigned long long control = (ADD_TRNG << 32) + TRNG_INTF_LOAD + TRNG_RST_OFF;
-	unsigned long long addr = 0;
-	
-    write_INTF(interface, &control, CONTROL, AXI_BYTES);
-	write_INTF(interface, &addr, ADDRESS, AXI_BYTES);
-	
-	//unsigned long long in_data = ((bytes) << 5) + 1;
-	unsigned long long in_data = ((bytes/8) << 5) + 1;
-	
-	write_INTF(interface, &in_data, DATA_IN, AXI_BYTES);
-	
-	control = (ADD_TRNG << 32) + TRNG_INTF_OPER + TRNG_RST_OFF;
-    write_INTF(interface, &control, CONTROL, AXI_BYTES);
-}
-
-
-void trng_read(unsigned char* out, unsigned int bytes, INTF interface)
-{
-    unsigned long long in_data;
-	unsigned long long control;
-	unsigned long long addr;
-	
-	int loop = (bytes % AXI_BYTES == 0) ? (bytes / AXI_BYTES) : (bytes / AXI_BYTES + 1); 
-	
-    for (int i = 0; i < loop; i++)
-    {
-        //in_data = (i << 18) + ((bytes) << 5) + 1;
-		in_data = (i << 18) + ((bytes/8) << 5) + 1;
-		control = (ADD_TRNG << 32) + TRNG_INTF_LOAD + TRNG_RST_OFF;
-		addr = 0;
-		
-		write_INTF(interface, &control, CONTROL, AXI_BYTES);
-		write_INTF(interface, &addr, ADDRESS, AXI_BYTES);
-		write_INTF(interface, &in_data, DATA_IN, AXI_BYTES);
-		
-		control = (ADD_TRNG << 32) + TRNG_INTF_READ + TRNG_RST_OFF;
-		addr = 1;
-		write_INTF(interface, &control, CONTROL, AXI_BYTES);
-		write_INTF(interface, &addr, ADDRESS, AXI_BYTES);
-		
-		read_INTF(interface, out + AXI_BYTES * i, DATA_OUT, AXI_BYTES);
-		
-		
-    }
-}
+#include "trng_hw.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // TRNG FUNCTION
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-void trng_hw(unsigned char* out, unsigned int bytes, INTF interface){
-	
-	unsigned int block_num = 0; 
-	unsigned int block_total = bytes / TRNG_MAX_BYTES;
-	unsigned int last_bytes = (bytes % TRNG_MAX_BYTES);
+void trng_hw(unsigned char* out, unsigned int bytes, INTF interface)
+{
+	//-- se_code = { {(32'b) 64-bit data_packages}, {10'b0}, {k = 4, k = 3, k = 2, DEC, ENC, KEY_GEN}, {(16'b)MLKEM} }
+	uint64_t next_block = 0;
+	uint64_t control 	= 0;
+    while (control != CMD_SE_CODE)
+    {
+        picorv32_control(interface, &control);
+    }
+    const uint8_t trng_code = TRNG_SE_CODE;
+	uint32_t data_packages 	= (bytes + AXI_BYTES - 1) / AXI_BYTES;
 
-	// printf("\n %d %d %d", bytes, block_total, last_bytes);
+    uint64_t se_code = ((uint64_t) data_packages << 32) | trng_code;
+    write_INTF(interface, &se_code, PICORV32_DATA_IN, AXI_BYTES);
 
-	unsigned char out_trng[TRNG_MAX_BYTES]; 
+	uint32_t data_blocks 	= data_packages / (FIFO_OUT_DEPTH - 2);
+	uint32_t data_rem 		= data_packages % (FIFO_OUT_DEPTH - 2);
 
-	/*
-	if (bytes > TRNG_MAX_BYTES) {
-		 printf("\nTRNG FAIL: Max bytes = %d\n ", TRNG_MAX_BYTES);
-		 exit(1);
-	}
-	*/
-	if (block_total != 0) { // blocks of TRNG_MAX_BYTES
-		for (block_num = 0; block_num < block_total; block_num++) {
-			trng_init(interface);
+	//-- Read Random Data
+	uint32_t packages_read = 0;
+	for (uint32_t i = 0; i < data_blocks; i++)
+	{
+		while (control != CMD_SE_READ)
+    	{
+    	    picorv32_control(interface, &control);
+    	}
 
-			trng_start(TRNG_MAX_BYTES, interface);
-
-			//-- Detect when finish
-			unsigned long long info;
-			int count = 0;
-
-			while (count < TRNG_WAIT_TIME)
-			{
-				read_INTF(interface, &info, END_OP, AXI_BYTES);
-
-				if (info & 0x1) break;
-
-				count++;
-			}
-			if (count == TRNG_WAIT_TIME)
-				printf("\nTRNG FAIL!: TIMEOUT \t%d\n", count);
-
-			count = 0;
-
-			trng_read(out_trng, TRNG_MAX_BYTES, interface);
-
-			memcpy(out + TRNG_MAX_BYTES * block_num, out_trng, TRNG_MAX_BYTES);
-
-		}
-	}
-
-	// last one or block less than TRNG_MAX_BYTES
-	if (last_bytes != 0) {
-
-		trng_init(interface);
-
-		trng_start(last_bytes, interface);
-
-		//-- Detect when finish
-		unsigned long long info;
-		int count = 0;
-
-		while (count < TRNG_WAIT_TIME)
+		for (uint32_t j = 0; j < FIFO_IN_DEPTH - 2; j++)
 		{
-			read_INTF(interface, &info, END_OP, AXI_BYTES);
-
-			if (info & 0x1) break;
-
-			count++;
+			read_INTF(interface, out + (j + packages_read) * AXI_BYTES, PICORV32_DATA_OUT, AXI_BYTES);
 		}
-		if (count == TRNG_WAIT_TIME)
-			printf("\nTRNG FAIL!: TIMEOUT \t%d\n", count);
+		packages_read += FIFO_OUT_DEPTH - 2;
 
-		count = 0;
-
-		trng_read(out_trng, last_bytes, interface);
-
-		memcpy(out + TRNG_MAX_BYTES * block_num, out_trng, last_bytes);
-	
+		while (control != CMD_SE_WAIT)
+    	{
+    	    picorv32_control(interface, &control);
+			if (control == CMD_SE_WAIT) read_INTF(interface, &next_block, PICORV32_DATA_OUT, AXI_BYTES); // Send a read signal to continue
+    	}
 	}
+
+	while (control != CMD_SE_READ)
+    {
+        picorv32_control(interface, &control);
+    }
+
+	for (uint32_t i = 0; i < data_rem; i++)
+	{
+		read_INTF(interface, out + (i + packages_read) * AXI_BYTES, PICORV32_DATA_OUT, AXI_BYTES);
+	}
+
+	while (control != CMD_SE_CODE)
+    {
+        picorv32_control(interface, &control);
+    }
 }
+
+
 

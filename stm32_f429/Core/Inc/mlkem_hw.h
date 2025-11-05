@@ -1,6 +1,6 @@
 /**
-  * @file sha2_hw.h
-  * @brief SHA2 HW header
+  * @file mlkem_hw.h
+  * @brief MLKEM HW header
   *
   * @section License
   *
@@ -58,32 +58,35 @@
   * @version 1.0
   **/
 
-#ifndef SHA2_H
-#define SHA2_H
+#ifndef MLKEM_H
+#define MLKEM_H
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <math.h>
+#include <stdbool.h>
+#include "intf.h"
+#include "extra_func.h"
+#include "picorv32.h"
+#include "conf.h"
+#include "secmem_hw.h"
 
-#include "../../se-qubip/common/conf.h"
-#include "../../se-qubip/common/extra_func.h"
-#include "../../se-qubip/common/intf.h"
+/************************ Gen Keys Functions **********************/
+void mlkem_512_gen_keys_hw(unsigned char* pk, unsigned char* sk, bool ext_key, uint8_t* key_id, INTF interface);
+void mlkem_768_gen_keys_hw(unsigned char* pk, unsigned char* sk, bool ext_key, uint8_t* key_id, INTF interface);
+void mlkem_1024_gen_keys_hw(unsigned char* pk, unsigned char* sk, bool ext_key, uint8_t* key_id, INTF interface);
+void mlkem_gen_keys_hw(int k, unsigned char* pk, unsigned char* sk, bool ext_key, uint8_t* key_id, INTF interface);
 
-/************************ interface Constant Definitions **********************/
-
-#define LOAD_LENGTH_SHA2			1
-#define LOAD_SHA2					2
-#define START_SHA2					3
-
-/************************ interface Function Definitions **********************/
-
-void sha2_interface_init(INTF interface, unsigned long long int length, int VERSION, int DBG);
-void sha2_interface(INTF interface, unsigned long long int* a, unsigned long long int* b, unsigned long long int length, int last_hb, int VERSION, int DBG);
-void sha2_hw(INTF interface, unsigned char* in, unsigned char* out, unsigned long long int length, unsigned int VERSION, int DBG);
-
-/************************ Main Functions **********************/
-
-void sha_256_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
-void sha_384_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
-void sha_512_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
-void sha_512_256_hw_func(unsigned char* in, unsigned int length, unsigned char* out, INTF interface);
+/************************ Encryption Functions **********************/
+void mlkem_512_enc_hw(unsigned char* pk, unsigned char* ct, unsigned char* ss, INTF interface);
+void mlkem_768_enc_hw(unsigned char* pk, unsigned char* ct, unsigned char* ss, INTF interface);
+void mlkem_1024_enc_hw(unsigned char* pk, unsigned char* ct, unsigned char* ss, INTF interface);
+void mlkem_enc_hw(int k, unsigned char* pk, unsigned char* ct, unsigned char* ss, INTF interface);
+/************************ Decryption Functions **********************/
+void mlkem_512_dec_hw(unsigned char* sk, unsigned char* ct, unsigned char* ss, unsigned int* result, bool ext_key, uint8_t* key_id, INTF interface);
+void mlkem_768_dec_hw(unsigned char* sk, unsigned char* ct, unsigned char* ss, unsigned int* result, bool ext_key, uint8_t* key_id, INTF interface);
+void mlkem_1024_dec_hw(unsigned char* sk, unsigned char* ct, unsigned char* ss, unsigned int* result, bool ext_key, uint8_t* key_id, INTF interface);
+void mlkem_dec_hw(int k, unsigned char* sk, unsigned char* ct, unsigned char* ss, unsigned int* result, bool ext_key, uint8_t* key_id, INTF interface);
 
 #endif
