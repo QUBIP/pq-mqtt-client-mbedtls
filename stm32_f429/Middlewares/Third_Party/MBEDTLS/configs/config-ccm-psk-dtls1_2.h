@@ -88,5 +88,5 @@
 
 /* Error messages and TLS debugging traces
  * (huge code size increase, needed for tests/ssl-opt.sh) */
-//#define MBEDTLS_DEBUG_C
-//#define MBEDTLS_ERROR_C
+#define MBEDTLS_DEBUG_C
+#define MBEDTLS_ERROR_C

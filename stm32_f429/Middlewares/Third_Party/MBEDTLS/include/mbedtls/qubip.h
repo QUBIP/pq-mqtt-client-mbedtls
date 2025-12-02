@@ -1,14 +1,15 @@
 /*
-Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
-SPDX-License-Identifier: MIT
-*/
+ Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
+ SPDX-License-Identifier: MIT
+ */
 
 #ifndef QUBIP_H
 #define QUBIP_H
 
-
 #include <stddef.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 // Public key size
 #define KYBER768_PK_SIZE 1184
@@ -25,22 +26,33 @@ SPDX-License-Identifier: MIT
 
 #define SWAP_ORDER
 
-
 //#define BROKER_IP		"192.168.1.12"
 #define BROKER_IP		"broker.dm.qubip.eu"
 #define BROKER_HOSTNAME "broker.dm.qubip.eu"
 
-// Does not launch FreeRTOS but runs custom test function
+// Does not launch FreeRTOS but runs custom test functions
 //#define TEST_SE
 
 // Ultra verbose logs, deactivate in prod as they massively interfere with MQTT timeouts
 //#define MQTT_INTERFACE_DEBUG
 
-
+typedef enum {
+	ROOT_CA, CLIENT
+} CertType;
 
 #ifdef CERTS_PQ_44
 
-	#define MQTT_PORT		"8884"
+#define MQTT_PORT		"8884"
+
+#define ROOT_CA_CERT_SIZE_BYTES 5871
+#define ROOT_CA_CERT_SPI_ADDR 0x1000
+
+#define CLIENT_CERT_SIZE_BYTES 6295
+
+#define CLIENT_CERT_SPI_ADDR 0x3000
+
+#define CLIENT_KEY_SIZE_BYTES 5523
+#define CLIENT_KEY_SPI_ADDR 0x5000
 
 #else
 
@@ -48,6 +60,19 @@ SPDX-License-Identifier: MIT
 
 #endif
 
+typedef struct {
+	unsigned char *name;
+
+	// Cert data
+	unsigned char *cert_bytes;
+	size_t cert_len;
+	size_t cert_spi_addr;
+	// Optional key data if key_len > 0
+	unsigned char *key_bytes;
+	size_t key_len;
+	size_t key_spi_addr;
+
+} SPICert;
 
 typedef struct {
 	// Kyber768 Public Key
@@ -71,16 +96,17 @@ typedef struct {
 	uint8_t x25519_key_slot;
 } HybridKeyKEM;
 
-HybridKeyKEM *hybrid_key_gen();
-void hybrid_key_free(HybridKeyKEM *);
+HybridKeyKEM* hybrid_key_gen();
+void hybrid_key_free(HybridKeyKEM*);
 //void print_result_valid(unsigned char* str, unsigned int fail);
-int qubip_pq_x25519_mlkem768_key_agreement(
-    const uint8_t *peer_key,
-    size_t peer_key_length,
-    const uint8_t *key_buffer,
-    size_t key_buffer_size,
-    uint8_t *shared_secret,
-    size_t shared_secret_size,
-    size_t *shared_secret_length);
+int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
+		size_t peer_key_length, const uint8_t *key_buffer,
+		size_t key_buffer_size, uint8_t *shared_secret,
+		size_t shared_secret_size, size_t *shared_secret_length);
+
+SPICert* make_certificate(CertType CERT_TYPE);
+void save_cert_to_spi(SPICert *certificate);
+void load_cert_from_spi(SPICert *certificate, bool load_key, bool alloc_buffers);
+void free_certificate(SPICert *certificate);
 #endif
 

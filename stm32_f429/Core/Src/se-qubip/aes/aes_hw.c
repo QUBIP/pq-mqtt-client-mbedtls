@@ -83,7 +83,7 @@ static void aes_block_padding(unsigned int len, unsigned int *complete_len, unsi
     *blocks = (len + AES_BLOCK - 1) / AES_BLOCK; 
     *complete_len = *blocks * AES_BLOCK;
     
-    *data_padded =  malloc(*complete_len);
+    *data_padded =  pvPortMalloc(*complete_len);
     memset(*data_padded, 0, *complete_len);
     memcpy(*data_padded, data, len);
 }
@@ -965,7 +965,7 @@ void aes_gcm_hw(unsigned char *key, unsigned char *iv, unsigned int iv_len, unsi
     unsigned int iv_new_len = iv_complete_len + AES_BLOCK;
     unsigned char *iv_new;
 
-    iv_new = (unsigned char*) malloc(iv_new_len);
+    iv_new = (unsigned char*) pvPortMalloc(iv_new_len);
     memcpy(iv_new, iv_padded, iv_complete_len);
     memcpy(iv_new + iv_complete_len, len_buf, AES_BLOCK);
 

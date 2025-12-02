@@ -126,8 +126,8 @@ void sha3_shake_hw(unsigned char *in, unsigned char *out, unsigned int length,
 	unsigned char *buffer_in;
 	unsigned char *buffer_out;
 
-	buffer_in = (unsigned char*) malloc(hb_num * SIZE_BLOCK / 8);
-	buffer_out = (unsigned char*) malloc(hb_num_out * SIZE_BLOCK / 8);
+	buffer_in = (unsigned char*) pvPortMalloc(hb_num * SIZE_BLOCK / 8);
+	buffer_out = (unsigned char*) pvPortMalloc(hb_num_out * SIZE_BLOCK / 8);
 	memset(buffer_in, 0, hb_num * SIZE_BLOCK / 8);
 	memcpy(buffer_in, in, length / 8);
 

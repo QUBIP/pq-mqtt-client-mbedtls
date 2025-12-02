@@ -64,14 +64,13 @@
 
 #define SECMEM_MAX_KEYS             48
 
-typedef struct  
-{
-    const char      alg_id[8];                          //  Algorithm name
-    const uint8_t   max_keys;                           //  Maximum number of keys (e.g., 48 for AES)
-    const uint8_t   key_len;                            //  Key length in bytes (e.g., 32 for AES)
-    const uint16_t  addr_offset;                        //  Starting address in Secure Memory
-    uint8_t         num_keys_stored;                    //  Number of keys currently stored
-    bool            key_slot_in_use[SECMEM_MAX_KEYS];   //  Keys in use 
+typedef struct {
+	const char alg_id[8];                          //  Algorithm name
+	const uint8_t max_keys;        //  Maximum number of keys (e.g., 48 for AES)
+	const uint8_t key_len;            //  Key length in bytes (e.g., 32 for AES)
+	const uint16_t addr_offset;            //  Starting address in Secure Memory
+	uint8_t num_keys_stored;                 //  Number of keys currently stored
+	bool key_slot_in_use[SECMEM_MAX_KEYS];   //  Keys in use
 } secmem_alg_t;
 
 extern secmem_alg_t secmem_aes;
@@ -85,9 +84,12 @@ extern secmem_alg_t secmem_mldsa;
 // SECURE MEMORY OPERATIONS
 //==============================================================================
 
-void secmem_store_key(uint8_t alg_id, uint8_t* key_id, bool is_external, uint8_t* key_external, uint8_t key_len, INTF interface);
+void secmem_store_key(uint8_t alg_id, uint8_t *key_id, bool is_external,
+		uint8_t *key_external, uint8_t key_len, INTF interface);
 void secmem_delete_key(uint8_t alg_id, uint8_t key_id, INTF interface);
-void secmem_get_key(uint8_t alg_id, uint8_t key_id, uint8_t* key_data, INTF interface);
+void secmem_get_key(uint8_t alg_id, uint8_t key_id, uint8_t *key_data,
+		INTF interface);
 void secmem_info(int DBG, INTF interface);
+void secmem_delete_all_keys(INTF interface);
 
 #endif

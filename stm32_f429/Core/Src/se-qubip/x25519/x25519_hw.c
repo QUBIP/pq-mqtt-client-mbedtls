@@ -84,8 +84,8 @@ void x25519_genkeys_hw(unsigned char **pri_key, unsigned char **pub_key,
 	*pri_len = X25519_BYTES;
 	*pub_len = X25519_BYTES;
 
-	*pri_key = (unsigned char*) malloc(*pri_len);
-	*pub_key = (unsigned char*) malloc(*pub_len);
+	*pri_key = (unsigned char*) pvPortMalloc(*pri_len);
+	*pub_key = (unsigned char*) pvPortMalloc(*pub_len);
 
 	if (ext_key) {
 		gen_priv_key(*pri_key, *pri_len);
@@ -165,7 +165,7 @@ void x25519_ss_gen_hw(unsigned char **shared_secret,
 	pri_len = X25519_BYTES;
 	*shared_secret_len = X25519_BYTES;
 
-	*shared_secret = (unsigned char*) malloc(*shared_secret_len);
+	*shared_secret = (unsigned char*) pvPortMalloc(*shared_secret_len);
 
 	//-- se_code = { {(32'b) 64-bit data_packages}, {14'b0}, {x25519_ss_gen, x25519_genkeys}, {(16'b)X25519} }
 	uint64_t control = 0;

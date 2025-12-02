@@ -70,6 +70,9 @@ void *_sbrk(ptrdiff_t incr)
   {
     errno = ENOMEM;
     printf("!!!!!! END OF MEMORY !!!!!!\r\n");
+
+    print_memory_stats();
+
     return (void *)-1;
   }
 

@@ -60,6 +60,7 @@
 
 #include "demo.h"
 #include "test_func.h"
+#include "secmem_hw.h"
 
 void demo_mlkem_hw(unsigned int mode, unsigned int verb, INTF interface) {
 

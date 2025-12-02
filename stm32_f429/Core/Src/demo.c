@@ -1,78 +1,43 @@
 #include "../Inc/demo.h"
+#include "qubip.h"
+#define ARRAY_SIZE_BYTES ( (unsigned int) 5 * 1024)
+/*
+ * NOT WORKING ADDRESSES
+ * #define SPI_START_ADDR 0x200000
+ * #define SPI_START_ADDR 0x100000
+ *
+ */
 
-void start_demo_csic_se() {
+extern const char mbedtls_root_certificate[];
+extern const size_t mbedtls_root_certificate_len;
+
+extern const char client_cert[];
+extern const size_t client_cert_len;
+
+extern const char client_key[];
+extern const size_t client_key_len;
+
+void write_certificates_to_spi() {
 
 	print_title_demo();
 
-	int verb = 3;
+	SPICert *root_ca = make_certificate(ROOT_CA);
+	root_ca->cert_bytes = mbedtls_root_certificate;
+	root_ca->cert_len = 5871;
 
-	// --- Open Interface --- //
-	INTF interface = 0;
+	SPICert *client = make_certificate(CLIENT);
+	client->cert_bytes = client_cert;
+	client->cert_len = 6295;
+	client->key_bytes = client_key;
+	client->key_len = 5523;
 
-	/*
-	 printf("\n\t ---- Test Evaluation --- ");
-	 printf("\n Configuration: ");
-	 printf("\n %-10s: ", "AES");
-	 printf("yes");
+	save_cert_to_spi(root_ca);
+	save_cert_to_spi(client);
 
-	 printf("\n %-10s: ", "SHA3");
-	 printf("yes");
-
-	 printf("\n %-10s: ", "SHA2");
-	 printf("yes");
-
-	 printf("\n %-10s: ", "EdDSA");
-	 printf("yes");
-
-	 printf("\n %-10s: ", "ECDH");
-	 printf("yes");
-
-	 printf("\n %-10s: ", "MLKEM");
-	 printf("yes");
-
-	 printf("\n %-10s: ", "DRBG");
-	 printf("yes");
-
-	 printf("\n\n %-30s | Result ", "Algorithm");
-	 printf("\n %-30s | ------ ", "---------");
-
-	 demo_aes_hw(128, verb, interface);	// Security level: 128
-	 demo_aes_hw(192, verb, interface);	// Security level: 192
-	 demo_aes_hw(256, verb, interface);	// Security level: 256
-
-	 demo_sha3_hw(verb, interface);
-
-	 demo_sha2_hw(verb, interface);
-
-	 demo_eddsa_hw(25519, verb, interface);
-
-	 demo_x25519_hw(25519, verb, interface);
-
-	 demo_mlkem_hw(512, verb, interface);
-	 demo_mlkem_hw(768, verb, interface);
-	 //demo_mlkem_hw(1024, verb, interface);
-	 */
-	/*
-	 demo_trng_hw(128, verb, interface);
-	 demo_trng_hw(256, verb, interface);
-	 demo_trng_hw(512, verb, interface);
-	 demo_trng_hw(1024, verb, interface);
-	 demo_trng_hw(2048, verb, interface);
-	 */
-	//demo_eddsa_hw(25519, verb, interface);
-	int i = 0;
-	/*
-	while (i++ < 10) {
-
-		printf("Executing demo_mldsa_hw\n");
-		demo_mldsa_hw(44, verb, interface);
-		printf("demo_mldsa_hw done!\n\n\n\n");
-	}
-	*/
-
-	 printf("Executing demo_mlkem_hw\n");
-	 demo_mlkem_hw(768, 3, 0);
-	 printf("demo_mlkem_hw done!\n");
+	SPICert *root_ca_read_back = make_certificate(ROOT_CA);
+	SPICert *client_read_back = make_certificate(CLIENT);
+	load_cert_from_spi(root_ca_read_back, false, true);
+	load_cert_from_spi(client_read_back, true, true);
 
 	printf("\n\n");
 

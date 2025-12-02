@@ -40,16 +40,15 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 /// @brief  Possible STM32 system reset causes
-typedef enum reset_cause_e
-{
-    RESET_CAUSE_UNKNOWN = 0,
-    RESET_CAUSE_LOW_POWER_RESET,
-    RESET_CAUSE_WINDOW_WATCHDOG_RESET,
-    RESET_CAUSE_INDEPENDENT_WATCHDOG_RESET,
-    RESET_CAUSE_SOFTWARE_RESET,
-    RESET_CAUSE_POWER_ON_POWER_DOWN_RESET,
-    RESET_CAUSE_EXTERNAL_RESET_PIN_RESET,
-    RESET_CAUSE_BROWNOUT_RESET,
+typedef enum reset_cause_e {
+	RESET_CAUSE_UNKNOWN = 0,
+	RESET_CAUSE_LOW_POWER_RESET,
+	RESET_CAUSE_WINDOW_WATCHDOG_RESET,
+	RESET_CAUSE_INDEPENDENT_WATCHDOG_RESET,
+	RESET_CAUSE_SOFTWARE_RESET,
+	RESET_CAUSE_POWER_ON_POWER_DOWN_RESET,
+	RESET_CAUSE_EXTERNAL_RESET_PIN_RESET,
+	RESET_CAUSE_BROWNOUT_RESET,
 } reset_cause_t;
 /* USER CODE END PTD */
 
@@ -87,26 +86,21 @@ static void MX_I2C1_Init(void);
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif
 
-PUTCHAR_PROTOTYPE
-{
-  HAL_UART_Transmit(&huart3, (uint8_t *) &ch, 1, HAL_MAX_DELAY);
-  return ch;
+PUTCHAR_PROTOTYPE {
+	HAL_UART_Transmit(&huart3, (uint8_t*) &ch, 1, HAL_MAX_DELAY);
+	return ch;
 }
 
-int _write(int file, char *ptr, int len)
-{
-  int DataIdx;
+int _write(int file, char *ptr, int len) {
+	int DataIdx;
 
-  HAL_UART_Transmit(&huart3, (uint8_t *) ptr, len, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart3, (uint8_t*) ptr, len, HAL_MAX_DELAY);
 
-  for (DataIdx = 0; DataIdx < len; ++DataIdx)
-  {
-    ITM_SendChar(*ptr++);
-  }
-  return len;
+	for (DataIdx = 0; DataIdx < len; ++DataIdx) {
+		ITM_SendChar(*ptr++);
+	}
+	return len;
 }
-
-
 
 /**
  * @brief I2C1 Initialization Function
@@ -158,53 +152,38 @@ static void MX_I2C1_Init(void) {
  * @param  None
  * @retval The system reset cause
  */
-reset_cause_t reset_cause_get(void)
-{
+reset_cause_t reset_cause_get(void) {
 	reset_cause_t reset_cause;
 
-    if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWRRST))
-    {
-        reset_cause = RESET_CAUSE_LOW_POWER_RESET;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDGRST))
-    {
-        reset_cause = RESET_CAUSE_WINDOW_WATCHDOG_RESET;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST))
-    {
-        reset_cause = RESET_CAUSE_INDEPENDENT_WATCHDOG_RESET;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST))
-    {
-        // This reset is induced by calling the ARM CMSIS
-        // `NVIC_SystemReset()` function!
-        reset_cause = RESET_CAUSE_SOFTWARE_RESET;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST))
-    {
-        reset_cause = RESET_CAUSE_POWER_ON_POWER_DOWN_RESET;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST))
-    {
-        reset_cause = RESET_CAUSE_EXTERNAL_RESET_PIN_RESET;
-    }
-    // Needs to come *after* checking the `RCC_FLAG_PORRST` flag in order to
-    // ensure first that the reset cause is NOT a POR/PDR reset. See note
-    // below.
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST))
-    {
-        reset_cause = RESET_CAUSE_BROWNOUT_RESET;
-    }
-    else
-    {
-        reset_cause = RESET_CAUSE_UNKNOWN;
-    }
+	if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWRRST)) {
+		reset_cause = RESET_CAUSE_LOW_POWER_RESET;
+	} else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDGRST)) {
+		reset_cause = RESET_CAUSE_WINDOW_WATCHDOG_RESET;
+	} else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST)) {
+		reset_cause = RESET_CAUSE_INDEPENDENT_WATCHDOG_RESET;
+	} else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST)) {
+		// This reset is induced by calling the ARM CMSIS
+		// `NVIC_SystemReset()` function!
+		reset_cause = RESET_CAUSE_SOFTWARE_RESET;
+	} else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST)) {
+		reset_cause = RESET_CAUSE_POWER_ON_POWER_DOWN_RESET;
+	} else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST)) {
+		reset_cause = RESET_CAUSE_EXTERNAL_RESET_PIN_RESET;
+	}
+	// Needs to come *after* checking the `RCC_FLAG_PORRST` flag in order to
+	// ensure first that the reset cause is NOT a POR/PDR reset. See note
+	// below.
+	else if (__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST)) {
+		reset_cause = RESET_CAUSE_BROWNOUT_RESET;
+	} else {
+		reset_cause = RESET_CAUSE_UNKNOWN;
+	}
 
-    // Clear all the reset flags or else they will remain set during future
-    // resets until system power is fully removed.
-    __HAL_RCC_CLEAR_RESET_FLAGS();
+	// Clear all the reset flags or else they will remain set during future
+	// resets until system power is fully removed.
+	__HAL_RCC_CLEAR_RESET_FLAGS();
 
-    return reset_cause;
+	return reset_cause;
 }
 
 // Note: any of the STM32 Hardware Abstraction Layer (HAL) Reset and Clock
@@ -227,41 +206,38 @@ reset_cause_t reset_cause_get(void)
  * @param[in]  reset_cause     The previously-obtained system reset cause
  * @retval A null-terminated ASCII name string describing the system reset cause
  */
-const char * reset_cause_get_name(reset_cause_t reset_cause)
-{
-    const char * reset_cause_name = "TBD";
+const char* reset_cause_get_name(reset_cause_t reset_cause) {
+	const char *reset_cause_name = "TBD";
 
-    switch (reset_cause)
-    {
-        case RESET_CAUSE_UNKNOWN:
-            reset_cause_name = "UNKNOWN";
-            break;
-        case RESET_CAUSE_LOW_POWER_RESET:
-            reset_cause_name = "LOW_POWER_RESET";
-            break;
-        case RESET_CAUSE_WINDOW_WATCHDOG_RESET:
-            reset_cause_name = "WINDOW_WATCHDOG_RESET";
-            break;
-        case RESET_CAUSE_INDEPENDENT_WATCHDOG_RESET:
-            reset_cause_name = "INDEPENDENT_WATCHDOG_RESET";
-            break;
-        case RESET_CAUSE_SOFTWARE_RESET:
-            reset_cause_name = "SOFTWARE_RESET";
-            break;
-        case RESET_CAUSE_POWER_ON_POWER_DOWN_RESET:
-            reset_cause_name = "POWER-ON_RESET (POR) / POWER-DOWN_RESET (PDR)";
-            break;
-        case RESET_CAUSE_EXTERNAL_RESET_PIN_RESET:
-            reset_cause_name = "EXTERNAL_RESET_PIN_RESET";
-            break;
-        case RESET_CAUSE_BROWNOUT_RESET:
-            reset_cause_name = "BROWNOUT_RESET (BOR)";
-            break;
-    }
+	switch (reset_cause) {
+	case RESET_CAUSE_UNKNOWN:
+		reset_cause_name = "UNKNOWN";
+		break;
+	case RESET_CAUSE_LOW_POWER_RESET:
+		reset_cause_name = "LOW_POWER_RESET";
+		break;
+	case RESET_CAUSE_WINDOW_WATCHDOG_RESET:
+		reset_cause_name = "WINDOW_WATCHDOG_RESET";
+		break;
+	case RESET_CAUSE_INDEPENDENT_WATCHDOG_RESET:
+		reset_cause_name = "INDEPENDENT_WATCHDOG_RESET";
+		break;
+	case RESET_CAUSE_SOFTWARE_RESET:
+		reset_cause_name = "SOFTWARE_RESET";
+		break;
+	case RESET_CAUSE_POWER_ON_POWER_DOWN_RESET:
+		reset_cause_name = "POWER-ON_RESET (POR) / POWER-DOWN_RESET (PDR)";
+		break;
+	case RESET_CAUSE_EXTERNAL_RESET_PIN_RESET:
+		reset_cause_name = "EXTERNAL_RESET_PIN_RESET";
+		break;
+	case RESET_CAUSE_BROWNOUT_RESET:
+		reset_cause_name = "BROWNOUT_RESET (BOR)";
+		break;
+	}
 
-    return reset_cause_name;
+	return reset_cause_name;
 }
-
 
 /* USER CODE END 0 */
 
@@ -269,48 +245,48 @@ const char * reset_cause_get_name(reset_cause_t reset_cause)
  * @brief  The application entry point.
  * @retval int
  */
-int main(void)
-{
-  /* USER CODE BEGIN 1 */
+int main(void) {
+	/* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+	/* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+	/* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_USART3_UART_Init();
-  MX_RNG_Init();
-  //MX_IWDG_Init();
-  MX_I2C1_Init();
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_USART3_UART_Init();
+	MX_RNG_Init();
+	//MX_IWDG_Init();
+	MX_I2C1_Init();
 
-  /* USER CODE BEGIN 2 */
-  DEBUG_LOG("\nStarting...\n\n");
-  // Print the cause of the reboot
-  reset_cause_t reset_cause = reset_cause_get();
-  DEBUG_LOG("[MAIN]: The system reset cause is \"%s\"\n", reset_cause_get_name(reset_cause));
-  print_title_demo();
+	/* USER CODE BEGIN 2 */
+	DEBUG_LOG("\nStarting...\n\n");
+	// Print the cause of the reboot
+	reset_cause_t reset_cause = reset_cause_get();
+	DEBUG_LOG("[MAIN]: The system reset cause is \"%s\"\n",
+			reset_cause_get_name(reset_cause));
+	print_title_demo();
 
-  osDelay(1000);
+	osDelay(1000);
 //#define TEST_SE
 #ifdef TEST_SE
-  //demo_mlkem_hw(768, 3, 0);
-  //kyber768_kat();
-  start_demo_csic_se();
+	//demo_mlkem_hw(768, 3, 0);
+	//kyber768_kat();
+	write_certificates_to_spi();
 #else
   /* USER CODE END 2 */
 
@@ -320,61 +296,57 @@ int main(void)
   /* Start scheduler */
   osKernelStart();
 #endif
-  /* We should never get here as control is now taken by the scheduler */
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
+	/* We should never get here as control is now taken by the scheduler */
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
+	while (1) {
+		/* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
+		/* USER CODE BEGIN 3 */
+	}
+	/* USER CODE END 3 */
 }
 
 /**
  * @brief System Clock Configuration
  * @retval None
  */
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+void SystemClock_Config(void) {
+	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
-  /** Configure the main internal regulator output voltage
-   */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+	/** Configure the main internal regulator output voltage
+	 */
+	__HAL_RCC_PWR_CLK_ENABLE();
+	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  /** Initializes the RCC Oscillators according to the specified parameters
-   * in the RCC_OscInitTypeDef structure.
-   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 168;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 7;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	/** Initializes the RCC Oscillators according to the specified parameters
+	 * in the RCC_OscInitTypeDef structure.
+	 */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+	RCC_OscInitStruct.PLL.PLLM = 4;
+	RCC_OscInitStruct.PLL.PLLN = 168;
+	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+	RCC_OscInitStruct.PLL.PLLQ = 7;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+		Error_Handler();
+	}
 
-  /** Initializes the CPU, AHB and APB buses clocks
-   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-      |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+	/** Initializes the CPU, AHB and APB buses clocks
+	 */
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK) {
+		Error_Handler();
+	}
 }
 
 /* USER CODE BEGIN 4 */
@@ -389,33 +361,29 @@ void SystemClock_Config(void)
  * @param  htim : TIM handle
  * @retval None
  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* USER CODE BEGIN Callback 0 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	/* USER CODE BEGIN Callback 0 */
 
-  /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM6)
-  {
-    HAL_IncTick();
-    ++MilliTimer;
-  }
-  /* USER CODE BEGIN Callback 1 */
-  /* USER CODE END Callback 1 */
+	/* USER CODE END Callback 0 */
+	if (htim->Instance == TIM6) {
+		HAL_IncTick();
+		++MilliTimer;
+	}
+	/* USER CODE BEGIN Callback 1 */
+	/* USER CODE END Callback 1 */
 }
 
 /**
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
-void Error_Handler(void)
-{
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
-  /* USER CODE END Error_Handler_Debug */
+void Error_Handler(void) {
+	/* USER CODE BEGIN Error_Handler_Debug */
+	/* User can add his own implementation to report the HAL error return state */
+	__disable_irq();
+	while (1) {
+	}
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

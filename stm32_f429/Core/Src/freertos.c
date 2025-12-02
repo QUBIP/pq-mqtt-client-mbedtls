@@ -76,7 +76,7 @@ osThreadId defaultTaskHandle;
 0xa0000 bytes starting from address 0x90000000.  The block starting at
 0x80000000 has the lower start address so appears in the array fist. */
 
-#define RAM_REGION_HEAP_SIZE (98304 + 1024 * 8)
+#define RAM_REGION_HEAP_SIZE (1024 * 120)
 #define CCRAM_HEAP_SIZE 0xfffe//0x20000
 
 volatile uint8_t heap[RAM_REGION_HEAP_SIZE] = { 0 }; // 192kb / 4
@@ -296,7 +296,7 @@ void StartDefaultTask(void const * argument)
   // Stack size calculated with static stack analyzer
   // Publish mqtt task
 
-  osThreadDef(mqttClientPubTask, MqttClientPubTask, osPriorityNormal, 0, (64 * 1024) / sizeof( StackType_t ) );
+  osThreadDef(mqttClientPubTask, MqttClientPubTask, osPriorityNormal, 0, (50 * 1024) / sizeof( StackType_t ) );
   mqttClientPubTaskHandle = osThreadCreate(osThread(mqttClientPubTask), NULL);
   if(mqttClientPubTaskHandle == NULL)
   {

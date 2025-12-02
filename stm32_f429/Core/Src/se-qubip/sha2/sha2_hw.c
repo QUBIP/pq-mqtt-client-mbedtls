@@ -163,8 +163,8 @@ void sha2_hw(INTF interface, unsigned char *in, unsigned char *out,
 	unsigned char *buffer_out;
 	unsigned char buffer_256[8] = { 0 };
 
-	buffer_in = (unsigned char*) malloc(hb_num * block_size / 8);
-	buffer_out = (unsigned char*) malloc(out_packages * 8);
+	buffer_in = (unsigned char*) pvPortMalloc(hb_num * block_size / 8);
+	buffer_out = (unsigned char*) pvPortMalloc(out_packages * 8);
 	memset(buffer_in, 0, hb_num * block_size / 8);
 	memcpy(buffer_in, in, length / 8);
 

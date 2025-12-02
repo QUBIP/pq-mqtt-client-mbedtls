@@ -1309,7 +1309,7 @@ static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 	char prefix[] = "\x30\x82\x09\xBC\x03\x82\x09\x75";
 	char sig_sep[] = "\x03\x41";
 	mbedtls_ed25519_mlds65_ctx *ctx = (mbedtls_ed25519_mlds65_ctx*) pk->pk_ctx;
-	unsigned char *new_msg = calloc(13 + 64, sizeof(char));
+	unsigned char *new_msg = pvPortCalloc(13 + 64, sizeof(char));
 	mbedtls_sha512(hash, hash_len, new_msg + 13, 0);
 	memcpy(new_msg, oid_der, 13);
 
@@ -1319,13 +1319,15 @@ static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 	memcpy(sig, prefix, 8);
 	sig[8] = 0;
 
-	MLDSA_65_SIGN(new_msg, 77, ctx->mldsa_pri_key, sig + 9, &mldsa_ssize, NULL,
-			0);
+	//MLDSA_65_SIGN(new_msg, 77, ctx->mldsa_pri_key, sig + 9, &mldsa_ssize, NULL, 0);
 	//EDDSA25519_SIGN(new_msg, 77, ctx->ed_pri_key , ctx->ed_prisize, sig + mldsa_ssize, &ed_ssize);
 #if HW_IMPLEMENTATION==1
 
 	eddsa25519_sign_hw(new_msg, 77, ctx->ed_pri_key, ctx->ed_prisize,
 			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize, 0);
+
+	mldsa65_sign_hw(new_msg, 77, ctx->mldsa_pri_key, sig + 9, &mldsa_ssize,
+	NULL, 0, true, NULL, 0);
 
 #else
 	EDDSA25519_SIGN(new_msg, 77, ctx->ed_pri_key, ctx->ed_prisize, &eddsa_sig,
@@ -1338,10 +1340,10 @@ static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 
 	memcpy(sig + mldsa_ssize + 9 + 3, eddsa_sig, 64);
 
-	free(eddsa_sig);
+	vPortFree(eddsa_sig);
 
 	*sig_len = mldsa_ssize + 64 + 9 + 3;
-	free(new_msg);
+	vPortFree(new_msg);
 	return 0;
 }
 
@@ -1367,7 +1369,8 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 
 	mbedtls_ed25519_mlds44_ctx *ctx = (mbedtls_ed25519_mlds44_ctx*) pk->pk_ctx;
 
-	unsigned char *msg_to_be_signed = calloc(MSG_LEN, sizeof(char));
+	unsigned char *msg_to_be_signed = (unsigned char*) pvPortCalloc(MSG_LEN,
+			sizeof(char));
 
 	// 	MSG
 	// | 13 OID | SHA512 |
@@ -1384,12 +1387,14 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	printf("HW EDDSA Signature...");
 
 	eddsa25519_sign_hw(msg_to_be_signed, 77, ctx->ed_pri_key, ctx->ed_prisize,
-			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize, external_key, &unused, 0 );
+			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize,
+			external_key, &unused, 0);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 	printf("HW MLDSA Signature...");
 	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
-			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0, external_key, &unused, 0);
+			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0, external_key, &unused,
+			0);
 
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -1417,10 +1422,10 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 
 	memcpy(sig + SIG_PREFIX_SIZE + mldsa_ssize + 3, eddsa_sig, SIG_SIZE);
 
-	free(eddsa_sig);
+	vPortFree(eddsa_sig);
 
 	*sig_len = mldsa_ssize + SIG_SIZE + 9 + 3;
-	free(msg_to_be_signed);
+	vPortFree(msg_to_be_signed);
 
 	printf("MLDSA44 + EDDSA25519 signature completed!\n");
 	printf("#############################################\n\n");
@@ -1438,7 +1443,8 @@ static int ed25519_mlds65_verify_wrap(mbedtls_pk_context *pk,
 	unsigned int result = 0;
 
 	mbedtls_ed25519_mlds65_ctx *ctx = (mbedtls_ed25519_mlds65_ctx*) pk->pk_ctx;
-	unsigned char *new_msg = calloc(13 + 64, sizeof(char));
+	unsigned char *new_msg = (unsigned char*) pvPortCalloc(13 + 64,
+			sizeof(char));
 	mbedtls_sha512(hash, hash_len, new_msg + 13, 0);
 	memcpy(new_msg, oid_der, 13);
 
@@ -1455,13 +1461,14 @@ static int ed25519_mlds65_verify_wrap(mbedtls_pk_context *pk,
 #endif
 
 	if (result != 0) {
-		free(new_msg);
+		vPortFree(new_msg);
 		return result;
 	}
 
-	MLDSA_65_VERIFY(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 3309, &result,
+	//MLDSA_65_VERIFY(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 3309, &result, NULL, 0);
+	mldsa65_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 3309, &result,
 	NULL, 0);
-	free(new_msg);
+	vPortFree(new_msg);
 
 	return result;
 }
@@ -1478,7 +1485,8 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	bool external_key = true;
 
 	mbedtls_ed25519_mlds65_ctx *ctx = (mbedtls_ed25519_mlds65_ctx*) pk->pk_ctx;
-	unsigned char *new_msg = calloc(13 + 64, sizeof(char));
+	unsigned char *new_msg = (unsigned char*) pvPortCalloc(13 + 64,
+			sizeof(char));
 	mbedtls_sha512(hash, hash_len, new_msg + 13, 0);
 	memcpy(new_msg, oid_der, 13);
 
@@ -1487,7 +1495,6 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 
 #if HW_IMPLEMENTATION==1
 	printf("HW EDDSA Verify...");
-
 
 	/*
 	 void eddsa25519_verify_hw(unsigned char *msg, unsigned int msg_len, unsigned char *pub_key, unsigned int pub_len,
@@ -1503,8 +1510,8 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	result = !result;
 
 #else
-
-	printf("SW EDDSA Verify...");
+	//TODO: ...
+	printf("HW EDDSA Verify...");
 
 	eddsa25519_verify(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
 			sig + sig_len - 64, 64, &result);
@@ -1514,11 +1521,13 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 #endif
 
 	if (result != 0) {
-		free(new_msg);
+		vPortFree(new_msg);
 		return result;
 	}
-	printf("SW MLDSA44 Verify...");
+	//TODO: ...
+	printf("HW MLDSA44 Verify...");
 
+	//TODO: Use HW verify
 	mldsa44_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 2420, &result,
 	NULL, 0);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
@@ -1526,7 +1535,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	printf("MLDSA44 + EDDSA25519 verify completed!\n");
 	printf("#############################################\n\n");
 
-	free(new_msg);
+	vPortFree(new_msg);
 	return result;
 }
 
@@ -1593,14 +1602,14 @@ static int ed25519_mlds44_check_pair_wrap(mbedtls_pk_context *pub,
 }
 
 #define ALLOC_SIZE(VAR,SIZE,FREE_FUNC,CONTAINER)\
-	if((VAR=malloc(SIZE)) == NULL){\
+	if((VAR=(unsigned char *)pvPortMalloc(SIZE)) == NULL){\
 		FREE_FUNC(CONTAINER);\
 		return NULL;\
 	}
 
 #define FREE_OBJ(NAME) \
 		if(NAME != NULL){\
-			free(NAME);\
+			vPortFree(NAME);\
 		}
 
 static void ed25519_mlds65_free_wrap(void *ctx) {
@@ -1615,7 +1624,7 @@ static void ed25519_mlds65_free_wrap(void *ctx) {
 	FREE_OBJ(tmp->mldsa_pri_key);
 	FREE_OBJ(tmp->mldsa_pub_key);
 
-	free(ctx);
+	vPortFree(ctx);
 
 	return;
 
@@ -1633,15 +1642,16 @@ static void ed25519_mlds44_free_wrap(void *ctx) {
 	FREE_OBJ(tmp->mldsa_pri_key);
 	FREE_OBJ(tmp->mldsa_pub_key);
 
-	free(ctx);
+	vPortFree(ctx);
 
 	return;
 
 }
 
 static void* ed25519_mlds65_alloc_wrap(void) {
-	mbedtls_ed25519_mlds65_ctx *ctx = malloc(
-			sizeof(mbedtls_ed25519_mlds65_ctx));
+	mbedtls_ed25519_mlds65_ctx *ctx =
+			(mbedtls_ed25519_mlds65_ctx*) pvPortMalloc(
+					sizeof(mbedtls_ed25519_mlds65_ctx));
 	if (ctx == NULL)
 		return NULL;
 
@@ -1667,8 +1677,9 @@ static void* ed25519_mlds65_alloc_wrap(void) {
 
 static void* ed25519_mlds44_alloc_wrap(void) {
 
-	mbedtls_ed25519_mlds44_ctx *ctx = malloc(
-			sizeof(mbedtls_ed25519_mlds44_ctx));
+	mbedtls_ed25519_mlds44_ctx *ctx =
+			(mbedtls_ed25519_mlds44_ctx*) pvPortMalloc(
+					sizeof(mbedtls_ed25519_mlds44_ctx));
 	if (ctx == NULL)
 		return NULL;
 

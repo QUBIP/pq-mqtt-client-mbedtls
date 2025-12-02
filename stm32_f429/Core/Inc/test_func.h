@@ -45,7 +45,7 @@ void print_results_str_1_tab_1_acc(unsigned int n_test, unsigned char* str, time
 void print_results_str_1_tab_3_acc(unsigned int n_test, unsigned char* str, time_result tr1_hw, time_result tr2_hw, time_result tr3_hw, time_result tr1_sw, time_result tr2_sw, time_result tr3_sw);
 void print_results_str_2_tab_1_acc(unsigned int n_test, unsigned char* str1, unsigned char* str2, time_result tr_hw, time_result tr_sw);
 void read_conf(data_conf* data);
-void start_demo_csic_se();
+void write_certificates_to_spi();
 
 void show_array(const unsigned char* r, const unsigned int size, const unsigned int mod);
 int cmpchar(unsigned char* in1, unsigned char* in2, unsigned int len);

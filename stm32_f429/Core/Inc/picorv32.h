@@ -55,7 +55,7 @@
 
 // --- ANSI Color and Style Macros ---
 // Resets all text attributes to default
-#define RESET   "\033[0m"
+#define RESET "\033[0m"
 
 // Text Styles
 #define BOLD    "\033[1m"

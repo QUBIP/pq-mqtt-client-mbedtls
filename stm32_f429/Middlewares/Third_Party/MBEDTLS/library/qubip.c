@@ -10,14 +10,18 @@
 
 #include <stdlib.h>
 
+extern char mbedtls_root_certificate;
+extern char client_cert;
+extern char client_key;
+
 HybridKeyKEM* hybrid_key_gen() {
 
-	HybridKeyKEM *out_keys = malloc(sizeof(HybridKeyKEM));
+	HybridKeyKEM *out_keys = pvPortMalloc(sizeof(HybridKeyKEM));
 	printf("#############################################\n");
 	printf("Starting X25519_MLKEM768 key generation...\n");
 
-	out_keys->mlkem_768_pk = malloc(KYBER768_PK_SIZE);
-	out_keys->mlkem_768_sk = malloc(KYBER768_SK_SIZE);
+	out_keys->mlkem_768_pk = pvPortMalloc(KYBER768_PK_SIZE);
+	out_keys->mlkem_768_sk = pvPortMalloc(KYBER768_SK_SIZE);
 	out_keys->mlkem_768_pk_size = KYBER768_PK_SIZE;
 	out_keys->mlkem_768_sk_size = KYBER768_SK_SIZE;
 	unsigned int pri_len;
@@ -25,7 +29,6 @@ HybridKeyKEM* hybrid_key_gen() {
 
 	uint8_t mlkem_key_slot = 31;
 	uint8_t x25519_key_slot = 31;
-
 
 #if HW_IMPLEMENTATION==1
 
@@ -39,7 +42,7 @@ HybridKeyKEM* hybrid_key_gen() {
 
 	// void mlkem_768_gen_keys_hw(unsigned char* pk, unsigned char* sk, bool ext_key, uint8_t* key_id, INTF interface);
 	mlkem_768_gen_keys_hw(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk,
-			false, &mlkem_key_slot, 0);
+	false, &mlkem_key_slot, 0);
 
 	//void x25519_genkeys_hw(unsigned char **pri_key, unsigned char **pub_key, unsigned int *pri_len,
 	// unsigned int *pub_len,
@@ -69,11 +72,11 @@ HybridKeyKEM* hybrid_key_gen() {
 }
 
 void hybrid_key_free(HybridKeyKEM *keys) {
-	free(keys->mlkem_768_pk);
-	free(keys->mlkem_768_sk);
-	free(keys->x25519_pk);
-	free(keys->x25519_sk);
-	free(keys);
+	vPortFree(keys->mlkem_768_pk);
+	vPortFree(keys->mlkem_768_sk);
+	vPortFree(keys->x25519_pk);
+	vPortFree(keys->x25519_sk);
+	vPortFree(keys);
 }
 
 int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
@@ -81,9 +84,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 		size_t key_buffer_size, uint8_t *shared_secret,
 		size_t shared_secret_size, size_t *shared_secret_length) {
 
-	uint8_t *server_ecdh_key = malloc(32);
-	uint8_t *server_kyber_ct = malloc(peer_key_length - 32);
-	uint8_t *ssecret_mlkem768 = malloc(32);
+	uint8_t *server_ecdh_key = pvPortMalloc(32);
+	uint8_t *server_kyber_ct = pvPortMalloc(peer_key_length - 32);
+	uint8_t *ssecret_mlkem768 = pvPortMalloc(32);
 	uint8_t *ssecret_x25519;
 	unsigned int out_len;
 	HybridKeyKEM *private_key = (HybridKeyKEM*) key_buffer;
@@ -120,8 +123,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	 * void mlkem_768_dec_hw(unsigned char* sk, unsigned char* ct, unsigned char* ss, unsigned int* result,
 	 * bool ext_key, uint8_t* key_id, INTF interface);
 	 * */
-	mlkem768_dec_hw(private_key->mlkem_768_sk, server_kyber_ct, ssecret_mlkem768,
-			&result, true, &private_key->mlkem_768_key_slot, 0);
+	mlkem768_dec_hw(private_key->mlkem_768_sk, server_kyber_ct,
+			ssecret_mlkem768, &result, true, &private_key->mlkem_768_key_slot,
+			0);
 
 	//HW returns 3 (?!?!) on success
 	result = (result == 3 ? 0 : -1);
@@ -169,13 +173,114 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	memcpy(shared_secret,ssecret_x25519,32);
 	memcpy(shared_secret + 32,ssecret_mlkem768,32);
 #endif // SWAP_ORDER
-	free(server_ecdh_key);
-	free(server_kyber_ct);
-	free(ssecret_mlkem768);
-	free(ssecret_x25519);
+	vPortFree(server_ecdh_key);
+	vPortFree(server_kyber_ct);
+	vPortFree(ssecret_mlkem768);
+	vPortFree(ssecret_x25519);
 	printf("X25519_MLKEM768 key agreement completed!\n");
 	printf("#############################################\n\n");
 
 	return result;
 }
 
+SPICert* make_certificate(CertType CERT_TYPE) {
+
+	SPICert *out_cert = (SPICert*) pvPortMalloc(sizeof(SPICert));
+	switch (CERT_TYPE) {
+
+	case ROOT_CA:
+		out_cert->name = (unsigned char*) "Root CA";
+		out_cert->cert_len = ROOT_CA_CERT_SIZE_BYTES;
+		out_cert->cert_spi_addr = ROOT_CA_CERT_SPI_ADDR;
+		out_cert->key_len = 0;
+		out_cert->key_bytes = NULL;
+		out_cert->cert_bytes = NULL;
+		break;
+
+	case CLIENT:
+		out_cert->name = (unsigned char*) "Client";
+		out_cert->cert_len = CLIENT_CERT_SIZE_BYTES;
+		out_cert->cert_spi_addr = CLIENT_CERT_SPI_ADDR;
+		out_cert->key_len = CLIENT_KEY_SIZE_BYTES;
+		out_cert->key_spi_addr = CLIENT_KEY_SPI_ADDR;
+		out_cert->cert_bytes = NULL;
+
+	default:
+		break;
+	}
+
+	return out_cert;
+}
+
+void free_certificate(SPICert *certificate) {
+	vPortFree(certificate->cert_bytes);
+	if (certificate->key_len > 0) {
+		vPortFree(certificate->key_bytes);
+	}
+	vPortFree(certificate);
+}
+
+void save_cert_to_spi(SPICert *certificate) {
+	printf("Writing CERT \"%s\" of %d bytes to SPI at address 0x%x...",
+			certificate->name, certificate->cert_len,
+			certificate->cert_spi_addr);
+	save_data_flash(certificate->cert_spi_addr, certificate->cert_len,
+			certificate->cert_bytes, 0);
+	printf("Certificate \"%s\" written!\n", certificate->name);
+	if (certificate->key_len > 0) {
+		printf("Writing KEY of %d bytes to SPI at address 0x%x...",
+				certificate->key_len, certificate->key_spi_addr);
+		save_data_flash(certificate->key_spi_addr, certificate->key_len,
+				certificate->key_bytes, 0);
+		printf("Key written!\n");
+
+	}
+}
+
+void load_cert_from_spi(SPICert *certificate, bool load_key, bool alloc_buffers) {
+	printf("#############################################\n");
+
+	printf("Loading CERT \"%s\"\n%d bytes from SPI at address 0x%x\n",
+			certificate->name, certificate->cert_len,
+			certificate->cert_spi_addr);
+
+	if (alloc_buffers == true) {
+		printf("Allocating buf for cert...");
+		certificate->cert_bytes = (unsigned char*) pvPortMalloc(
+				sizeof(unsigned char) * certificate->cert_len);
+		printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+	}
+	printf("Loading data from SPI Flash...");
+
+	recover_data_flash(certificate->cert_spi_addr, certificate->cert_len,
+			certificate->cert_bytes, 0);
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+	printf("Certificate \"%s\" loaded!", certificate->name);
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+	if (load_key == true) {
+		printf("Loading KEY\n%d bytes from SPI at address 0x%x\n",
+				certificate->key_len, certificate->key_spi_addr);
+		if (alloc_buffers == true) {
+			printf("Allocating buf for key...");
+
+			certificate->key_bytes = (unsigned char*) pvPortMalloc(
+					sizeof(unsigned char) * certificate->key_len);
+			printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+		}
+		printf("Loading data from SPI Flash...");
+
+		recover_data_flash(certificate->key_spi_addr, certificate->key_len,
+				certificate->key_bytes, 0);
+		printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+		printf("Key loaded!");
+		printf("\t\t\t\t\033[1;32m\u2705\033[0m\n");
+
+	}
+	printf("#############################################\n\n\n");
+
+}

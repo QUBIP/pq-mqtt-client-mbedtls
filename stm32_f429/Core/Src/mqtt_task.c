@@ -126,7 +126,6 @@ void MqttClientPubTask(void const *argument) {
 
 	// Note: In case of IP address change, it is necessary to reconnect.
 
-	print_memory_stats();
 
 	for (;;) {
 		// Is link up?
@@ -253,9 +252,10 @@ int MqttConnectAndSubscribe(void) {
 	// Connect to MQTT broker
 	ret = mqtt_network_connect(&mqttNet, BROKER_IP, MQTT_PORT);
 
-	print_memory_stats();
+	//print_memory_stats();
 	// If ret is tls handshake failed
 	if (ret == -2) {
+		printf("TLS Handshake failed.\n");
 		leds_indicate_tls_handshake_failure();
 	}
 
@@ -281,7 +281,7 @@ int MqttConnectAndSubscribe(void) {
 	data.keepAliveInterval = 60;
 	data.cleansession = 1;
 	printf("\n#############################################\n");
-	printf("Connecting to MQTT broker \n%s...", BROKER_IP);
+	printf("Connecting to MQTTs broker \n%s...", BROKER_IP);
 	ret = MQTTConnect(&mqttClient, &data);
 	if (ret != MQTT_SUCCESS) {
 		// Handle MQTT connection failure
@@ -289,7 +289,7 @@ int MqttConnectAndSubscribe(void) {
 		MQTTCloseSession(&mqttClient);
 		mqtt_network_disconnect(&mqttNet);
 		printf(
-				"\n\n!!!!!!!! CONNECTING TO MQTT BROKER FAILED !!!!!!!!\n\n\n\n\n\n");
+				"\n\n!!!!!!!! CONNECTING TO MQTTs BROKER FAILED !!!!!!!!\n\n\n\n\n\n");
 
 		while (1)
 			;

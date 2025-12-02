@@ -82,12 +82,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "../common/intf.h"
-#include "../common/conf.h"
-#include "../common/picorv32.h"
-#include "../sha2/sha2_hw.h"
-#include "../sha3/sha3_shake_hw.h"
-#include "../secmem/secmem_hw.h"
+#include "intf.h"
+#include "conf.h"
+#include "picorv32.h"
+#include "sha2_hw.h"
+#include "sha3_shake_hw.h"
+#include "secmem_hw.h"
 
 
 //-- Deterministic

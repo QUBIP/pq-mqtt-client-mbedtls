@@ -84,8 +84,8 @@ void eddsa25519_genkeys_hw(unsigned char **pri_key, unsigned char **pub_key,
 	*pri_len = EDDSA_BYTES;
 	*pub_len = EDDSA_BYTES;
 
-	*pri_key = (unsigned char*) malloc(*pri_len);
-	*pub_key = (unsigned char*) malloc(*pub_len);
+	*pri_key = (unsigned char*) pvPortMalloc(*pri_len);
+	*pub_key = (unsigned char*) pvPortMalloc(*pub_len);
 
 	if (ext_key) {
 		gen_priv_key(*pri_key, *pri_len);
@@ -152,14 +152,14 @@ void eddsa25519_sign_hw(unsigned char *msg, unsigned int msg_len,
 		bool ext_key, uint8_t *key_id, INTF interface) {
 	//-- Signature Size
 	*sig_len = SIG_BYTES;
-	*sig = (unsigned char*) malloc(*sig_len);
+	*sig = (unsigned char*) pvPortMalloc(*sig_len);
 
 	//-- Number of Message Blocks and Padding
 	unsigned int complete_len = ((msg_len + MSG_BLOCK_BYTES - 1)
 			/ MSG_BLOCK_BYTES) * MSG_BLOCK_BYTES + HASH_1_OFFSET_BYTES; // Add extra BYTES for the Hash offset
 	unsigned char *msg_pad;
 
-	msg_pad = (unsigned char*) malloc(complete_len);
+	msg_pad = (unsigned char*) pvPortMalloc(complete_len);
 	memset(msg_pad, 0, complete_len);
 	memcpy(msg_pad, msg, msg_len);
 
@@ -297,7 +297,7 @@ void eddsa25519_verify_hw(unsigned char *msg, unsigned int msg_len,
 			/ MSG_BLOCK_BYTES) * MSG_BLOCK_BYTES + HASH_1_OFFSET_BYTES; // Add extra BYTES for the Hash offset
 	unsigned char *msg_pad;
 
-	msg_pad = (unsigned char*) malloc(complete_len);
+	msg_pad = (unsigned char*) pvPortMalloc(complete_len);
 	memset(msg_pad, 0, complete_len);
 	memcpy(msg_pad, msg, msg_len);
 
