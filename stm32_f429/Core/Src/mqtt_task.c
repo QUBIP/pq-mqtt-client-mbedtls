@@ -217,8 +217,11 @@ void MqttClientPubTask(void const *argument) {
 			vTaskDelayUntil(&xLastWakeTime, xFrequency);
 			++ulNotifiedValue;
 			temperature += 0.5;
-			osDelay(10000);
 
+			printf("\n\n");
+			print_memory_stats();
+
+			osDelay(10000);
 			/* no error and i'm connected and i don't need to reconnect */
 		} while (!error && mqttClient.isconnected && !need_to_reconnect);
 

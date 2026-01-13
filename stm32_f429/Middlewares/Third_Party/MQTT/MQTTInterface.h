@@ -28,6 +28,7 @@
 /* Private includes ----------------------------------------------------------*/
 #include "cmsis_os.h"
 
+
 /* Private define ------------------------------------------------------------*/
 /* CONFIG */
 #define MQTT_LWIP_SOCKET_TLS  //Use SOCKET API WITH TLS

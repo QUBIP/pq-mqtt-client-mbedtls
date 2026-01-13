@@ -30,6 +30,9 @@
 #define BROKER_IP		"broker.dm.qubip.eu"
 #define BROKER_HOSTNAME "broker.dm.qubip.eu"
 
+// Force a CRL revocation check
+#define FORCE_CRL_CHECK 0
+
 // Does not launch FreeRTOS but runs custom test functions
 //#define TEST_SE
 
@@ -37,7 +40,7 @@
 //#define MQTT_INTERFACE_DEBUG
 
 typedef enum {
-	ROOT_CA, CLIENT
+	ROOT_CA, CLIENT, CRL
 } CertType;
 
 #ifdef CERTS_PQ_44
@@ -48,11 +51,13 @@ typedef enum {
 #define ROOT_CA_CERT_SPI_ADDR 0x1000
 
 #define CLIENT_CERT_SIZE_BYTES 6295
-
 #define CLIENT_CERT_SPI_ADDR 0x3000
 
 #define CLIENT_KEY_SIZE_BYTES 5523
 #define CLIENT_KEY_SPI_ADDR 0x5000
+
+#define CRL_CERT_SIZE_BYTES 3955
+#define CRL_CERT_SPI_ADDR 	0x7000
 
 #else
 

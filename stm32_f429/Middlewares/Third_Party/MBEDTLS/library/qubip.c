@@ -204,6 +204,16 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 		out_cert->key_len = CLIENT_KEY_SIZE_BYTES;
 		out_cert->key_spi_addr = CLIENT_KEY_SPI_ADDR;
 		out_cert->cert_bytes = NULL;
+		break;
+
+	case CRL:
+		out_cert->name = (unsigned char*) "CRL";
+		out_cert->cert_len = CRL_CERT_SIZE_BYTES;
+		out_cert->cert_spi_addr = CRL_CERT_SPI_ADDR;
+		out_cert->key_len = 0;
+		out_cert->key_spi_addr = 0;
+		out_cert->cert_bytes = NULL;
+		break;
 
 	default:
 		break;

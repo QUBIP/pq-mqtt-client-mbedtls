@@ -76,7 +76,7 @@ osThreadId defaultTaskHandle;
 0xa0000 bytes starting from address 0x90000000.  The block starting at
 0x80000000 has the lower start address so appears in the array fist. */
 
-#define RAM_REGION_HEAP_SIZE (1024 * 120)
+#define RAM_REGION_HEAP_SIZE (1024 * 115)
 #define CCRAM_HEAP_SIZE 0xfffe//0x20000
 
 volatile uint8_t heap[RAM_REGION_HEAP_SIZE] = { 0 }; // 192kb / 4
