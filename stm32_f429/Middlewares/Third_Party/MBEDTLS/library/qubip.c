@@ -27,8 +27,8 @@ HybridKeyKEM* hybrid_key_gen() {
 	unsigned int pri_len;
 	unsigned int pub_len;
 
-	uint8_t mlkem_key_slot = 31;
-	uint8_t x25519_key_slot = 31;
+	uint64_t mlkem_key_slot = 31;
+	uint64_t x25519_key_slot = 31;
 
 #if HW_IMPLEMENTATION==1
 

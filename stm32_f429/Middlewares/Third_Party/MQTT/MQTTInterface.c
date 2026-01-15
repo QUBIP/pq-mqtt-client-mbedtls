@@ -18,7 +18,7 @@
  */
 #include "MQTTInterface.h"
 #include "stm32f4xx_hal.h"
-
+#include "intf.h"
 #include <string.h>
 #include "lwip.h"
 #include "lwip/api.h"
@@ -47,12 +47,13 @@ const char *pers = "mbedtls";
 
 mbedtls_entropy_context entropy;
 mbedtls_ctr_drbg_context ctr_drbg;
-mbedtls_ssl_context ssl;
 mbedtls_ssl_config conf;
 mbedtls_x509_crt cacert;
 mbedtls_x509_crt clicert;
 mbedtls_pk_context pkey;
+mbedtls_ssl_context ssl;
 mbedtls_x509_crl crl;
+
 /*
  const char mbedtls_crl[] =
  "-----BEGIN X509 CRL-----\r\n"
@@ -212,7 +213,6 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 	// Initialize the network interface
 	mqtt_network_init(n);
 	mqtt_network_clear();
-
 	//mbedtls_net_init( &server_fd ); // MX_LWIP_Init() is called already
 	mbedtls_ssl_init(&ssl);
 	mbedtls_ssl_config_init(&conf);
@@ -237,6 +237,13 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 				ret);
 		return -1;
 	}
+
+
+#if SCP03 == 1
+	printf("Setting UP SCP03 protected channel\n");
+	open_INTF((INTF*) NULL, 0, 0);
+	printf("SCP03 protected channel OK\n\n");
+#endif
 
 	// Reading certs from SPI Flash
 	SPICert *root_ca = make_certificate(ROOT_CA);
@@ -405,8 +412,6 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 			return -2;
 		}
 	}
-
-
 
 	ret = mbedtls_ssl_get_verify_result(&ssl);
 	if (ret < 0) {

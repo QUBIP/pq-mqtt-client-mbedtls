@@ -1391,10 +1391,18 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 			external_key, &unused, 0);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
+	//We're doing this because we want to move our data to a correctly aligned buffer as the original's address was odd and triggered a Hard Fault on the cpu
+	unsigned char *out_sig_buf = (unsigned char*) pvPortMalloc(4000);
 	printf("HW MLDSA Signature...");
-	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
-			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0, external_key, &unused,
-			0);
+	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key, out_sig_buf,
+			&mldsa_ssize, NULL, 0, external_key, &unused, 0);
+
+	/*
+	 mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
+	 sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0, external_key, &unused,
+	 0);
+	 */
+	memcpy(sig + SIG_PREFIX_SIZE, out_sig_buf, mldsa_ssize);
 
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -1426,6 +1434,7 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 
 	*sig_len = mldsa_ssize + SIG_SIZE + 9 + 3;
 	vPortFree(msg_to_be_signed);
+	vPortFree(out_sig_buf);
 
 	printf("MLDSA44 + EDDSA25519 signature completed!\n");
 	printf("#############################################\n\n");
@@ -1502,9 +1511,19 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	 bool ext_key, uint8_t* key_id, INTF interface);
 
 	 */
-	eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
-			sig + sig_len - 64, 64, &result, external_key, &unused, 0);
+	//We're doing this because we want to move our data to a correctly aligned buffer as the original's address was odd and triggered a Hard Fault on the cpu
 
+	unsigned char *sig_buf = pvPortMalloc(64);
+	memcpy(sig_buf, sig + sig_len - 64, 64);
+
+	eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize, sig_buf,
+			64, &result, external_key, &unused, 0);
+	vPortFree(sig_buf);
+
+	/*
+	 eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
+	 sig + sig_len - 64, 64, &result, external_key, &unused, 0);
+	 */
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	//printf("Result: %d\n", result);
 	result = !result;

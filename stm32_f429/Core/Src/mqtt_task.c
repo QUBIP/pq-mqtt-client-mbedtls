@@ -126,7 +126,6 @@ void MqttClientPubTask(void const *argument) {
 
 	// Note: In case of IP address change, it is necessary to reconnect.
 
-
 	for (;;) {
 		// Is link up?
 		// Write once link is down
@@ -158,6 +157,7 @@ void MqttClientPubTask(void const *argument) {
 //		mqtt_network_connect(&mqttNet, BROKER_IP, MQTT_PORT);
 //
 //		return;
+
 		// Connect to the broker
 		MQTTDisconnect(&mqttClient);
 		mqtt_network_disconnect(&mqttNet);
@@ -192,7 +192,7 @@ void MqttClientPubTask(void const *argument) {
 			snprintf(str, sizeof(str), "{\n"
 					"  \"device\": \"%s\",\n"
 					"  \"temperature\": %f\n"
-					"}",device_name, temperature);
+					"}", device_name, temperature);
 
 			message.payload = (void*) str;
 			message.payloadlen = strlen(str);
@@ -207,8 +207,8 @@ void MqttClientPubTask(void const *argument) {
 			}
 
 			/*MQTT_PUB_TASK_DEBUG_LOG(
-					"[MQTT_PUB_TASK] INFO: [%lu] I've sent a message!\n",
-					ulNotifiedValue);*/
+			 "[MQTT_PUB_TASK] INFO: [%lu] I've sent a message!\n",
+			 ulNotifiedValue);*/
 			leds_blink_on_mqtt_message_sent();
 
 			// The vTaskDelayUntil() suspend a task for up to an absolute amount of time,
@@ -251,6 +251,7 @@ void ethernet_status_updated(struct netif *netif) {
  */
 int MqttConnectAndSubscribe(void) {
 	int ret;
+
 
 	// Connect to MQTT broker
 	ret = mqtt_network_connect(&mqttNet, BROKER_IP, MQTT_PORT);
