@@ -36,16 +36,10 @@ extern "C" {
  * @param session_mac     Output buffer for Session S-MAC
  * @param session_rmac    Output buffer for Session S-RMAC
  */
-void scp03_derive_session_keys(int key_bits,
-                               unsigned char* static_enc_key,
-                               unsigned char* static_mac_key,
-                               unsigned char* host_challenge,
-                               unsigned char* card_challenge,
-                               unsigned char* session_enc,
-                               unsigned char* session_mac,
-                               unsigned char* session_rmac);
-
-
+void scp03_derive_session_keys(int key_bits, unsigned char *static_enc_key,
+		unsigned char *static_mac_key, unsigned char *host_challenge,
+		unsigned char *card_challenge, unsigned char *session_enc,
+		unsigned char *session_mac, unsigned char *session_rmac);
 
 /**
  * @brief Generates Authentication Cryptograms using the Session MAC Key
@@ -55,12 +49,9 @@ void scp03_derive_session_keys(int key_bits,
  * @param card_crypt     Output: 8-byte Card Cryptogram
  * @param host_crypt     Output: 8-byte Host Cryptogram
  */
-void scp03_calc_cryptograms(int key_bits,
-                            unsigned char* s_mac,
-                            unsigned char* host_challenge,
-                            unsigned char* card_challenge,
-                            unsigned char* card_crypt,
-                            unsigned char* host_crypt);
+void scp03_calc_cryptograms(int key_bits, unsigned char *s_mac,
+		unsigned char *host_challenge, unsigned char *card_challenge,
+		unsigned char *card_crypt, unsigned char *host_crypt);
 
 #ifdef __cplusplus
 }

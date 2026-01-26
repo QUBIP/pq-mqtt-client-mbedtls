@@ -9,7 +9,6 @@
 #ifndef SCP03_H
 #define SCP03_H
 
-
 #include <stdbool.h>
 
 #include "i2c.h"
@@ -22,7 +21,7 @@ extern "C" {
 #endif
 
 // SCP-03 Configuration
-#define SCP03_KEY_BITS          128
+#define SCP03_KEY_BITS          256
 #define SCP03_STATIC_KEY_ENC    { \
                                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, \
                                 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, \
@@ -37,23 +36,22 @@ extern "C" {
                                 }
 
 // SCP-03 Session Context
-typedef struct 
-{
-    // Configuration
-    int key_bits;                   // 128/192/256
-    unsigned char static_enc[32];
-    unsigned char static_mac[32];
-    
-    // Session State
-    unsigned char s_enc[32];
-    unsigned char s_mac[32];
-    unsigned char s_rmac[32];
-    unsigned char host_chal[8];
-    unsigned char card_chal[8];
-    
-    // Security State (Chaining & Counters)
-    unsigned char mac_chain[16];    
-    unsigned char counter[16];      
+typedef struct {
+	// Configuration
+	int key_bits;                   // 128/192/256
+	unsigned char static_enc[32];
+	unsigned char static_mac[32];
+
+	// Session State
+	unsigned char s_enc[32];
+	unsigned char s_mac[32];
+	unsigned char s_rmac[32];
+	unsigned char host_chal[16];
+	unsigned char card_chal[16];
+
+	// Security State (Chaining & Counters)
+	unsigned char mac_chain[16];
+	unsigned char counter[16];
 } scp03_session_t;
 
 // ---------------------------------------------------------------------------
@@ -95,9 +93,11 @@ typedef struct
 #define STATUS_AUTH         0x04 // Bit 2
 #define STATUS_ERROR        0x80 // Bit 7
 
-bool scp03_init(I2C_FD interface, scp03_session_t* session);
-bool scp03_write(I2C_FD interface, scp03_session_t* session, uint8_t addr, uint64_t* data);
-bool scp03_read(I2C_FD interface, scp03_session_t* session, uint8_t addr, uint64_t* data);
+bool scp03_init(I2C_FD interface, scp03_session_t *session);
+bool scp03_write(I2C_FD interface, scp03_session_t *session, uint8_t addr,
+		uint64_t *data);
+bool scp03_read(I2C_FD interface, scp03_session_t *session, uint8_t addr,
+		uint64_t *data);
 
 #ifdef __cplusplus
 }

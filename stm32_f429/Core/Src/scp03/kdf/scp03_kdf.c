@@ -6,7 +6,7 @@
 static void scp03_kdf_internal(int key_bits, unsigned char *key,
 		unsigned char constant, int L_bits, unsigned char *host_challenge,
 		unsigned char *card_challenge, unsigned char *output) {
-	unsigned char input_data[32]; // Fixed 32-byte buffer for SCP-03 KDF input
+	unsigned char input_data[48]; // Fixed 48-byte buffer for SCP-03 KDF input
 	unsigned char prf_result[16]; // CMAC output is always 16 bytes (128 bits)
 	unsigned int mac_len = 16;
 
@@ -34,9 +34,9 @@ static void scp03_kdf_internal(int key_bits, unsigned char *key,
 
 	// 4. i (1 byte): Counter, set inside loop at index 15
 
-	// 5. Context (16 bytes): Host Challenge || Card Challenge
-	memcpy(&input_data[16], host_challenge, 8);
-	memcpy(&input_data[24], card_challenge, 8);
+	// 5. Context (32 bytes): Host Challenge || Card Challenge
+	memcpy(&input_data[16], host_challenge, 16);
+	memcpy(&input_data[32], card_challenge, 16);
 
 	// ----------------------------------------------------------
 	// Iteration Loop (NIST SP 800-108)
@@ -50,11 +50,11 @@ static void scp03_kdf_internal(int key_bits, unsigned char *key,
 		// Calculate CMAC
 		// Note: CMAC output is always 128 bits (16 bytes) regardless of AES key size
 		if (key_bits == 128)
-			AES_128_CMAC(key, prf_result, &mac_len, input_data, 32);
+			AES_128_CMAC(key, prf_result, &mac_len, input_data, 48);
 		else if (key_bits == 192)
-			AES_192_CMAC(key, prf_result, &mac_len, input_data, 32);
+			AES_192_CMAC(key, prf_result, &mac_len, input_data, 48);
 		else
-			AES_256_CMAC(key, prf_result, &mac_len, input_data, 32);
+			AES_256_CMAC(key, prf_result, &mac_len, input_data, 48);
 
 		// Copy result to output buffer
 		int bytes_to_copy = 16;
@@ -87,9 +87,9 @@ void scp03_derive_session_keys(int key_bits, unsigned char *static_enc_key,
 void scp03_calc_cryptograms(int key_bits, unsigned char *s_mac,
 		unsigned char *host_challenge, unsigned char *card_challenge,
 		unsigned char *card_crypt, unsigned char *host_crypt) {
-	// L = 64 bits (8 bytes)
-	scp03_kdf_internal(key_bits, s_mac, SCP03_CONST_CARD_CRYPT, 0x40,
+	// L = 128 bits (16 bytes)
+	scp03_kdf_internal(key_bits, s_mac, SCP03_CONST_CARD_CRYPT, 0x80,
 			host_challenge, card_challenge, card_crypt);
-	scp03_kdf_internal(key_bits, s_mac, SCP03_CONST_HOST_CRYPT, 0x40,
+	scp03_kdf_internal(key_bits, s_mac, SCP03_CONST_HOST_CRYPT, 0x80,
 			host_challenge, card_challenge, host_crypt);
 }
