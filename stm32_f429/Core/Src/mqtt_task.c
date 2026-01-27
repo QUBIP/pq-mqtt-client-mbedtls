@@ -110,7 +110,6 @@ void MqttClientPubTask(void const *argument) {
 	uint32_t ulNotifiedValue = 0;
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 	const TickType_t xFrequency = 1000;
-	float temperature = 31.0;
 
 	// 1) Check the status of the network link:
 	// - If the link is inactive, wait until it becomes active.
@@ -166,18 +165,12 @@ void MqttClientPubTask(void const *argument) {
 			osDelay(250);
 			continue;
 		}
+		uint8_t error = 0;
 
 		need_to_reconnect = 0;
-
-		uint8_t error = 0;
 		do {
-			// Send a mqtt message
-			// Get the PLC holding register value from the other task
-			/*if(xTaskNotifyWait(0, 0, &ulNotifiedValue, 250) != pdTRUE)
-			 {
-			 osDelay(250);
-			 continue;
-			 } */
+			float temperature = 0.0;
+			temperature = getInternalTemp();
 
 			//printf("[MQTT_PUB_TASK] INFO: Preparing to send mqtt message\r\n");
 			// Composing the message to be sent
@@ -201,6 +194,7 @@ void MqttClientPubTask(void const *argument) {
 			if (MQTTPublish(&mqttClient, "2025/temperature", &message)
 					!= MQTT_SUCCESS) {
 				MQTTCloseSession(&mqttClient);
+				printf("Error publishing to MQTT topic!!\n");
 				mqtt_network_disconnect(&mqttNet);
 				error = 1;
 				continue;
@@ -216,19 +210,17 @@ void MqttClientPubTask(void const *argument) {
 			// NOTE: update internally xLastWakeTime with the current time
 			vTaskDelayUntil(&xLastWakeTime, xFrequency);
 			++ulNotifiedValue;
-			temperature += 0.5;
+			temperature += 1;
 
 			printf("\n\n");
 			print_memory_stats();
 
-			osDelay(10000);
+			osDelay(1000);
 			/* no error and i'm connected and i don't need to reconnect */
-		} while (!error && mqttClient.isconnected && !need_to_reconnect);
+			//} while (!error && mqttClient.isconnected && !need_to_reconnect);
+		} while (!error);
 
-		if (ulNotifiedValue >= 20) {
-			while (1)
-				osDelay(1000);
-		}
+		NVIC_SystemReset();			// Perform a software reset
 
 	}
 }
@@ -239,7 +231,7 @@ void MqttClientPubTask(void const *argument) {
  * @retval None
  */
 void ethernet_status_updated(struct netif *netif) {
-	// Force a reconnect
+// Force a reconnect
 	need_to_reconnect = 1;
 	DEBUG_LOG("[LWIP_EVENT] INFO: Force a reconnect!\n");
 }
@@ -252,12 +244,11 @@ void ethernet_status_updated(struct netif *netif) {
 int MqttConnectAndSubscribe(void) {
 	int ret;
 
-
-	// Connect to MQTT broker
+// Connect to MQTT broker
 	ret = mqtt_network_connect(&mqttNet, BROKER_IP, MQTT_PORT);
 
-	//print_memory_stats();
-	// If ret is tls handshake failed
+//print_memory_stats();
+// If ret is tls handshake failed
 	if (ret == -2) {
 		printf("TLS Handshake failed.\n");
 		leds_indicate_tls_handshake_failure();
@@ -271,17 +262,17 @@ int MqttConnectAndSubscribe(void) {
 		return -1;
 	}
 
-	// Initialize the MQTT client
+// Initialize the MQTT client
 	MQTTClientInit(&mqttClient, &mqttNet, 1000, sndBuffer, sizeof(sndBuffer),
 			rcvBuffer, sizeof(rcvBuffer));
 
-	// Set up MQTT connection parameters
+// Set up MQTT connection parameters
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 	data.willFlag = 0;
 	data.MQTTVersion = 4;
 	data.clientID.cstring = "secpat-stm32";
-	//data.username.cstring = "roger";
-	//data.password.cstring = "password";
+//data.username.cstring = "roger";
+//data.password.cstring = "password";
 	data.keepAliveInterval = 60;
 	data.cleansession = 1;
 	printf("\n#############################################\n");
@@ -301,7 +292,7 @@ int MqttConnectAndSubscribe(void) {
 		return ret;
 	}
 
-	// Subscribe to the desired topic
+// Subscribe to the desired topic
 	ret = MQTTSubscribe(&mqttClient, "2025/temperature", QOS0,
 			MqttMessageArrived);
 
@@ -318,7 +309,7 @@ int MqttConnectAndSubscribe(void) {
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	printf("#############################################\n\n");
 
-	//MQTT_PUB_TASK_DEBUG_LOG("[MQTT_PUB_TASK] INFO: MQTT_ConnectBroker O.K.\n");
+//MQTT_PUB_TASK_DEBUG_LOG("[MQTT_PUB_TASK] INFO: MQTT_ConnectBroker O.K.\n");
 	return MQTT_SUCCESS;
 }
 
@@ -330,11 +321,11 @@ int MqttConnectAndSubscribe(void) {
 void MqttMessageArrived(MessageData *msg) {
 	MQTTMessage *message = msg->message;
 
-	// Clear the message buffer and copy the received payload into it.
+// Clear the message buffer and copy the received payload into it.
 	memset(msgBuffer, 0, sizeof(msgBuffer));
 	memcpy(msgBuffer, message->payload, message->payloadlen);
 
-	// Log the received message payload and its length.
+// Log the received message payload and its length.
 	MQTT_SUB_TASK_DEBUG_LOG("[MQTT_SUB_TASK] INFO: MQTT MSG[%d]:%s\n",
 			(int )message->payloadlen, msgBuffer);
 }

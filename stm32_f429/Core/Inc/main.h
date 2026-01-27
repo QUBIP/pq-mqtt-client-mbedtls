@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.h
-  * @brief          : Header for main.c file.
-  *                   This file contains the common defines of the application.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.h
+ * @brief          : Header for main.c file.
+ *                   This file contains the common defines of the application.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2022 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -103,7 +103,6 @@ void Error_Handler(void);
 // ----------------------------------------------------------------------------
 // MODBUS Configuration Defines
 // ----------------------------------------------------------------------------
-
 #define MOBBUS_PLC_IP 		"192.168.101.212"
 #define MODBUS_PLC_PORT 	"502"
 #define MODBUS_PLC_REGISTER 32770
@@ -114,16 +113,12 @@ void Error_Handler(void);
 
 #define TLS_1V3
 
-
 #define MQTT_BUFSIZE	1024
-
 
 // ----------------------------------------------------------------------------
 // IPERF Configuration Defines
 // ----------------------------------------------------------------------------
 #define IPERF_SERVER_ENABLED
-
-
 
 // ----------------------------------------------------------------------------
 // DEBUG Configuration Defines
@@ -136,6 +131,8 @@ void Error_Handler(void);
 #define FREERTOS_DEBUG
 #define LWIP_EVENT_DEBUG
 #define NANOMODBUS_INTERFACE_DEBUG
+
+float getInternalTemp();
 
 /* USER CODE END Private defines */
 

@@ -28,6 +28,8 @@
 #include "leds.h"
 #include "qubip.h"
 #include "mbedtls/gcm.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_hal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -239,6 +241,67 @@ const char* reset_cause_get_name(reset_cause_t reset_cause) {
 	return reset_cause_name;
 }
 
+void ADC1_EnableClock(void) {
+	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+}
+
+void ADC_EnableTempSensor(void) {
+	ADC->CCR |= ADC_CCR_TSVREFE;
+}
+
+void ADC1_Init(void) {
+	// Ensure ADC is disabled before config
+	ADC1->CR2 &= ~ADC_CR2_ADON;
+
+	// 12-bit resolution (00 = 12-bit)
+	ADC1->CR1 &= ~ADC_CR1_RES;
+
+	// Single conversion
+	ADC1->CR2 &= ~ADC_CR2_CONT;
+
+	// Right alignment
+	ADC1->CR2 &= ~ADC_CR2_ALIGN;
+
+	// Sample time for channel 16 (TEMP SENSOR)
+	// Channel 16 is in SMPR1, bits [18:20]
+	ADC1->SMPR1 |= ADC_SMPR1_SMP16; // 480 cycles
+
+	// Regular sequence length = 1 conversion
+	ADC1->SQR1 &= ~ADC_SQR1_L;
+
+	// First conversion in regular sequence = channel 16
+	ADC1->SQR3 &= ~ADC_SQR3_SQ1;
+	ADC1->SQR3 |= (16 << ADC_SQR3_SQ1_Pos);
+
+	// Enable ADC
+	ADC1->CR2 |= ADC_CR2_ADON;
+}
+
+uint16_t ADC1_ReadRaw(void) {
+	// Start conversion
+	ADC1->CR2 |= ADC_CR2_SWSTART;
+
+	// Wait until conversion complete
+	while (!(ADC1->SR & ADC_SR_EOC))
+		;
+
+	// Read result
+	return (uint16_t) ADC1->DR;
+}
+
+float ADC_ConvertToTemperature(uint16_t adc) {
+	float Vref = 3.3f;
+	float Vsense;
+
+	Vsense = (adc * Vref) / 4095.0f;
+	float out_temp = ((Vsense - 0.76f) / 0.0025f) + 25.0f;
+	// STM32F429 datasheet formula
+	return out_temp;
+}
+
+float getInternalTemp(){
+	return ADC_ConvertToTemperature(ADC1_ReadRaw());
+}
 /* USER CODE END 0 */
 
 /**
@@ -270,9 +333,12 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART3_UART_Init();
 	MX_RNG_Init();
-	//MX_IWDG_Init();
+	MX_IWDG_Init();
 	MX_I2C1_Init();
 
+	ADC1_EnableClock();
+	ADC_EnableTempSensor();
+	ADC1_Init();
 	/* USER CODE BEGIN 2 */
 	DEBUG_LOG("\nStarting...\n\n");
 	// Print the cause of the reboot
@@ -288,13 +354,13 @@ int main(void) {
 	//kyber768_kat();
 	write_certificates_to_spi();
 #else
-  /* USER CODE END 2 */
+	/* USER CODE END 2 */
 
-  /* Call init function for freertos objects (in freertos.c) */
-  MX_FREERTOS_Init();
+	/* Call init function for freertos objects (in freertos.c) */
+	MX_FREERTOS_Init();
 
-  /* Start scheduler */
-  osKernelStart();
+	/* Start scheduler */
+	osKernelStart();
 #endif
 	/* We should never get here as control is now taken by the scheduler */
 	/* Infinite loop */
