@@ -188,10 +188,11 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 	SPICert *out_cert = (SPICert*) pvPortMalloc(sizeof(SPICert));
 	switch (CERT_TYPE) {
 
+#ifdef CERTS_PQ_65
 	case ROOT_CA:
 		out_cert->name = (unsigned char*) "Root CA";
-		out_cert->cert_len = ROOT_CA_CERT_SIZE_BYTES;
-		out_cert->cert_spi_addr = ROOT_CA_CERT_SPI_ADDR;
+		out_cert->cert_len = ROOT_CA_65_CERT_SIZE_BYTES;
+		out_cert->cert_spi_addr = ROOT_CA_65_CERT_SPI_ADDR;
 		out_cert->key_len = 0;
 		out_cert->key_bytes = NULL;
 		out_cert->cert_bytes = NULL;
@@ -199,21 +200,49 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 
 	case CLIENT:
 		out_cert->name = (unsigned char*) "Client";
-		out_cert->cert_len = CLIENT_CERT_SIZE_BYTES;
-		out_cert->cert_spi_addr = CLIENT_CERT_SPI_ADDR;
-		out_cert->key_len = CLIENT_KEY_SIZE_BYTES;
-		out_cert->key_spi_addr = CLIENT_KEY_SPI_ADDR;
+		out_cert->cert_len = CLIENT_CERT_65_SIZE_BYTES;
+		out_cert->cert_spi_addr = CLIENT_CERT_65_SPI_ADDR;
+		out_cert->key_len = CLIENT_KEY_65_SIZE_BYTES;
+		out_cert->key_spi_addr = CLIENT_KEY_65_SPI_ADDR;
 		out_cert->cert_bytes = NULL;
 		break;
 
 	case CRL:
 		out_cert->name = (unsigned char*) "CRL";
-		out_cert->cert_len = CRL_CERT_SIZE_BYTES;
-		out_cert->cert_spi_addr = CRL_CERT_SPI_ADDR;
+		out_cert->cert_len = CRL_CERT_65_SIZE_BYTES;
+		out_cert->cert_spi_addr = CRL_CERT_65_SPI_ADDR;
 		out_cert->key_len = 0;
 		out_cert->key_spi_addr = 0;
 		out_cert->cert_bytes = NULL;
 		break;
+#else
+	case ROOT_CA:
+		out_cert->name = (unsigned char*) "Root CA";
+		out_cert->cert_len = ROOT_CA_CERT_44_SIZE_BYTES;
+		out_cert->cert_spi_addr = ROOT_CA_CERT_44_SPI_ADDR;
+		out_cert->key_len = 0;
+		out_cert->key_bytes = NULL;
+		out_cert->cert_bytes = NULL;
+		break;
+
+	case CLIENT:
+		out_cert->name = (unsigned char*) "Client";
+		out_cert->cert_len = CLIENT_CERT_44_SIZE_BYTES;
+		out_cert->cert_spi_addr = CLIENT_CERT_44_SPI_ADDR;
+		out_cert->key_len = CLIENT_KEY_44_SIZE_BYTES;
+		out_cert->key_spi_addr = CLIENT_KEY_44_SPI_ADDR;
+		out_cert->cert_bytes = NULL;
+		break;
+
+	case CRL:
+		out_cert->name = (unsigned char*) "CRL";
+		out_cert->cert_len = CRL_CERT_44_SIZE_BYTES;
+		out_cert->cert_spi_addr = CRL_CERT_44_SPI_ADDR;
+		out_cert->key_len = 0;
+		out_cert->key_spi_addr = 0;
+		out_cert->cert_bytes = NULL;
+		break;
+#endif
 
 	default:
 		break;

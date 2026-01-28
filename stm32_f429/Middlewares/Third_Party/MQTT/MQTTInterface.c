@@ -238,7 +238,6 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 		return -1;
 	}
 
-
 #if SCP03 == 1
 	printf("Setting UP SCP03 protected channel\n");
 	open_INTF((INTF*) NULL, 0, 0);
@@ -246,6 +245,7 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 #endif
 
 	// Reading certs from SPI Flash
+
 	SPICert *root_ca = make_certificate(ROOT_CA);
 	//root_ca->cert_bytes = mbedtls_root_certificate;
 	load_cert_from_spi(root_ca, false, true);
@@ -291,6 +291,7 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 
 	free_certificate(client_certificate);
 
+#if FORCE_CRL_CHECK == 1
 	SPICert *crl_cert = make_certificate(CRL);
 	load_cert_from_spi(crl_cert, false, true);
 
@@ -304,6 +305,8 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 	}
 
 	free_certificate(crl_cert);
+
+#endif
 
 	// Extract public from client cert: Not a perfect solution but as of now we don't have a way to derive the public from the private
 	// Private and Public for MLDSA are inside the key, for the x25519 we can derive it. For now we import the one from cert (need to check the two keys match) and later we can derive it
