@@ -1391,17 +1391,12 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 			external_key, &unused, 0);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
-	//We're doing this because we want to move our data to a correctly aligned buffer as the original's address was odd and triggered a Hard Fault on the cpu
+	//We're doing this because we want to move our data to a correctly aligned buffer as the original address was odd and triggered a Hard Fault on the cpu
 	unsigned char *out_sig_buf = (unsigned char*) pvPortMalloc(4000);
 	printf("HW MLDSA Signature...");
 	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key, out_sig_buf,
 			&mldsa_ssize, NULL, 0, external_key, &unused, 0);
 
-	/*
-	 mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
-	 sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0, external_key, &unused,
-	 0);
-	 */
 	memcpy(sig + SIG_PREFIX_SIZE, out_sig_buf, mldsa_ssize);
 
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
@@ -1505,14 +1500,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 #if HW_IMPLEMENTATION==1
 	printf("HW EDDSA Verify...");
 
-	/*
-	 void eddsa25519_verify_hw(unsigned char *msg, unsigned int msg_len, unsigned char *pub_key, unsigned int pub_len,
-	 unsigned char *sig, unsigned int sig_len, unsigned int *result,
-	 bool ext_key, uint8_t* key_id, INTF interface);
-
-	 */
-	//We're doing this because we want to move our data to a correctly aligned buffer as the original's address was odd and triggered a Hard Fault on the cpu
-
+	//We're doing this because we want to move our data to a correctly aligned buffer as the original address was odd and triggered a Hard Fault on the cpu
 	unsigned char *sig_buf = pvPortMalloc(64);
 	memcpy(sig_buf, sig + sig_len - 64, 64);
 
@@ -1520,39 +1508,53 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 			64, &result, external_key, &unused, 0);
 	vPortFree(sig_buf);
 
-	/*
-	 eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
-	 sig + sig_len - 64, 64, &result, external_key, &unused, 0);
-	 */
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	//printf("Result: %d\n", result);
 	result = !result;
 
+	printf("HW MLDSA44 Verify...");
+
+	//We're doing this because we want to move our data to a correctly aligned buffer as the original address was odd and triggered a Hard Fault on the cpu
+
+	sig_buf = pvPortMalloc(4000);
+	memcpy(sig_buf, sig + 9, 2420);
+
+	mldsa44_verify_hw(new_msg, 77, ctx->mldsa_pub_key, sig_buf, 2420, NULL, 0,
+			&result, 0);
+
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
 #else
 	//TODO: ...
-	printf("HW EDDSA Verify...");
+	printf("SW EDDSA Verify...");
 
 	eddsa25519_verify(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
 			sig + sig_len - 64, 64, &result);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+	printf("SW MLDSA44 Verify...");
+
+	mldsa44_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 2420, &result,
+		NULL, 0);
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+
 	//printf("Result: %d\n", result);
 
 #endif
 
 	if (result != 0) {
 		vPortFree(new_msg);
+		vPortFree(sig_buf);
 		return result;
 	}
-	//TODO: ...
-	printf("HW MLDSA44 Verify...");
 
-	mldsa44_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 2420, &result,
-	NULL, 0);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	printf("MLDSA44 + EDDSA25519 verify completed!\n");
 	printf("#############################################\n\n");
 
 	vPortFree(new_msg);
+	vPortFree(sig_buf);
+
 	return result;
 }
 
