@@ -1546,11 +1546,9 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	//TODO: ...
 	printf("HW MLDSA44 Verify...");
 
-	//TODO: Use HW verify
 	mldsa44_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 2420, &result,
 	NULL, 0);
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
-	//printf("Result: %d\n", result);
 	printf("MLDSA44 + EDDSA25519 verify completed!\n");
 	printf("#############################################\n\n");
 
