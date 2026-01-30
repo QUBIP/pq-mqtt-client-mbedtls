@@ -299,7 +299,7 @@ float ADC_ConvertToTemperature(uint16_t adc) {
 	return out_temp;
 }
 
-float getInternalTemp(){
+float getInternalTemp() {
 	return ADC_ConvertToTemperature(ADC1_ReadRaw());
 }
 /* USER CODE END 0 */
@@ -333,7 +333,7 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART3_UART_Init();
 	MX_RNG_Init();
-	MX_IWDG_Init();
+	//MX_IWDG_Init();
 	MX_I2C1_Init();
 
 	ADC1_EnableClock();
@@ -347,8 +347,6 @@ int main(void) {
 			reset_cause_get_name(reset_cause));
 	print_title_demo();
 
-	osDelay(1000);
-
 //#define TEST_SE
 #ifdef TEST_SE
 	//demo_mlkem_hw(768, 3, 0);
@@ -359,7 +357,9 @@ int main(void) {
 
 	/* Call init function for freertos objects (in freertos.c) */
 	MX_FREERTOS_Init();
-
+	printf("#############################################\n");
+	print_memory_stats();
+	printf("#############################################\n");
 	/* Start scheduler */
 	osKernelStart();
 #endif

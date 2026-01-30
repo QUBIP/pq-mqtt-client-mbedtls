@@ -72,8 +72,7 @@ void print_memory_stats() {
 	// Log heap statistics for debugging.
 	MQTT_PUB_TASK_DEBUG_LOG(
 			"[MQTT_PUB_TASK] INFO: freeHeapSize: %u bytes, minimumEverFreeHeapSize: %u bytes\r\n",
-			(unsigned int )xPortGetFreeHeapSize(),
-			(unsigned int )xPortGetMinimumEverFreeHeapSize());
+			(unsigned int )xPortGetFreeHeapSize());
 
 	MQTT_PUB_TASK_DEBUG_LOG("[MQTT_PUB_TASK] INFO: Heap Statistics:\n");
 	MQTT_PUB_TASK_DEBUG_LOG(
