@@ -20,6 +20,7 @@
 #include "nanomodbus_interface.h"
 #include "iperf_server.h"
 #include "demo.h"
+#include "tim_us.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -160,10 +161,18 @@ void MqttClientPubTask(void const *argument) {
 		MQTTDisconnect(&mqttClient);
 		mqtt_network_disconnect(&mqttNet);
 		mqtt_network_clear();
+
+		uint32_t start_connect = micros();
+
 		if (MqttConnectAndSubscribe() < 0) {
 			osDelay(250);
 			continue;
 		}
+		uint32_t end_connect = micros();
+
+		printf("Connected in %fs\n",
+				(double) ((end_connect - start_connect) / 1000 / 1000));
+
 		uint8_t error = 0;
 
 		need_to_reconnect = 0;

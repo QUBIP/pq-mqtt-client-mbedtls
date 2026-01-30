@@ -37,6 +37,8 @@
 #include "stdlib.h"
 #include "test_func.h"
 #include "demo.h"
+#include "tim_us.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -339,6 +341,8 @@ int main(void) {
 	ADC1_EnableClock();
 	ADC_EnableTempSensor();
 	ADC1_Init();
+	MX_TIM_US_Init();
+
 	/* USER CODE BEGIN 2 */
 	DEBUG_LOG("\nStarting...\n\n");
 	// Print the cause of the reboot
