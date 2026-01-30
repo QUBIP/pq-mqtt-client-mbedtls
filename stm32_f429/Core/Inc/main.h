@@ -46,16 +46,14 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-#ifdef DEBUG
+
 #include <stdarg.h>
 //#define DEBUG_LOG(message, ...) do { printf(message, ##__VA_ARGS__); } while(0)
 #define DEBUG_LOG(message, ...) do { \
 	printf("%lu -> ", HAL_GetTick()); \
     printf(message, ##__VA_ARGS__); \
 } while(0)
-#else
-#define DEBUG_LOG(message, ...)
-#endif
+
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

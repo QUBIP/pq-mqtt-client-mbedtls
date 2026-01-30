@@ -20,7 +20,7 @@
 #include "ssl_tls13_keys.h"
 #include "ssl_debug_helpers.h"
 #include "mbedtls/psa_util.h"
-#include "mbedtls/qubip.h"
+#include "qubip.h"
 #include "mbedtls/ecp.h"
 
 #if defined(MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_SOME_EPHEMERAL_ENABLED)

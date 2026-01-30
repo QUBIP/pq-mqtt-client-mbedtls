@@ -33,7 +33,7 @@
 #include "mbedtls/debug.h"
 #endif
 
-#include "mbedtls/qubip.h"
+#include "qubip.h"
 
 #include "mbedtls/eddsa.h" 
 #include "mbedtls/psa_util.h"

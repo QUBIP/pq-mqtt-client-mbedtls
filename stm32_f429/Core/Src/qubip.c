@@ -3,7 +3,7 @@
  SPDX-License-Identifier: MIT
  */
 
-#include "mbedtls/qubip.h"
+#include "qubip.h"
 #include "mbedtls/ecp.h"
 #include "se-qubip.h"
 #include "crypto_api_sw.h"
@@ -16,12 +16,12 @@ extern char client_key;
 
 HybridKeyKEM* hybrid_key_gen() {
 
-	HybridKeyKEM *out_keys = pvPortMalloc(sizeof(HybridKeyKEM));
+	HybridKeyKEM *out_keys = (HybridKeyKEM*) pvPortMalloc(sizeof(HybridKeyKEM));
 	printf("#############################################\n");
 	printf("Starting X25519_MLKEM768 key generation...\n");
 
-	out_keys->mlkem_768_pk = pvPortMalloc(KYBER768_PK_SIZE);
-	out_keys->mlkem_768_sk = pvPortMalloc(KYBER768_SK_SIZE);
+	out_keys->mlkem_768_pk = (uint8_t*) pvPortMalloc(KYBER768_PK_SIZE);
+	out_keys->mlkem_768_sk = (uint8_t*) pvPortMalloc(KYBER768_SK_SIZE);
 	out_keys->mlkem_768_pk_size = KYBER768_PK_SIZE;
 	out_keys->mlkem_768_sk_size = KYBER768_SK_SIZE;
 	unsigned int pri_len;

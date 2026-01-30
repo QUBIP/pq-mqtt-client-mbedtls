@@ -23,7 +23,7 @@
 
 #include "psa/crypto.h"
 #include "mbedtls/psa_util.h"
-#include "mbedtls/qubip.h"
+#include "qubip.h"
 
 
 /* Define a local translating function to save code size by not using too many
