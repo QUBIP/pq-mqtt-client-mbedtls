@@ -15,9 +15,6 @@ extern char mbedtls_root_certificate;
 extern char client_cert;
 extern char client_key;
 
-
-static bool initialized_keys = false;
-
 HybridKeyKEM* hybrid_key_gen() {
 
 	uint32_t end_time = 0;
