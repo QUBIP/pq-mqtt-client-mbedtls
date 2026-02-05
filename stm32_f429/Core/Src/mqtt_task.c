@@ -223,7 +223,7 @@ void MqttClientPubTask(void const *argument) {
 			printf("\n\n");
 			print_memory_stats();
 
-			osDelay(1000);
+			osDelay(10000);
 			/* no error and i'm connected and i don't need to reconnect */
 			//} while (!error && mqttClient.isconnected && !need_to_reconnect);
 		} while (!error);

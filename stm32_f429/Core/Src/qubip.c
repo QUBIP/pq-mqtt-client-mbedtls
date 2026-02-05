@@ -15,6 +15,9 @@ extern char mbedtls_root_certificate;
 extern char client_cert;
 extern char client_key;
 
+
+static bool initialized_keys = false;
+
 HybridKeyKEM* hybrid_key_gen() {
 
 	uint32_t end_time = 0;
@@ -51,13 +54,15 @@ HybridKeyKEM* hybrid_key_gen() {
 	false, &mlkem_key_slot, 0);
 
 	end_time = micros();
-	printf("MLKEM768 GenKeys HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n", end_time - start_time);
+	printf("MLKEM768 GenKeys HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 	start_time = micros();
 	x25519_genkeys_hw(&out_keys->x25519_sk, &out_keys->x25519_pk, &pri_len,
 			&pub_len, false, &x25519_key_slot, 0);
 	end_time = micros();
-	printf("X215519 GenKeys HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n", end_time - start_time);
+	printf("X215519 GenKeys HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 	//printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -73,7 +78,7 @@ HybridKeyKEM* hybrid_key_gen() {
 
 	out_keys->x25519_pk_size = X25519_PK_SIZE;
 	out_keys->x25519_sk_size = X25519_SK_SIZE;
-
+	secmem_delete_all_keys(0);
 	printf("Hybrid Gen Key completed!\n");
 	printf("##########################################################\n\n");
 	return out_keys;
@@ -82,8 +87,8 @@ HybridKeyKEM* hybrid_key_gen() {
 void hybrid_key_free(HybridKeyKEM *keys) {
 	vPortFree(keys->mlkem_768_pk);
 	vPortFree(keys->mlkem_768_sk);
-	vPortFree(keys->x25519_pk);
-	vPortFree(keys->x25519_sk);
+	//vPortFree(keys->x25519_pk);
+	//vPortFree(keys->x25519_sk);
 	vPortFree(keys);
 }
 
@@ -92,16 +97,16 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 		size_t key_buffer_size, uint8_t *shared_secret,
 		size_t shared_secret_size, size_t *shared_secret_length) {
 
-	uint8_t *server_ecdh_key = pvPortMalloc(32);
-	uint8_t *server_kyber_ct = pvPortMalloc(peer_key_length - 32);
-	uint8_t *ssecret_mlkem768 = pvPortMalloc(32);
+	uint8_t *server_ecdh_key = (uint8_t*) pvPortMalloc(32);
+	uint8_t *server_kyber_ct = (uint8_t*) pvPortMalloc(peer_key_length - 32);
+	uint8_t *ssecret_mlkem768 = (uint8_t*) pvPortMalloc(32);
 	uint8_t *ssecret_x25519;
 	unsigned int out_len;
 	HybridKeyKEM *private_key = (HybridKeyKEM*) key_buffer;
 	unsigned int result = 0;
 	uint32_t end_time = 0;
-
 	uint32_t start_time = micros();
+
 	printf("##########################################################\n");
 
 	printf("Starting X25519_MLKEM768 key agreement...\n");
@@ -134,7 +139,8 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 			ssecret_mlkem768, &result, true, &private_key->mlkem_768_key_slot,
 			0);
 	end_time = micros();
-	printf("MLKEM768 Decapsulate HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n", end_time - start_time);
+	printf("MLKEM768 Decapsulate HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 	//HW returns 3 (?!?!) on success
 	result = (result == 3 ? 0 : -1);
@@ -161,7 +167,8 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 			private_key->x25519_sk, private_key->x25519_sk_size, true,
 			&private_key->x25519_key_slot, 0);
 	end_time = micros();
-	printf("HW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n", end_time - start_time);
+	printf("HW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 	//printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -183,7 +190,7 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	vPortFree(server_ecdh_key);
 	vPortFree(server_kyber_ct);
 	vPortFree(ssecret_mlkem768);
-	vPortFree(ssecret_x25519);
+	//vPortFree(ssecret_x25519);
 	printf("X25519_MLKEM768 key agreement completed!\n");
 	printf("##########################################################\n\n");
 
