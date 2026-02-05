@@ -1,0 +1,2342 @@
+)0[0m(B)0[?1h=[H[J[0m[7m[41;1H[K[34h[?25h[?25l                                                                                                 [34h[?25h[34h[?25h[?25lMeta-Z for help | 115200 8N1 | NOR | Minicom 2.9 | VT102 | Offline | ttyUSB0                     [34h[?25h[1;1H
+[0mWelcome to minicom 2.9
+
+OPTIONS: I18n 
+Port /dev/ttyUSB0, 08:02:42
+
+Press Meta-Z for help on special keys
+
+[34h[?25h[34h[?25h[H[J]0;[34h[?25h[?1l>c[?1000l[?25h)0(B)0[?1h=[H[J[34h[?25h2 -> 
+Starting...
+
+3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+   _____                      _ _           _____      _   _                  
+  / ____|                    (_) |         |  __ \    | | | |                 
+ | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+ |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+                                     __/ |                                    
+                                    |___/                                     
+
+
+   _______          __           _____ _____ 
+  / ____\ \        / /     /\   |  __ \_   _|
+ | (___  \ \  /\  / /     /  \  | |__) || |  
+  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+  ____) |  \  /\  /     / ____ \| |    _| |_ 
+ |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33704 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204617 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41848 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203811 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722866 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73223 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722552 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73279 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722706 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73271 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 354924 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722739 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9132 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9140 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9144 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9150 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9156 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9161 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9166 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9172 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3588
+[19;98H [20;1H9178 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3511
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33709 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204657 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41851 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203707 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722653 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73220 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722654 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73310 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722694 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 202278 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722850 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8981 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8989 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8993 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8999 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9005 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9010 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9015 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9021 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9026 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33704 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204551 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41847 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 204019 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722895 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73216 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722867 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73224 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722708 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73267 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 110371 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722854 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8888 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8896 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8900 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8906 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8912 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8917 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8922 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8928 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3592
+[19;98H [20;1H8934 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3515
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33700 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204551 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41847 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203705 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722657 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73222 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722553 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73330 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722991 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73270 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 278916 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 723256 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9057 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9065 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9070 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9075 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9081 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9087 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9092 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9098 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9103 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33712 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204548 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41859 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203706 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722661 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73217 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722547 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73277 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722705 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73267 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 194497 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722762 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8971 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8980 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8984 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8990 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8995 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9001 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9006 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9012 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3591
+[19;98H [20;1H9017 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3514
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33708 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204554 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41852 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203705 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 723047 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73223 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722552 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73278 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722704 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73268 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 110396 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722861 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8887 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8896 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8900 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8906 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8911 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8917 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8922 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8928 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H8933 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|�2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33699 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204513 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41844 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203803 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722728 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73214 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722748 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73273 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722780 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 110367 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722964 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8887 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8895 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8900 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8905 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8911 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8917 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8922 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8928 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H8933 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9454 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9463 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9467 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9473 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9478 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9484 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9489 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9495 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9500 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33697 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204516 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41841 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203700 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722647 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73214 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722529 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73270 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722691 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73262 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 110332 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722849 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8886 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8894 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8899 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8905 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8910 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8916 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8921 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8927 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3592
+[19;98H [20;1H8932 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3515
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9454 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9462 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9466 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9472 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9477 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9483 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9488 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9494 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3657
+[19;98H [20;1H9499 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3579
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33702 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204544 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41845 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203804 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 723083 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73315 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722947 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73406 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 723169 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73265 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 271226 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722867 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9049 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9058 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9062 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9068 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9073 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9079 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9084 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9090 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9095 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9617 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9626 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9630 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9635 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9641 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9647 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9652 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9658 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9663 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33708 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204750 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41853 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203702 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722643 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73217 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722730 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722682 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73369 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 156189 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722857 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8934 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8942 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8946 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8952 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8958 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8963 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8968 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8974 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H8979 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9501 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9509 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9513 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9519 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9525 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9530 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9535 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9541 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9547 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33707 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204509 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41849 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203703 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722755 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73217 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722536 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73271 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722787 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73266 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 416558 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722737 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9203 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9211 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9215 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9221 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9227 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9232 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9237 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9243 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9249 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9770 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9779 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9783 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9789 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9794 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9800 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9805 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9811 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9816 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33716 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204540 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41860 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203698 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722641 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73218 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722681 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73268 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722691 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73268 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 148591 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722868 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8925 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8933 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8938 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8943 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8949 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8955 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8960 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8966 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H8971 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9492 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9501 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9505 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9511 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9516 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9522 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9527 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9533 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9538 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33698 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204647 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41842 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203704 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722633 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73214 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722539 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73268 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722672 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73267 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 301837 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722757 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9090 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9099 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9103 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9109 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9114 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9120 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9125 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9131 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9136 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9657 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9666 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9670 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9675 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9681 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9687 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9692 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9698 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9703 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33709 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204548 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41854 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203702 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722679 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73216 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722645 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722822 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73262 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 110330 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722846 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8887 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8896 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8900 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8906 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8911 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8917 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8922 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8928 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H8933 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9455 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9463 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9467 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9473 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9478 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9484 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9489 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9495 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9500 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33702 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204544 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41844 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203704 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722643 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73216 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722534 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73273 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722926 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73264 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 187026 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722856 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8970 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8979 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8983 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8988 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8994 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9000 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9005 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9011 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9016 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9544 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9553 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9557 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9562 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9568 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9574 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9579 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9585 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9590 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33698 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204620 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41844 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203702 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722741 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73212 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722531 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73375 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 723140 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73298 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 301712 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 723097 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9080 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9088 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9092 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9098 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9103 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9109 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9114 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9120 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9125 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9647 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9655 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9660 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9665 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9671 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9677 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9682 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9687 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9693 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33713 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204511 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41854 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203666 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722781 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73218 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722751 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73270 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722909 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73266 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 324859 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722877 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9103 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9111 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9115 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9121 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9127 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9133 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9138 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9143 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9149 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9670 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9678 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9682 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9688 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9694 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9699 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9704 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9710 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9715 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33699 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204546 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41839 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203699 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722819 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722588 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73219 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722438 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73264 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 370521 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722977 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9030 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9038 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9042 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9048 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9054 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9059 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9064 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9070 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9076 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9597 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9606 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9610 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9616 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9621 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9627 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9632 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9638 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9643 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33713 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204547 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41856 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203701 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722957 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73213 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722540 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73271 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722785 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73265 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 156130 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722851 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8933 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8941 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8945 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8951 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8957 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8963 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8968 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8973 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H8979 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9500 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9509 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9513 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9519 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9524 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9530 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9535 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9541 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9546 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33812 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204648 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41853 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203805 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 723156 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73217 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722811 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73268 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722827 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73267 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 110672 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722981 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H8888 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H8897 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H8901 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H8906 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H8912 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H8918 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H8923 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H8929 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3592
+[19;98H [20;1H8934 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3515
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9456 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9464 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9468 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9474 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9479 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9485 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9490 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9496 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3657
+[19;98H [20;1H9501 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3579
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H3089 -> [LWIP_EVENT] INFO: Force a reconnect!
+[19;98H [20;1H3167 -> [MQTT_PUB_TASK] INFO: DHCP/Static IP O.K.
+[19;98H [20;1H3171 -> [MQTT_PUB_TASK] INFO: IP 192.168.1.244
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key generation...
+[19;98H [20;1HMLKEM768 GenKeys SW - 33705 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HX215519 GenKeys SW - 204756 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHybrid Gen Key completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting X25519_MLKEM768 key agreement...
+[19;98H [20;1HMLKEM768 Decapsulate SW - 41848 us[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HHW x25519 SS GEN SW - 203700 us[20;33H[20;41H[20;49H[20;57H[0m[1m✅[0m
+[19;98H [20;1HX25519_MLKEM768 key agreement completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722785 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73214 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722528 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 verify...
+[19;98H [20;1HSW EDDSA Verify - 722486 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW MLDSA44 Verify - 73269 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 verify completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HStarting MLDSA44 + EDDSA25519 signature...
+[19;98H [20;1HSW MLDSA Signature - 363026 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HSW EDDSA Signature - 722744 us[20;33H[20;41H[20;49H[0m[1m✅[0m
+[19;98H [20;1HMLDSA44 + EDDSA25519 signature completed!
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H9014 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 27920 bytes, minimumEverFreeHeapSize: 6248 bytes
+[19;98H [20;1H9022 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9027 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H27920 bytes
+[19;98H [20;1H9032 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H24160 bytes
+[19;98H [20;1H9038 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9044 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9049 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H6248 bytes
+[19;98H [20;1H9055 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3590
+[19;98H [20;1H9060 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3513
+[19;98H [20;1H
+[19;98H [20;1H#############################################
+[19;98H [20;1HConnecting to MQTT broker 
+[19;98H [20;1Hbroker.dm.qubip.eu...[20;25H[20;33H[0m[1m✅[0m
+[19;98H [20;1H#############################################
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1HMQTT Publish:
+[19;98H [20;1H{
+[19;98H [20;1H  "device": "STM32",
+[19;98H [20;1H  "temperature": 31.000000
+[19;98H [20;1H}
+[19;98H [20;1H9581 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 23160 bytes, minimumEverFreeHeapSize: 5968 bytes
+[19;98H [20;1H9589 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H9594 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H23160 bytes
+[19;98H [20;1H9599 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H19400 bytes
+[19;98H [20;1H9605 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H32 bytes
+[19;98H [20;1H9611 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H7
+[19;98H [20;1H9616 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H5968 bytes
+[19;98H [20;1H9622 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H3655
+[19;98H [20;1H9627 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H3577
+[19;98H [20;1H2 -> 
+[19;98H [20;1HStarting...
+[19;98H [20;1H
+[19;98H [20;1H3 -> [MAIN]: The system reset cause is "SOFTWARE_RESET"
+[19;98H [20;1H   _____                      _ _           _____      _   _                  
+[19;98H [20;1H  / ____|                    (_) |         |  __ \    | | | |                 
+[19;98H [20;1H | (___   ___  ___ _   _ _ __ _| |_ _   _  | |__) |_ _| |_| |_ ___ _ __ _ __  
+[19;98H [20;1H  \___ \ / _ \/ __| | | | '__| | __| | | | |  ___/ _` | __| __/ _ \ '__| '_ \ 
+[19;98H [20;1H  ____) |  __/ (__| |_| | |  | | |_| |_| | | |  | (_| | |_| ||  __/ |  | | | |
+[19;98H [20;1H |_____/ \___|\___|\__,_|_|  |_|\__|\__, | |_|   \__,_|\__|\__\___|_|  |_| |_|
+[19;98H [20;1H                                     __/ |                                    
+[19;98H [20;1H                                    |___/                                     
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H   _______          __           _____ _____ 
+[19;98H [20;1H  / ____\ \        / /     /\   |  __ \_   _|
+[19;98H [20;1H | (___  \ \  /\  / /     /  \  | |__) || |  
+[19;98H [20;1H  \___ \  \ \/  \/ /     / /\ \ |  ___/ | |  
+[19;98H [20;1H  ____) |  \  /\  /     / ____ \| |    _| |_ 
+[19;98H [20;1H |_____/    \/  \/     /_/    \_\_|   |_____|
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H
+[19;98H [20;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minimumEverFreeHeapSize: 92192 bytes
+[19;98H [20;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:
+[19;98H [20;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:[20;57H92192 bytes
+[19;98H [20;1H2126 -> [MQTT_PUB_TASK] INFO:   Largest Free Block: [20;57H51256 bytes
+[19;98H [20;1H2132 -> [MQTT_PUB_TASK] INFO:   Smallest Free Block: [20;57H40936 bytes
+[19;98H [20;1H2138 -> [MQTT_PUB_TASK] INFO:   Number of Free Blocks:[20;57H3
+[19;98H [20;1H2143 -> [MQTT_PUB_TASK] INFO:   Minimum Ever Free Bytes:[20;65H92192 bytes
+[19;98H [20;1H2149 -> [MQTT_PUB_TASK] INFO:   Successful Allocations:[20;57H16
+[19;98H [20;1H2154 -> [MQTT_PUB_TASK] INFO:   Successful Frees:    [20;57H0
+[19;98H [20;1H2159 -> [MQTT_PUB_TASK] INFO: Link is up
+[19;98H [20;1H2162 -> [MQTT_PUB_TASK] INFO: Waiting for valid ip address
+[19;98H [20;1H�����P��� ������������������������������������������0���������������������������@��������А�����[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[20;98H[0m[7m[K[34h[?25h[8;39H[?25l[0m+----------------------+[9;39H|    Leave Minicom?    |[10;39H|               No     |[11;39H+----------------------+[10;60H[?25l[10;42H[0m[7m   Yes  [34h[?25h[8;1H[0m                                                              [9;1H2108 -> [MQTT_PUB_TASK] INFO: freeHeapSize: 92192 bytes, minim[10;1H2116 -> [MQTT_PUB_TASK] INFO: Heap Statistics:                [11;1H2120 -> [MQTT_PUB_TASK] INFO:   Available Heap Space:   92192 [20;1H[0m[7m[34h[?25h[34h[?25h[0m[H[J]0;[34h[?25h[?1l>c[?1000l[?25h
