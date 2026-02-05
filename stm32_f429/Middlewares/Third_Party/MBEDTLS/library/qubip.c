@@ -11,6 +11,8 @@ SPDX-License-Identifier: MIT
 #include <stdlib.h>
 
 HybridKeyKEM* hybrid_key_gen() {
+	uint32_t end_time = 0;
+	uint32_t start_time = micros();
 
 	HybridKeyKEM *out_keys = malloc(sizeof(HybridKeyKEM));
 	printf("#############################################\n");
@@ -33,12 +35,18 @@ HybridKeyKEM* hybrid_key_gen() {
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #else
-	printf("SW Hybrid Gen Key...");
-
+	start_time = micros();
 	mlkem768_genkeys(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk);
+	end_time = micros();
+	printf("MLKEM768 GenKeys SW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+				end_time - start_time);
+	start_time = micros();
 	x25519_genkeys(&out_keys->x25519_sk, &out_keys->x25519_pk, &pri_len,
 			&pub_len);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
+	end_time = micros();
+	printf("X215519 GenKeys SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+				end_time - start_time);
+
 
 #endif
 
@@ -70,6 +78,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	unsigned int out_len;
 	HybridKeyKEM *private_key = (HybridKeyKEM*) key_buffer;
 	unsigned int result = 0;
+	uint32_t end_time = 0;
+	uint32_t start_time = micros();
+
 	printf("#############################################\n");
 
 	printf("Starting X25519_MLKEM768 key agreement...\n");
@@ -106,13 +117,14 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 
 #else
 
-	printf("SW MLKEM768 Dec...");
-
+	start_time = micros();
 	mlkem768_dec(ssecret_kem, server_kyber_ct, private_key->mlkem_768_sk,
 			&result);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
-	//printf("Result: %d\n", result);
+	end_time = micros();
+	printf("MLKEM768 Decapsulate SW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
+	//printf("Result: %d\n", result);
 
 #endif
 
@@ -123,10 +135,13 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #else
-	printf("SW x25519 SS GEN...");
+
+	start_time = micros();
 	x25519_ss_gen(&ssecret_x25519, &out_len, server_ecdh_key, 32,
 			private_key->x25519_sk, private_key->x25519_sk);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
+	end_time = micros();
+	printf("HW x25519 SS GEN SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 #endif
 

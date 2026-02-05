@@ -35,6 +35,7 @@
 #include "stdlib.h"
 #include "test_func.h"
 #include "demo.h"
+#include "tim_us.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -297,6 +298,7 @@ int main(void)
   MX_RNG_Init();
   //MX_IWDG_Init();
   MX_I2C1_Init();
+  MX_TIM_US_Init();
 
   /* USER CODE BEGIN 2 */
   DEBUG_LOG("\nStarting...\n\n");

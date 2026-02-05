@@ -206,6 +206,7 @@ void MqttClientPubTask(void const *argument) {
 				error = 1;
 				continue;
 			}
+			print_memory_stats();
 
 			/*MQTT_PUB_TASK_DEBUG_LOG(
 					"[MQTT_PUB_TASK] INFO: [%lu] I've sent a message!\n",
