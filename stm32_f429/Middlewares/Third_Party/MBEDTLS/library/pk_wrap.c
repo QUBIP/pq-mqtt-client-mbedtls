@@ -1357,7 +1357,8 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
 		unsigned char *sig, size_t sig_size, size_t *sig_len,
 		int (*f_rng)(void*, unsigned char*, size_t), void *p_rng) {
-	char oid_der[] = "\x06\x0B\x60\x86\x48\x01\x86\xFA\x6B\x50\x08\x01\x03";
+	char oid_der[] = "\x06\x0B\x60\x86\x48\x01\x86\xFA\x6B\x50\x08\x01\x03"; //Parsed: 2.16.840.1.114027.80.8.1.3
+	//char possible_new_oid_der = "\x06\x08\x2B\x06\x01\x05\x05\x07\x06\x27" // Parsed: 1.3.6.1.5.5.7.6.39
 	char prefix[] = "\x30\x82\x09\xBC\x03\x82\x09\x75";
 	char sig_sep[] = "\x03\x41";
 
