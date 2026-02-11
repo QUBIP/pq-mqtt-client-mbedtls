@@ -19,7 +19,6 @@
 #include "leds.h"
 #include "nanomodbus_interface.h"
 #include "iperf_server.h"
-#include "demo.h"
 #include "tim_us.h"
 
 /* Private typedef -----------------------------------------------------------*/

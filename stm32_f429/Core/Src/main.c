@@ -36,7 +36,6 @@
 #include "crypto_api_sw.h"
 #include "stdlib.h"
 #include "test_func.h"
-#include "demo.h"
 #include "tim_us.h"
 
 /* USER CODE END Includes */
@@ -351,22 +350,8 @@ int main(void) {
 			reset_cause_get_name(reset_cause));
 	print_title_demo();
 
-//#define TEST_SE
-#ifdef TEST_SE
-	//demo_mlkem_hw(768, 3, 0);
-	//kyber768_kat();
 	write_certificates_to_spi();
-#else
-	/* USER CODE END 2 */
 
-	/* Call init function for freertos objects (in freertos.c) */
-	MX_FREERTOS_Init();
-	printf("#############################################\n");
-	print_memory_stats();
-	printf("#############################################\n");
-	/* Start scheduler */
-	osKernelStart();
-#endif
 	/* We should never get here as control is now taken by the scheduler */
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
