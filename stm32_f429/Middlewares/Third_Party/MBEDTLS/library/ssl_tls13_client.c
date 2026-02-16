@@ -226,9 +226,13 @@ static int ssl_tls13_get_default_group_id(mbedtls_ssl_context *ssl,
     }
 
     for (; *group_list != 0; group_list++) {
-    	if(*group_list != MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768) 
-    		continue;
-
+    	
+        #ifdef CERTS_PQ_44
+    	    // TODO: FEDE we only allow MLKEM768
+            if(*group_list != MBEDTLS_SSL_IANA_TLS_GROUP_MLKEM768) 
+                continue;
+    	 #endif
+         
     	*group_id =*group_list;
     	return 0;
 #if defined(PSA_WANT_ALG_ECDH)

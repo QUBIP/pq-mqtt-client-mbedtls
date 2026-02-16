@@ -483,7 +483,7 @@
 #define MBEDTLS_SSL_SIG_RSA                  1
 #define MBEDTLS_SSL_SIG_ECDSA                3
 #define MBEDTLS_SSL_SIG_HPQ					 5
-
+#define MBEDTLS_SSL_SIG_EDDSA				 6
 /*
  * TLS 1.3 signature algorithms
  * RFC 8446, Section 4.2.3

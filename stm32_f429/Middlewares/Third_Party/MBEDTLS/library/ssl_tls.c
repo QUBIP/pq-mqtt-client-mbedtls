@@ -5647,11 +5647,12 @@ static const int ssl_preset_suiteb_ciphersuites[] = {
 
 static const uint16_t ssl_preset_default_sig_algs[] = {
 
-#ifdef CERTS_PQ_65
-	MBEDTLS_TLS1_3_SIG_ED25519_MLDSA65,
+#ifdef CERTS_PQ_44
+		MBEDTLS_TLS1_3_SIG_ED25519_MLDSA44,
 #else
-	MBEDTLS_TLS1_3_SIG_ED25519_MLDSA44,
+		MBEDTLS_TLS1_3_SIG_ED25519,
 #endif
+
     MBEDTLS_TLS_SIG_NONE
 };
 
@@ -6034,6 +6035,9 @@ unsigned char mbedtls_ssl_sig_from_pk(mbedtls_pk_context *pk)
         return MBEDTLS_SSL_SIG_ECDSA;
     }
 
+    if (mbedtls_pk_can_do(pk, MBEDTLS_PK_EDDSA)) {
+        return MBEDTLS_SSL_SIG_EDDSA;
+    }
     if (mbedtls_pk_can_do(pk,MBEDTLS_PK_ED25519_MLDSA65)) {
     	return MBEDTLS_SSL_SIG_HPQ;
     }

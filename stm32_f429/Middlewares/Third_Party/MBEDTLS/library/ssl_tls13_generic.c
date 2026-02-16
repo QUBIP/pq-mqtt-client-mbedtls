@@ -968,6 +968,9 @@ int mbedtls_ssl_tls13_check_sig_alg_cert_key_match(uint16_t sig_alg,
     size_t key_size = mbedtls_pk_get_bitlen(key);
 
     switch (pk_type) {
+    	case MBEDTLS_SSL_SIG_EDDSA:
+    		return 1;
+    	break;
         case MBEDTLS_SSL_SIG_ECDSA:
             switch (key_size) {
                 case 256:
@@ -1091,10 +1094,10 @@ static int ssl_tls13_write_certificate_verify_body(mbedtls_ssl_context *ssl,
         unsigned char *verify_hash;
         unsigned int verify_hash_size;
 		if(pk_type != MBEDTLS_PK_ED25519_MLDSA65 && pk_type != MBEDTLS_PK_ED25519_MLDSA44){
-			verify_hash = malloc(PSA_HASH_MAX_SIZE * sizeof(unsigned char));
-			verify_hash_size = PSA_HASH_MAX_SIZE * sizeof(unsigned char);
+			verify_hash = pvPortMalloc(verify_buffer_len * sizeof(unsigned char));
+			verify_hash_size = verify_buffer_len * sizeof(unsigned char);
 		} else {
-			verify_hash = malloc(verify_buffer_len * sizeof(unsigned char));
+			verify_hash = pvPortMalloc(verify_buffer_len * sizeof(unsigned char));
 			verify_hash_size = verify_buffer_len * sizeof(unsigned char);
 		}
 		size_t verify_hash_len;
@@ -1107,7 +1110,7 @@ static int ssl_tls13_write_certificate_verify_body(mbedtls_ssl_context *ssl,
                                   verify_hash, verify_hash_size,
                                   &verify_hash_len);
         if (status != PSA_SUCCESS) {
-        	free(verify_hash);
+        	vPortFree(verify_hash);
             return PSA_TO_MBEDTLS_ERR(status);
         }
 
@@ -1126,13 +1129,13 @@ static int ssl_tls13_write_certificate_verify_body(mbedtls_ssl_context *ssl,
              * did not check its suitability completely. Let's try with
              * another signature algorithm.
              */
-            free(verify_hash);
+            vPortFree(verify_hash);
             continue;
         }
 
         MBEDTLS_SSL_DEBUG_MSG(2, ("CertificateVerify signature with %s",
                                   mbedtls_ssl_sig_alg_to_str(*sig_alg)));
-        free(verify_hash);
+        vPortFree(verify_hash);
         break;
     }
 

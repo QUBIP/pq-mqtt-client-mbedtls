@@ -377,7 +377,7 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 		return -1;
 	}
 
-	ret = mbedtls_ssl_set_hostname(&ssl, BROKER_HOSTNAME); // if the handshake fail check here
+	ret = mbedtls_ssl_set_hostname(&ssl, BROKER_HOSTNAME); // if the handshake fails check here
 	if (ret < 0) {
 		MQTT_INTERFACE_DEBUG_LOG(
 				"[MQTT_INTERFACE] ERROR: mbedtls_ssl_set_hostname failed.\n");

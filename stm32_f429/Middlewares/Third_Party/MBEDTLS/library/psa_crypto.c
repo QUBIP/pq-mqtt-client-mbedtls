@@ -9110,7 +9110,7 @@ psa_status_t psa_crypto_local_input_alloc(const uint8_t *input, size_t input_len
         return PSA_SUCCESS;
     }
 
-    local_input->buffer = mbedtls_calloc(input_len, 1);
+    local_input->buffer = pvPortCalloc(input_len, 1);
     if (local_input->buffer == NULL) {
         /* Since we dealt with the zero-length case above, we know that
          * a NULL return value means a failure of allocation. */
@@ -9129,7 +9129,7 @@ psa_status_t psa_crypto_local_input_alloc(const uint8_t *input, size_t input_len
     return PSA_SUCCESS;
 
 error:
-    mbedtls_free(local_input->buffer);
+    vPortFree(local_input->buffer);
     local_input->buffer = NULL;
     local_input->length = 0;
     return status;
@@ -9137,7 +9137,7 @@ error:
 
 void psa_crypto_local_input_free(psa_crypto_local_input_t *local_input)
 {
-    mbedtls_free(local_input->buffer);
+    vPortFree(local_input->buffer);
     local_input->buffer = NULL;
     local_input->length = 0;
 }
@@ -9150,7 +9150,7 @@ psa_status_t psa_crypto_local_output_alloc(uint8_t *output, size_t output_len,
     if (output_len == 0) {
         return PSA_SUCCESS;
     }
-    local_output->buffer = mbedtls_calloc(output_len, 1);
+    local_output->buffer = pvPortCalloc(output_len, 1);
     if (local_output->buffer == NULL) {
         /* Since we dealt with the zero-length case above, we know that
          * a NULL return value means a failure of allocation. */
@@ -9181,7 +9181,7 @@ psa_status_t psa_crypto_local_output_free(psa_crypto_local_output_t *local_outpu
         return status;
     }
 
-    mbedtls_free(local_output->buffer);
+    vPortFree(local_output->buffer);
     local_output->buffer = NULL;
     local_output->length = 0;
 

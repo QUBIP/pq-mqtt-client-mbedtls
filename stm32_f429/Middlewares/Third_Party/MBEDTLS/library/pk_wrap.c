@@ -1209,40 +1209,56 @@ const mbedtls_pk_info_t mbedtls_ecdsa_info = { .type = MBEDTLS_PK_ECDSA, .name =
 	PRINTFNAME(NAME) \
 	return RET;
 
+#include "psa/crypto.h"
+
+
+#define OID_SIZE 13
+#define SIG_SIZE 64
+#define MSG_LEN (OID_SIZE + SIG_SIZE)
+
+#define SIG_PREFIX_SIZE 9
+
 static int eddsa_sign_wrap(mbedtls_pk_context *pk, mbedtls_md_type_t md_alg,
 		const unsigned char *hash, size_t hash_len, unsigned char *sig,
 		size_t sig_size, size_t *sig_len,
 		int (*f_rng)(void*, unsigned char*, size_t), void *p_rng) {
-	CREATE_STUB("eddsa_sign_wrap", 1)
+
+		mbedtls_ecp_keypair * key_pair = (mbedtls_ecp_keypair *) pk->pk_ctx;
+
+	    /*
+	     *
+	     * int mbedtls_eddsa_write_signature(mbedtls_ecp_keypair *ctx,
+                                  const unsigned char *hash, size_t hlen,
+                                  unsigned char *sig, size_t sig_size, size_t *slen,
+                                  mbedtls_eddsa_id eddsa_id,
+                                  const unsigned char *ed_ctx, size_t ed_ctx_len,
+                                  int (*f_rng)(void *, unsigned char *, size_t),
+                                  void *p_rng)
+	     */
+	    int ret =  mbedtls_eddsa_write_signature(
+	    		key_pair,
+                hash,
+                hash_len,
+                sig,
+                sig_size,
+                sig_len,
+				MBEDTLS_EDDSA_PURE,
+				NULL, 0,
+                f_rng,
+                p_rng );
+
+	    return ret;
 }
 
 static int eddsa_verify_wrap(mbedtls_pk_context *pk, mbedtls_md_type_t md_alg,
 		const unsigned char *hash, size_t hash_len, const unsigned char *sig,
 		size_t sig_len) {
-	/*
-	 int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
-	 ((void) md_alg);
 
-	 ret = mbedtls_ecdsa_read_signature_restartable(
-	 (mbedtls_ecdsa_context *) pk->pk_ctx,
-	 hash, hash_len, sig, sig_len,
-	 (mbedtls_ecdsa_restart_ctx *) rs_ctx);
-
-	 if (ret == MBEDTLS_ERR_ECP_SIG_LEN_MISMATCH) {
-	 return MBEDTLS_ERR_PK_SIG_LEN_MISMATCH;
-	 }
-
-	 return ret;
-	 */
-
-	int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
-	((void) md_alg);
-	//mbedtls_ecdsa_read_signature(ctx, hash, hlen, sig, slen);
-	ret = mbedtls_eddsa_read_signature(pk->pk_ctx, hash, hash_len, sig, sig_len,
-			MBEDTLS_EDDSA_PURE, NULL, 0);
-
-	return ret;
-	//CREATE_STUB("eddsa_verify_wrap",1)
+		int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+		((void) md_alg);
+		ret = mbedtls_eddsa_read_signature(pk->pk_ctx, hash, hash_len, sig, sig_len,
+				MBEDTLS_EDDSA_PURE, NULL, 0);
+		return ret;
 }
 
 static int eddsa_can_do(mbedtls_pk_type_t type) {
@@ -1347,11 +1363,7 @@ static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 	return 0;
 }
 
-#define OID_SIZE 13
-#define SIG_SIZE 64
-#define MSG_LEN (OID_SIZE + SIG_SIZE)
 
-#define SIG_PREFIX_SIZE 9
 
 static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
