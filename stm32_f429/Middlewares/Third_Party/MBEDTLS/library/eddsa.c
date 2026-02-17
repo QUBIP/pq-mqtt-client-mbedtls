@@ -79,7 +79,7 @@ static int mbedtls_eddsa_put_dom2_ctx(int flag, const unsigned char *ctx,
  * For PREHASH operation, the message is already previously hashed.
  * Obviously, for PREHASH, we skip hash message step.
  */
-int mbedtls_eddsa_sign(mbedtls_ecp_group *grp,
+int mbedtls_eddsa_check(mbedtls_ecp_group *grp,
                        mbedtls_mpi *r, mbedtls_mpi *s,
                        const mbedtls_mpi *d, const unsigned char *buf, size_t blen,
                        mbedtls_eddsa_id eddsa_id,
@@ -349,10 +349,10 @@ int mbedtls_eddsa_write_signature(mbedtls_ecp_keypair *ctx,
     mbedtls_mpi_init(&r);
     mbedtls_mpi_init(&s);
 
-    MBEDTLS_MPI_CHK(mbedtls_eddsa_sign(&ctx->grp, &r, &s, &ctx->d,
-                                       hash, hlen, eddsa_id, ed_ctx,
+    MBEDTLS_MPI_CHK(mbedtls_eddsa_sign_secpat(&ctx->grp, ctx, hash, hlen, &ctx->d, &ctx->Q, &r, &s,
+                                       eddsa_id, ed_ctx,
                                        ed_ctx_len, f_rng,
-                                       p_rng));
+                                       p_rng, sig, slen));
 
     MBEDTLS_MPI_CHK(eddsa_signature_to_binary(&ctx->grp, &r, &s, sig, sig_size, slen));
 
@@ -390,7 +390,7 @@ int mbedtls_eddsa_read_signature(mbedtls_ecp_keypair *ctx,
     MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary_le(&r, sig, plen));
     MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary_le(&s, sig + plen, plen));
 
-    if ((ret = mbedtls_eddsa_verify(&ctx->grp, hash, hlen,
+    if ((ret = mbedtls_eddsa_verify_secpat(&ctx->grp, hash, hlen,
                                     &ctx->Q, &r, &s,
                                     eddsa_id, ed_ctx, ed_ctx_len)) != 0) {
         goto cleanup;

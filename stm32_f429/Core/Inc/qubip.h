@@ -23,16 +23,20 @@
 #define SCP03			  1 //1=ON, 0=OFF
 
 // OPTIONS: CERTS_PQ_44, CERTS_CLASSIC
-#define CERTS_PQ_44
+#define CERTS_CLASSIC
 
 #define SWAP_ORDER
 
 //#define BROKER_IP		"192.168.1.12"
 //#define BROKER_HOSTNAME "secpat"
 
-#define BROKER_IP		"broker.dm.qubip.eu"
-#define BROKER_HOSTNAME "broker.dm.qubip.eu"
-
+#ifdef CERTS_CLASSIC
+	#define BROKER_IP		"broker.smartfactory.it"
+	#define BROKER_HOSTNAME "broker.smartfactory.it"
+#else
+	#define BROKER_IP		"broker.dm.qubip.eu"
+	#define BROKER_HOSTNAME "broker.dm.qubip.eu"
+#endif
 // Force a CRL revocation check
 #define FORCE_CRL_CHECK 0
 
@@ -72,15 +76,9 @@ typedef enum {
 #define CRL_CERT_44_SIZE_BYTES 3955
 #define CRL_CERT_44_SPI_ADDR 	0x7000
 
-#ifdef CERTS_PQ_44
 
-	#define MQTT_PORT		"8884"
 
-#else
-
-	#define MQTT_PORT		"8883"
-
-#endif
+#define MQTT_PORT		"8884"
 
 typedef struct {
 	unsigned char *name;
