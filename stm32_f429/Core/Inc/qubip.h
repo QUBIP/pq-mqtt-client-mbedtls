@@ -61,6 +61,19 @@ extern unsigned long total_handshake_us;
 
 #define MQTT_PORT		"8884"
 
+#define DEVICE_NAME  "sfp10002"
+
+#if HW_IMPLEMENTATION == 1
+	#define HW_OR_SW "HW"
+#else
+	#define HW_OR_SW "SW"
+#endif
+
+#ifdef CERTS_CLASSIC
+	#define CLASSIC_OR_PQ "Classic"
+#else
+	#define CLASSIC_OR_PQ "Hybrid PQ"
+#endif
 // Does not launch FreeRTOS but runs custom test functions
 //#define TEST_SE
 

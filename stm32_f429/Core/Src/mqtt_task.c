@@ -126,6 +126,7 @@ void MqttClientPubTask(void const *argument) {
 	// - If the connection is successful, sends MQTT messages.
 
 	// Note: In case of IP address change, it is necessary to reconnect.
+	uint8_t error = 0;
 
 	for (;;) {
 		// Is link up?
@@ -174,20 +175,9 @@ void MqttClientPubTask(void const *argument) {
 
 		total_handshake_us = end_connect - start_connect;
 
-#if HW_IMPLEMENTATION == 1
-			char *hw_or_sw = "HW";
-#else
-			char *hw_or_sw = "SW";
-#endif
-
-#ifdef CERTS_CLASSIC
-			char *classic_or_pq = "Classic";
-#else
-			char *classic_or_pq = "Hybrid PQ";
-#endif
 
 		printf("#############################################\n");
-		printf("Benchmarks %s %s\n", classic_or_pq, hw_or_sw);
+		printf("Benchmarks %s %s\n", CLASSIC_OR_PQ, HW_OR_SW);
 		printf("Connected in %lu us\n", total_handshake_us);
 		printf("X25519 Gen Keys %lu us\n", x25519_keygen_us);
 		printf("X25519 KEM %lu us\n", x25519_kem_us);
@@ -199,8 +189,25 @@ void MqttClientPubTask(void const *argument) {
 		printf("MLDSA44 Sign %lu us\n", mldsa44_sign_us);
 		printf("#############################################\n");
 
-		uint8_t error = 0;
+		/*
+				//Publishing handshake timings
+				memset(str, 0, sizeof(str));
+				snprintf(str, sizeof(str), "{\n"
+						"  \"device\": \"%s\",\n"
+						"  \"x25519_genkeys\": %ul\n"
+						"}", DEVICE_NAME, x25519_keygen_us);
 
+				message.payload = (void*) str;
+				message.payloadlen = strlen(str);
+				printf("\nMQTT Publish Benchmarks:\n%s\n", str);
+				if (MQTTPublish(&mqttClient, "2025/benchmarks", &message)
+						!= MQTT_SUCCESS) {
+					MQTTCloseSession(&mqttClient);
+					mqtt_network_disconnect(&mqttNet);
+					error = 1;
+					continue;
+				}
+				 */
 		need_to_reconnect = 0;
 		do {
 			float temperature = 0.0;
@@ -210,22 +217,17 @@ void MqttClientPubTask(void const *argument) {
 			// Composing the message to be sent
 			memset(str, 0, sizeof(str));
 			// Composing the message to be sent
-#if HW_IMPLEMENTATION == 1
-			char *device_name = "STM32+SE";
-#else
-			char *device_name ="STM32";
 
-#endif
 			snprintf(str, sizeof(str), "{\n"
 					"  \"device\": \"%s\",\n"
 					"  \"temperature\": %f\n"
-					"}", device_name, temperature);
+					"}", DEVICE_NAME, temperature);
 
 			message.payload = (void*) str;
 			message.payloadlen = strlen(str);
 			printf("\nMQTT Publish:\n%s\n", str);
 
-			if (MQTTPublish(&mqttClient, "2025/temperature", &message)
+			if (MQTTPublish(&mqttClient, DEVICE_NAME, &message)
 					!= MQTT_SUCCESS) {
 				MQTTCloseSession(&mqttClient);
 				printf("Error publishing to MQTT topic!!\n");
@@ -249,7 +251,7 @@ void MqttClientPubTask(void const *argument) {
 			printf("\n\n");
 			print_memory_stats();
 
-			osDelay(10000);
+			osDelay(1000);
 			/* no error and i'm connected and i don't need to reconnect */
 			//} while (!error && mqttClient.isconnected && !need_to_reconnect);
 		} while (!error);
