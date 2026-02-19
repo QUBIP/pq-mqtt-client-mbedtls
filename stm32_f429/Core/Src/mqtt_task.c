@@ -175,7 +175,6 @@ void MqttClientPubTask(void const *argument) {
 
 		total_handshake_us = end_connect - start_connect;
 
-
 		printf("#############################################\n");
 		printf("Benchmarks %s %s\n", CLASSIC_OR_PQ, HW_OR_SW);
 		printf("Connected in %lu us\n", total_handshake_us);
@@ -189,25 +188,37 @@ void MqttClientPubTask(void const *argument) {
 		printf("MLDSA44 Sign %lu us\n", mldsa44_sign_us);
 		printf("#############################################\n");
 
-		/*
-				//Publishing handshake timings
-				memset(str, 0, sizeof(str));
-				snprintf(str, sizeof(str), "{\n"
-						"  \"device\": \"%s\",\n"
-						"  \"x25519_genkeys\": %ul\n"
-						"}", DEVICE_NAME, x25519_keygen_us);
+		char *benchmark_str = pvPortCalloc(500, sizeof(char));
 
-				message.payload = (void*) str;
-				message.payloadlen = strlen(str);
-				printf("\nMQTT Publish Benchmarks:\n%s\n", str);
-				if (MQTTPublish(&mqttClient, "2025/benchmarks", &message)
-						!= MQTT_SUCCESS) {
-					MQTTCloseSession(&mqttClient);
-					mqtt_network_disconnect(&mqttNet);
-					error = 1;
-					continue;
-				}
-				 */
+		//Publishing handshake timings
+		snprintf(benchmark_str, 500, "{\n"
+				"  \"device\": \"%s\",\n"
+				"  \"total_handshake\": %lu,\n"
+				"  \"X25519_gen_key\": %lu,\n"
+				"  \"X25519_kem\": %lu,\n"
+				"  \"MLKEM768_gen_key\": %lu,\n"
+				"  \"MLKEM768_kem\": %lu,\n"
+				"  \"Ed25519_verify\": %lu,\n"
+				"  \"Ed25519_sign\": %lu,\n"
+				"  \"MLDSA44_verify\": %lu,\n"
+				"  \"MLDSA44_sign\": %lu\n"
+				"}", DEVICE_NAME "+" HW_OR_SW, total_handshake_us,
+				x25519_keygen_us, x25519_kem_us, mlkem768_keygen_us,
+				mlkem768_kem_us, ed25519_verify_us, ed25519_sign_us,
+				mldsa44_verify_us, mldsa44_sign_us);
+
+		message.payload = (void*) benchmark_str;
+		message.payloadlen = strlen(benchmark_str);
+		printf("\nMQTT Publish Benchmarks:\n%s\n", benchmark_str);
+		if (MQTTPublish(&mqttClient, DEVICE_NAME "/benchmark", &message)
+				!= MQTT_SUCCESS) {
+			MQTTCloseSession(&mqttClient);
+			mqtt_network_disconnect(&mqttNet);
+			error = 1;
+			continue;
+		}
+
+		vPortFree(benchmark_str);
 		need_to_reconnect = 0;
 		do {
 			float temperature = 0.0;
@@ -221,7 +232,7 @@ void MqttClientPubTask(void const *argument) {
 			snprintf(str, sizeof(str), "{\n"
 					"  \"device\": \"%s\",\n"
 					"  \"temperature\": %f\n"
-					"}", DEVICE_NAME, temperature);
+					"}", DEVICE_NAME "+" HW_OR_SW, temperature);
 
 			message.payload = (void*) str;
 			message.payloadlen = strlen(str);
