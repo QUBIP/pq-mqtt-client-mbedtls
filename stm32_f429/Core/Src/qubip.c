@@ -244,10 +244,12 @@ int qubip_classic_x25519_key_agreement(const uint8_t *peer_key,
 	//printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #else
-	printf("SW x25519 SS GEN...");
-	x25519_ss_gen(&ssecret_x25519, &out_len, server_ecdh_key, 32,
-			private_key->x25519_sk, private_key->x25519_sk);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
+	start_time = micros();
+	x25519_ss_gen(&ssecret_x25519, &out_len, peer_key, 32,
+			key_buffer, key_buffer_size);
+	end_time = micros();
+	printf("SW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 #endif
 	/*
@@ -273,7 +275,7 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 
 #ifdef CERTS_CLASSIC
 	case ROOT_CA:
-		out_cert->name = (unsigned char*) "Root CA_CLA";
+		out_cert->name = (unsigned char*) "Root CA_CL";
 		out_cert->cert_len = ROOT_CA_CLASSIC_CERT_SIZE_BYTES;
 		out_cert->cert_spi_addr = ROOT_CA_CLASSIC_CERT_SPI_ADDR;
 		out_cert->key_len = 0;

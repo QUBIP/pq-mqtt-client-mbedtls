@@ -1713,8 +1713,18 @@ int mbedtls_ssl_tls13_generate_and_write_xxdh_key_exchange(
     psa_set_key_bits(&key_attributes, handshake->xxdh_psa_bits);
 
     /* Generate ECDH/FFDH private key. */
+    uint32_t end_time = 0;
+    uint32_t start_time = micros();
+    printf("##########################################################\n");
+    printf("Starting X25519_MLKEM768 key generation...\n");
+    start_time = micros();
     status = psa_generate_key(&key_attributes,
                               &handshake->xxdh_psa_privkey);
+	end_time = micros();
+	printf("X215519 GenKeys SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
+	printf("Classic x25519 Gen Key completed!\n");
+	printf("##########################################################\n\n");
     if (status != PSA_SUCCESS) {
         ret = PSA_TO_MBEDTLS_ERR(status);
         MBEDTLS_SSL_DEBUG_RET(1, "psa_generate_key", ret);
