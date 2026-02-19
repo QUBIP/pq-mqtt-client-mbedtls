@@ -23,7 +23,7 @@
 #define SCP03			  1 //1=ON, 0=OFF
 
 // OPTIONS: CERTS_PQ_44, CERTS_CLASSIC
-#define CERTS_CLASSIC
+#define CERTS_PQ_44
 
 #define SWAP_ORDER
 
@@ -39,6 +39,9 @@
 #endif
 // Force a CRL revocation check
 #define FORCE_CRL_CHECK 0
+
+
+#define MQTT_PORT		"8884"
 
 // Does not launch FreeRTOS but runs custom test functions
 //#define TEST_SE
@@ -78,7 +81,6 @@ typedef enum {
 
 
 
-#define MQTT_PORT		"8884"
 
 typedef struct {
 	unsigned char *name;
@@ -120,6 +122,11 @@ HybridKeyKEM* hybrid_key_gen();
 void hybrid_key_free(HybridKeyKEM*);
 //void print_result_valid(unsigned char* str, unsigned int fail);
 int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
+		size_t peer_key_length, const uint8_t *key_buffer,
+		size_t key_buffer_size, uint8_t *shared_secret,
+		size_t shared_secret_size, size_t *shared_secret_length);
+
+int qubip_classic_x25519_key_agreement(const uint8_t *peer_key,
 		size_t peer_key_length, const uint8_t *key_buffer,
 		size_t key_buffer_size, uint8_t *shared_secret,
 		size_t shared_secret_size, size_t *shared_secret_length);

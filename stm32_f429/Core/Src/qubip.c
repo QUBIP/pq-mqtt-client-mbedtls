@@ -194,6 +194,78 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	return result;
 }
 
+int qubip_classic_x25519_key_agreement(const uint8_t *peer_key,
+		size_t peer_key_length, const uint8_t *key_buffer,
+		size_t key_buffer_size, uint8_t *shared_secret,
+		size_t shared_secret_size, size_t *shared_secret_length) {
+
+	uint8_t *ssecret_x25519;
+	unsigned int out_len;
+	unsigned int result = 0;
+	uint32_t end_time = 0;
+	uint32_t start_time = micros();
+	unsigned int unused = 0;
+	printf("##########################################################\n");
+
+	printf("Starting X25519 key agreement...\n");
+
+	mbedtls_ecp_point p;
+	mbedtls_ecp_group grp;
+	mbedtls_ecp_point_init(&p);
+	mbedtls_ecp_group_init(&grp);
+	/*
+	 #ifdef SWAP_ORDER
+	 memcpy(server_ecdh_key, peer_key + peer_key_length - 32, 32);
+	 memcpy(server_kyber_ct, peer_key, peer_key_length - 32);
+	 #else
+	 memcpy(server_ecdh_key,peer_key,32);
+	 memcpy(server_kyber_ct,peer_key + 32, peer_key_length - 32);
+	 #endif //SWAP_ORDER
+	 */
+	result = mbedtls_ecp_group_load(&grp, MBEDTLS_ECP_DP_CURVE25519);
+	result = mbedtls_ecp_point_read_binary(&grp, &p, peer_key, 32);
+	if (result != 0) {
+		printf("Error loading mbedtls info...");
+		return -1;
+	}
+	mbedtls_mpi_write_binary_le(&p.private_X, peer_key, 32);
+
+#if HW_IMPLEMENTATION==1
+	//printf("HW x25519 SS GEN...\n");
+
+	start_time = micros();
+
+	x25519_ss_gen_hw(&ssecret_x25519, &out_len, peer_key, 32, key_buffer,
+			key_buffer_size, true, &unused, 0);
+	end_time = micros();
+	printf("HW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
+
+	//printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+#else
+	printf("SW x25519 SS GEN...");
+	x25519_ss_gen(&ssecret_x25519, &out_len, server_ecdh_key, 32,
+			private_key->x25519_sk, private_key->x25519_sk);
+	printf("\t\t\033[1;32m\u2705\033[0m\n");
+
+#endif
+	/*
+	 #ifdef SWAP_ORDER
+	 memcpy(shared_secret + 32, ssecret_x25519, 32);
+	 memcpy(shared_secret, ssecret_mlkem768, 32);
+	 #else
+	 memcpy(shared_secret,ssecret_x25519,32);
+	 memcpy(shared_secret + 32,ssecret_mlkem768,32);
+	 #endif // SWAP_ORDER
+	 */
+	memcpy(shared_secret, ssecret_x25519, 32);
+	//vPortFree(ssecret_x25519);
+	printf("X25519 key agreement completed!\n");
+	printf("##########################################################\n\n");
+
+	return result;
+}
 SPICert* make_certificate(CertType CERT_TYPE) {
 
 	SPICert *out_cert = (SPICert*) pvPortMalloc(sizeof(SPICert));
@@ -288,7 +360,7 @@ void save_cert_to_spi(SPICert *certificate) {
 }
 
 void load_cert_from_spi(SPICert *certificate, bool load_key, bool alloc_buffers) {
-	printf("#############################################\n");
+	printf("##################################################\n");
 
 	printf("Loading CERT \"%s\"\n%d bytes from SPI at address 0x%x\n",
 			certificate->name, certificate->cert_len,
@@ -298,17 +370,17 @@ void load_cert_from_spi(SPICert *certificate, bool load_key, bool alloc_buffers)
 		printf("Allocating buf for cert...");
 		certificate->cert_bytes = (unsigned char*) pvPortMalloc(
 				sizeof(unsigned char) * certificate->cert_len);
-		printf("\t\t\033[1;32m\u2705\033[0m\n");
+		printf("\t\t\t\033[1;32m\u2705\033[0m\n");
 
 	}
 	printf("Loading data from SPI Flash...");
 
 	recover_data_flash(certificate->cert_spi_addr, certificate->cert_len,
 			certificate->cert_bytes, 0);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
+	printf("\t\t\t\033[1;32m\u2705\033[0m\n");
 
 	printf("Certificate \"%s\" loaded!", certificate->name);
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
+	printf("\t\t\t\033[1;32m\u2705\033[0m\n");
 
 	if (load_key == true) {
 		printf("Loading KEY\n%d bytes from SPI at address 0x%x\n",
@@ -318,19 +390,19 @@ void load_cert_from_spi(SPICert *certificate, bool load_key, bool alloc_buffers)
 
 			certificate->key_bytes = (unsigned char*) pvPortMalloc(
 					sizeof(unsigned char) * certificate->key_len);
-			printf("\t\t\033[1;32m\u2705\033[0m\n");
+			printf("\t\t\t\033[1;32m\u2705\033[0m\n");
 
 		}
 		printf("Loading data from SPI Flash...");
 
 		recover_data_flash(certificate->key_spi_addr, certificate->key_len,
 				certificate->key_bytes, 0);
-		printf("\t\t\033[1;32m\u2705\033[0m\n");
+		printf("\t\t\t\033[1;32m\u2705\033[0m\n");
 
 		printf("Key loaded!");
-		printf("\t\t\t\t\033[1;32m\u2705\033[0m\n");
+		printf("\t\t\t\t\t\033[1;32m\u2705\033[0m\n");
 
 	}
-	printf("#############################################\n\n\n");
+	printf("##################################################\n\n\n");
 
 }

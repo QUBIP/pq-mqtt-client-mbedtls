@@ -1379,7 +1379,7 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	uint32_t end_time = 0;
 	uint32_t start_time = micros();
 
-	printf("#############################################\n");
+	printf("##########################################################\n");
 	printf("Starting MLDSA44 + EDDSA25519 signature...\n");
 
 	mbedtls_ed25519_mlds44_ctx *ctx = (mbedtls_ed25519_mlds44_ctx*) pk->pk_ctx;
@@ -1404,7 +1404,7 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize,
 			external_key, &unused, 0);
 	end_time = micros();
-	printf("HW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+	printf("HW EDDSA Signature - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
 			end_time - start_time);
 
 	//We're doing this because we want to move our data to a correctly aligned buffer as the original address was odd and triggered a Hard Fault on the cpu
@@ -1413,7 +1413,7 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key, out_sig_buf,
 			&mldsa_ssize, NULL, 0, external_key, &unused, 0);
 	end_time = micros();
-	printf("HW MLDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+	printf("HW MLDSA Signature - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
 			end_time - start_time);
 	memcpy(sig + SIG_PREFIX_SIZE, out_sig_buf, mldsa_ssize);
 	vPortFree(out_sig_buf);
@@ -1446,14 +1446,14 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 
 	memcpy(sig + SIG_PREFIX_SIZE + mldsa_ssize + 3, eddsa_sig, SIG_SIZE);
 
-	vPortFree(eddsa_sig);
+	//vPortFree(eddsa_sig);
 
 	*sig_len = mldsa_ssize + SIG_SIZE + 9 + 3;
 	vPortFree(msg_to_be_signed);
 
 
 	printf("MLDSA44 + EDDSA25519 signature completed!\n");
-	printf("#############################################\n\n");
+	printf("##########################################################\n\n");
 
 	return 0;
 }
@@ -1517,7 +1517,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	mbedtls_sha512(hash, hash_len, new_msg + 13, 0);
 	memcpy(new_msg, oid_der, 13);
 
-	printf("#############################################\n");
+	printf("##########################################################\n");
 	printf("Starting MLDSA44 + EDDSA25519 verify...\n");
 
 #if HW_IMPLEMENTATION==1
@@ -1532,7 +1532,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	end_time = micros();
 
 	vPortFree(sig_buf);
-	printf("HW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+	printf("HW EDDSA Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
 			end_time - start_time);
 
 	//printf("Result: %d\n", result);
@@ -1546,7 +1546,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	mldsa44_verify_hw(new_msg, 77, ctx->mldsa_pub_key, sig_buf, 2420, NULL, 0,
 			&result, 0);
 	end_time = micros();
-	printf("HW MLDSA44 Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+	printf("HW MLDSA44 Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
 			end_time - start_time);
 	vPortFree(sig_buf);
 
@@ -1572,7 +1572,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 #endif
 
 	printf("MLDSA44 + EDDSA25519 verify completed!\n");
-	printf("#############################################\n\n");
+	printf("##########################################################\n\n");
 
 	vPortFree(new_msg);
 	return result;

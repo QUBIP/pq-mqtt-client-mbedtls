@@ -202,7 +202,7 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 		//	const unsigned char* sig, const unsigned int sig_len,
 		//  unsigned int* result);
 
-		printf("#############################################\n");
+		printf("##########################################################\n");
 		printf("Starting EDDSA25519 signature...\n");
 
 		uint32_t end_time = 0;
@@ -249,7 +249,7 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 #endif
 
 		printf("EDDSA25519 signature completed!\n");
-		printf("#############################################\n\n");
+		printf("##########################################################\n\n");
 
 
 		vPortFree(priv_key);
@@ -301,7 +301,7 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	//	const unsigned char* sig, const unsigned int sig_len,
 	//  unsigned int* result);
 
-	printf("#############################################\n");
+	printf("##########################################################\n");
 	printf("Starting EDDSA25519 verify...\n");
 	uint32_t end_time = 0;
 	uint32_t start_time = micros();
@@ -343,7 +343,7 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 				end_time - start_time);
 #endif
 	printf("EDDSA25519 verify completed!\n");
-	printf("#############################################\n\n");
+	printf("##########################################################\n\n");
 	free(sig);
 	free(pub_key);
 	return ret;

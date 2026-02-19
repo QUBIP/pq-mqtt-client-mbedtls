@@ -72,6 +72,7 @@
 #include "mbedtls/sha512.h"
 #include "mbedtls/psa_util.h"
 #include "mbedtls/threading.h"
+#include "qubip.h"
 
 #if defined(MBEDTLS_PSA_BUILTIN_ALG_HKDF) ||          \
     defined(MBEDTLS_PSA_BUILTIN_ALG_HKDF_EXTRACT) ||  \
@@ -7474,12 +7475,21 @@ psa_status_t psa_key_agreement_raw_builtin(const psa_key_attributes_t *attribute
     switch (alg) {
 #if defined(MBEDTLS_PSA_BUILTIN_ALG_ECDH)
         case PSA_ALG_ECDH:
+        	return qubip_classic_x25519_key_agreement(peer_key,
+                            peer_key_length,
+                            key_buffer,
+                            key_buffer_size,
+                            shared_secret,
+                            shared_secret_size,
+                            shared_secret_length);
+        	/*
             return mbedtls_psa_key_agreement_ecdh(attributes, key_buffer,
                                                   key_buffer_size, alg,
                                                   peer_key, peer_key_length,
                                                   shared_secret,
                                                   shared_secret_size,
-                                                  shared_secret_length);
+                                                 shared_secret_length);
+                                                 */
 #endif /* MBEDTLS_PSA_BUILTIN_ALG_ECDH */
 
 #if defined(MBEDTLS_PSA_BUILTIN_ALG_FFDH)

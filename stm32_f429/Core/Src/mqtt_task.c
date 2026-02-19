@@ -170,8 +170,7 @@ void MqttClientPubTask(void const *argument) {
 		}
 		uint32_t end_connect = micros();
 
-		printf("Connected in %fs\n",
-				(double) ((end_connect - start_connect) / 1000 / 1000));
+		printf("Connected in %lu us\n", (end_connect - start_connect));
 
 		uint8_t error = 0;
 
@@ -283,7 +282,7 @@ int MqttConnectAndSubscribe(void) {
 //data.password.cstring = "password";
 	data.keepAliveInterval = 60;
 	data.cleansession = 1;
-	printf("\n#############################################\n");
+	printf("\n##########################################################\n");
 	printf("Connecting to MQTTs broker \n%s...", BROKER_IP);
 	ret = MQTTConnect(&mqttClient, &data);
 	if (ret != MQTT_SUCCESS) {
@@ -315,7 +314,7 @@ int MqttConnectAndSubscribe(void) {
 		return ret;
 	}
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
-	printf("#############################################\n\n");
+	printf("##########################################################\n\n");
 
 //MQTT_PUB_TASK_DEBUG_LOG("[MQTT_PUB_TASK] INFO: MQTT_ConnectBroker O.K.\n");
 	return MQTT_SUCCESS;
