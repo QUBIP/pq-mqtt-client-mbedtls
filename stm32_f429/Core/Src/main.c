@@ -38,6 +38,7 @@
 #include "test_func.h"
 #include "demo.h"
 #include "tim_us.h"
+#include "app_sensor.h"
 
 /* USER CODE END Includes */
 
@@ -242,7 +243,7 @@ const char* reset_cause_get_name(reset_cause_t reset_cause) {
 
 	return reset_cause_name;
 }
-
+/*
 void ADC1_EnableClock(void) {
 	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
 }
@@ -304,6 +305,8 @@ float ADC_ConvertToTemperature(uint16_t adc) {
 float getInternalTemp() {
 	return ADC_ConvertToTemperature(ADC1_ReadRaw());
 }
+
+*/
 /* USER CODE END 0 */
 
 /**
@@ -337,12 +340,13 @@ int main(void) {
 	MX_RNG_Init();
 	//MX_IWDG_Init();
 	MX_I2C1_Init();
-
+/*
 	ADC1_EnableClock();
 	ADC_EnableTempSensor();
 	ADC1_Init();
+*/
 	MX_TIM_US_Init();
-
+	Sensor_Init();
 	/* USER CODE BEGIN 2 */
 	DEBUG_LOG("\nStarting...\n\n");
 	// Print the cause of the reboot

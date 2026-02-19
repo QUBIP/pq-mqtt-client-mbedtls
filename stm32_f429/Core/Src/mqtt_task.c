@@ -21,6 +21,7 @@
 #include "iperf_server.h"
 #include "demo.h"
 #include "tim_us.h"
+#include "app_sensor.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -177,7 +178,7 @@ void MqttClientPubTask(void const *argument) {
 		need_to_reconnect = 0;
 		do {
 			float temperature = 0.0;
-			temperature = getInternalTemp();
+			temperature = Sensor_Read_Temperature();
 
 			//printf("[MQTT_PUB_TASK] INFO: Preparing to send mqtt message\r\n");
 			// Composing the message to be sent
