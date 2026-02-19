@@ -168,7 +168,6 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 	//printf("Result: %d\n", result);
 
-
 #endif
 
 #if HW_IMPLEMENTATION==1
@@ -263,11 +262,12 @@ int qubip_classic_x25519_key_agreement(const uint8_t *peer_key,
 
 #else
 	start_time = micros();
-	x25519_ss_gen(&ssecret_x25519, &out_len, peer_key, 32,
-			key_buffer, key_buffer_size);
+	x25519_ss_gen(&ssecret_x25519, &out_len, peer_key, 32, key_buffer,
+			key_buffer_size);
 	end_time = micros();
+	x25519_kem_us = end_time - start_time;
 	printf("SW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			x25519_kem_us);
 
 #endif
 	/*

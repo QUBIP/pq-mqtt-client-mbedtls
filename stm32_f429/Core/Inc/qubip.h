@@ -61,7 +61,7 @@ extern unsigned long total_handshake_us;
 
 #define MQTT_PORT		"8884"
 
-#define DEVICE_NAME  "sfp10002"
+#define DEVICE_NAME  "sfc10002"
 
 #if HW_IMPLEMENTATION == 1
 	#define HW_OR_SW "HW"
