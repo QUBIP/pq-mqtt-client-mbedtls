@@ -1363,8 +1363,6 @@ static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 	return 0;
 }
 
-
-
 static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
 		unsigned char *sig, size_t sig_size, size_t *sig_len,
@@ -1404,8 +1402,9 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 			ctx->ed_pub_key, ctx->ed_pubsize, &eddsa_sig, &ed_ssize,
 			external_key, &unused, 0);
 	end_time = micros();
+	ed25519_sign_us = end_time - start_time;
 	printf("HW EDDSA Signature - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			ed25519_sign_us);
 
 	//We're doing this because we want to move our data to a correctly aligned buffer as the original address was odd and triggered a Hard Fault on the cpu
 	unsigned char *out_sig_buf = (unsigned char*) pvPortMalloc(4000);
@@ -1413,8 +1412,9 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	mldsa44_sign_hw(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key, out_sig_buf,
 			&mldsa_ssize, NULL, 0, external_key, &unused, 0);
 	end_time = micros();
+	mldsa44_sign_us = end_time - start_time;
 	printf("HW MLDSA Signature - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			mldsa44_sign_us);
 	memcpy(sig + SIG_PREFIX_SIZE, out_sig_buf, mldsa_ssize);
 	vPortFree(out_sig_buf);
 
@@ -1530,10 +1530,10 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize, sig_buf,
 			64, &result, external_key, &unused, 0);
 	end_time = micros();
-
+	ed25519_verify_us = end_time - start_time;
 	vPortFree(sig_buf);
 	printf("HW EDDSA Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			ed25519_verify_us);
 
 	//printf("Result: %d\n", result);
 	result = !result;
@@ -1546,8 +1546,9 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	mldsa44_verify_hw(new_msg, 77, ctx->mldsa_pub_key, sig_buf, 2420, NULL, 0,
 			&result, 0);
 	end_time = micros();
+	mldsa44_verify_us = end_time - start_time;
 	printf("HW MLDSA44 Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			mldsa44_verify_us);
 	vPortFree(sig_buf);
 
 #else

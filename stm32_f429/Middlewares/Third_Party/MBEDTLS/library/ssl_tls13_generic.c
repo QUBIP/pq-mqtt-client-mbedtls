@@ -26,6 +26,7 @@
 
 #include "psa/crypto.h"
 #include "psa_util_internal.h"
+#include "qubip.h"
 
 #if defined(MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_SOME_EPHEMERAL_ENABLED)
 /* Define a local translating function to save code size by not using too many
@@ -1721,8 +1722,9 @@ int mbedtls_ssl_tls13_generate_and_write_xxdh_key_exchange(
     status = psa_generate_key(&key_attributes,
                               &handshake->xxdh_psa_privkey);
 	end_time = micros();
+	x25519_keygen_us = end_time - start_time;
 	printf("X215519 GenKeys SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			x25519_keygen_us);
 	printf("Classic x25519 Gen Key completed!\n");
 	printf("##########################################################\n\n");
     if (status != PSA_SUCCESS) {

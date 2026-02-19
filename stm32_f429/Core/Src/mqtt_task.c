@@ -22,6 +22,7 @@
 #include "demo.h"
 #include "tim_us.h"
 #include "app_sensor.h"
+#include "qubip.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -171,7 +172,32 @@ void MqttClientPubTask(void const *argument) {
 		}
 		uint32_t end_connect = micros();
 
-		printf("Connected in %lu us\n", (end_connect - start_connect));
+		total_handshake_us = end_connect - start_connect;
+
+#if HW_IMPLEMENTATION == 1
+			char *hw_or_sw = "HW";
+#else
+			char *hw_or_sw = "SW";
+#endif
+
+#ifdef CERTS_CLASSIC
+			char *classic_or_pq = "Classic";
+#else
+			char *classic_or_pq = "Hybrid PQ";
+#endif
+
+		printf("#############################################\n");
+		printf("Benchmarks %s %s\n", classic_or_pq, hw_or_sw);
+		printf("Connected in %lu us\n", total_handshake_us);
+		printf("X25519 Gen Keys %lu us\n", x25519_keygen_us);
+		printf("X25519 KEM %lu us\n", x25519_kem_us);
+		printf("MLKEM768 Gen Keys %lu us\n", mlkem768_keygen_us);
+		printf("MLKEM768 KEM %lu us\n", mlkem768_kem_us);
+		printf("Ed255519 Verify %lu us\n", ed25519_verify_us);
+		printf("Ed255519 Sign %lu us\n", ed25519_sign_us);
+		printf("MLDSA44 Verify %lu us\n", mldsa44_verify_us);
+		printf("MLDSA44 Sign %lu us\n", mldsa44_sign_us);
+		printf("#############################################\n");
 
 		uint8_t error = 0;
 

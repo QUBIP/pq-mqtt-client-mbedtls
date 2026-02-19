@@ -11,6 +11,21 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+extern unsigned long x25519_keygen_us;
+extern unsigned long x25519_kem_us;
+
+extern unsigned long mlkem768_keygen_us;
+extern unsigned long mlkem768_kem_us;
+
+extern unsigned long ed25519_verify_us;
+extern unsigned long ed25519_sign_us;
+
+extern unsigned long mldsa44_verify_us;
+extern unsigned long mldsa44_sign_us;
+
+extern unsigned long total_handshake_us;
+
+
 // Public key size
 #define KYBER768_PK_SIZE 1184
 // Secret key Size
@@ -19,11 +34,14 @@
 #define X25519_PK_SIZE 32
 #define X25519_SK_SIZE 32
 
-#define HW_IMPLEMENTATION 1 //1=ON, 0=OFF
+// This branch only works with the HW for the PQ and CLASSIC
+// and the SW implementation for the CLassic
+// The SW Implementation for PQ is in the branch SW_ONLY
+#define HW_IMPLEMENTATION 0 //1=ON, 0=OFF
 #define SCP03			  1 //1=ON, 0=OFF
 
 // OPTIONS: CERTS_PQ_44, CERTS_CLASSIC
-#define CERTS_PQ_44
+#define CERTS_CLASSIC
 
 #define SWAP_ORDER
 

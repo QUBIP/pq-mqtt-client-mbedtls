@@ -11,6 +11,20 @@
 #include "crypto_api_sw.h"
 #include <stdlib.h>
 
+unsigned long x25519_keygen_us = 0;
+unsigned long x25519_kem_us = 0;
+
+unsigned long mlkem768_keygen_us = 0;
+unsigned long mlkem768_kem_us = 0;
+
+unsigned long ed25519_verify_us = 0;
+unsigned long ed25519_sign_us = 0;
+
+unsigned long mldsa44_verify_us = 0;
+unsigned long mldsa44_sign_us = 0;
+
+unsigned long total_handshake_us = 0;
+
 extern char mbedtls_root_certificate;
 extern char client_cert;
 extern char client_key;
@@ -49,17 +63,18 @@ HybridKeyKEM* hybrid_key_gen() {
 
 	mlkem_768_gen_keys_hw(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk,
 	false, &mlkem_key_slot, 0);
-
 	end_time = micros();
+	mlkem768_keygen_us = end_time - start_time;
 	printf("MLKEM768 GenKeys HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			mlkem768_keygen_us);
 
 	start_time = micros();
 	x25519_genkeys_hw(&out_keys->x25519_sk, &out_keys->x25519_pk, &pri_len,
 			&pub_len, false, &x25519_key_slot, 0);
 	end_time = micros();
+	x25519_keygen_us = end_time - start_time;
 	printf("X215519 GenKeys HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			x25519_keygen_us);
 
 	//printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -136,8 +151,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 			ssecret_mlkem768, &result, true, &private_key->mlkem_768_key_slot,
 			0);
 	end_time = micros();
+	mlkem768_kem_us = end_time - start_time;
 	printf("MLKEM768 Decapsulate HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			mlkem768_kem_us);
 
 	//HW returns 3 (?!?!) on success
 	result = (result == 3 ? 0 : -1);
@@ -164,8 +180,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 			private_key->x25519_sk, private_key->x25519_sk_size, true,
 			&private_key->x25519_key_slot, 0);
 	end_time = micros();
+	x25519_kem_us = end_time - start_time;
 	printf("HW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			x25519_kem_us);
 
 	//printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -238,8 +255,9 @@ int qubip_classic_x25519_key_agreement(const uint8_t *peer_key,
 	x25519_ss_gen_hw(&ssecret_x25519, &out_len, peer_key, 32, key_buffer,
 			key_buffer_size, true, &unused, 0);
 	end_time = micros();
+	x25519_kem_us = end_time - start_time;
 	printf("HW x25519 SS GEN HW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			x25519_kem_us);
 
 	//printf("\t\t\033[1;32m\u2705\033[0m\n");
 
@@ -275,7 +293,7 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 
 #ifdef CERTS_CLASSIC
 	case ROOT_CA:
-		out_cert->name = (unsigned char*) "Root CA_CL";
+		out_cert->name = (unsigned char*) "Root CL";
 		out_cert->cert_len = ROOT_CA_CLASSIC_CERT_SIZE_BYTES;
 		out_cert->cert_spi_addr = ROOT_CA_CLASSIC_CERT_SPI_ADDR;
 		out_cert->key_len = 0;
@@ -284,7 +302,7 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 		break;
 
 	case CLIENT:
-		out_cert->name = (unsigned char*) "ClientCLA";
+		out_cert->name = (unsigned char*) "ClientCL";
 		out_cert->cert_len = CLIENT_CERT_CLASSIC_SIZE_BYTES;
 		out_cert->cert_spi_addr = CLIENT_CERT_CLASSIC_SPI_ADDR;
 		out_cert->key_len = CLIENT_KEY_CLASSIC_SIZE_BYTES;
@@ -293,7 +311,7 @@ SPICert* make_certificate(CertType CERT_TYPE) {
 		break;
 
 	case CRL:
-		out_cert->name = (unsigned char*) "CRL_CLA";
+		out_cert->name = (unsigned char*) "CRL CL";
 		out_cert->cert_len = CRL_CERT_CLASSIC_SIZE_BYTES;
 		out_cert->cert_spi_addr = CRL_CERT_CLASSIC_SPI_ADDR;
 		out_cert->key_len = 0;

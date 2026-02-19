@@ -79,7 +79,7 @@ static int mbedtls_eddsa_put_dom2_ctx(int flag, const unsigned char *ctx,
  * For PREHASH operation, the message is already previously hashed.
  * Obviously, for PREHASH, we skip hash message step.
  */
-int mbedtls_eddsa_check(mbedtls_ecp_group *grp,
+int mbedtls_eddsa(mbedtls_ecp_group *grp,
                        mbedtls_mpi *r, mbedtls_mpi *s,
                        const mbedtls_mpi *d, const unsigned char *buf, size_t blen,
                        mbedtls_eddsa_id eddsa_id,

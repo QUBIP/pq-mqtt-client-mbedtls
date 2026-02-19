@@ -74,8 +74,6 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 		return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
 	}
 
-
-
 #ifdef MBEDTLS_ECP_DP_ED25519_ENABLED
 	if (grp->id == MBEDTLS_ECP_DP_ED25519 && eddsa_id != MBEDTLS_EDDSA_PURE
 			&& eddsa_id != MBEDTLS_EDDSA_CTX
@@ -212,8 +210,8 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 
 		uint8_t unused = 0;
 		bool external_key = true;
-		mbedtls_eddsa_check(grp, r, s, d, buf, blen, eddsa_id, ed_ctx, ed_ctx_len,
-					f_rng, p_rng);
+		mbedtls_eddsa(grp, r, s, d, buf, blen, eddsa_id, ed_ctx,
+				ed_ctx_len, f_rng, p_rng);
 		/*
 		 void eddsa25519_sign_hw(unsigned char *msg, unsigned int msg_len,
 		 unsigned char *pri_key, unsigned int pri_len, unsigned char *pub_key,
@@ -227,30 +225,32 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 		eddsa25519_sign_hw(sha_buf, 64, priv_key, 32, pub_key, 32, &out_sig_buf,
 				out_sig_size, external_key, &unused, 0);
 		end_time = micros();
+		ed25519_sign_us = end_time - start_time;
 		printf("HW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-				end_time - start_time);
+				ed25519_sign_us);
 
 		memcpy(out_sig, out_sig_buf, 64);
 		vPortFree(out_sig_buf);
 
 #else
 
-			/*
-			 *void EDDSA25519_SIGN(const unsigned char* msg, const unsigned int msg_len,
-			 *void const unsigned char* pri_key, const unsigned int pri_len,
-			 *void unsigned char** sig, unsigned int* sig_len)
-			 */
-			start_time = micros();
-			mbedtls_eddsa_check(grp, r, s, d, buf, blen, eddsa_id, ed_ctx, ed_ctx_len,
+		/*
+		 *void EDDSA25519_SIGN(const unsigned char* msg, const unsigned int msg_len,
+		 *void const unsigned char* pri_key, const unsigned int pri_len,
+		 *void unsigned char** sig, unsigned int* sig_len)
+		 */
+		start_time = micros();
+		mbedtls_eddsa(grp, r, s, d, buf, blen, eddsa_id, ed_ctx, ed_ctx_len,
 				f_rng, p_rng);
-			end_time = micros();
-			printf("SW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-						end_time - start_time);
+		end_time = micros();
+		ed25519_sign_us = end_time - start_time;
+		printf("SW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+				ed25519_sign_us);
 #endif
 
 		printf("EDDSA25519 signature completed!\n");
-		printf("##########################################################\n\n");
-
+		printf(
+				"##########################################################\n\n");
 
 		vPortFree(priv_key);
 		vPortFree(pub_key);
@@ -323,8 +323,9 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	eddsa25519_verify_hw(buf, blen, pub_key, 32, sig, sig_len, &ret,
 			external_key, &unused, 0);
 	end_time = micros();
+	ed25519_verify_us = end_time - start_time;
 	printf("HW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+			ed25519_verify_us);
 
 	ret = !ret;
 #else
@@ -339,8 +340,9 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	start_time = micros();
 	EDDSA25519_VERIFY(buf, blen, pub_key, 32, sig, sig_len, &ret);
 	end_time = micros();
+	ed25519_verify_us = end_time - start_time;
 	printf("SW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-				end_time - start_time);
+			ed25519_verify_us);
 #endif
 	printf("EDDSA25519 verify completed!\n");
 	printf("##########################################################\n\n");
