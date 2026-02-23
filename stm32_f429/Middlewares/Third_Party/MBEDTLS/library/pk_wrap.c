@@ -1530,7 +1530,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	eddsa25519_verify_hw(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize, sig_buf,
 			64, &result, external_key, &unused, 0);
 	end_time = micros();
-	ed25519_verify_us = end_time - start_time;
+	ed25519_verify_us += (end_time - start_time);
 	vPortFree(sig_buf);
 	printf("HW EDDSA Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
 			ed25519_verify_us);
@@ -1546,7 +1546,7 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	mldsa44_verify_hw(new_msg, 77, ctx->mldsa_pub_key, sig_buf, 2420, NULL, 0,
 			&result, 0);
 	end_time = micros();
-	mldsa44_verify_us = end_time - start_time;
+	mldsa44_verify_us += (end_time - start_time);
 	printf("HW MLDSA44 Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
 			mldsa44_verify_us);
 	vPortFree(sig_buf);
@@ -1557,6 +1557,8 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	eddsa25519_verify(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
 			sig + sig_len - 64, 64, &result);
 	end_time = micros();
+	ed25519_verify_us += (end_time - start_time);
+
 	printf("SW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
 				end_time - start_time);
 
@@ -1564,6 +1566,8 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	mldsa44_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 2420, &result,
 		NULL, 0);
 	end_time = micros();
+	mldsa44_verify_us += (end_time - start_time);
+
 	printf("SW MLDSA44 Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
 				end_time - start_time);
 

@@ -323,7 +323,7 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	eddsa25519_verify_hw(buf, blen, pub_key, 32, sig, sig_len, &ret,
 			external_key, &unused, 0);
 	end_time = micros();
-	ed25519_verify_us = end_time - start_time;
+	ed25519_verify_us += (end_time - start_time);
 	printf("HW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
 			ed25519_verify_us);
 
@@ -340,7 +340,7 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	start_time = micros();
 	EDDSA25519_VERIFY(buf, blen, pub_key, 32, sig, sig_len, &ret);
 	end_time = micros();
-	ed25519_verify_us = end_time - start_time;
+	ed25519_verify_us += (end_time - start_time);
 	printf("SW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
 			ed25519_verify_us);
 #endif

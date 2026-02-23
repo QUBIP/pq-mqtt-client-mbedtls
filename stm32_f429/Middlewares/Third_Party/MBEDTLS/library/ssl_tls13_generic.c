@@ -27,6 +27,7 @@
 #include "psa/crypto.h"
 #include "psa_util_internal.h"
 #include "qubip.h"
+#include "tim_us.h"
 
 #if defined(MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_SOME_EPHEMERAL_ENABLED)
 /* Define a local translating function to save code size by not using too many
@@ -826,8 +827,10 @@ int mbedtls_ssl_tls13_process_certificate(mbedtls_ssl_context *ssl)
                              &buf, &buf_len));
 
     /* Parse the certificate chain sent by the peer. */
+    uint32_t start = micros();
     MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_tls13_parse_certificate(ssl, buf,
                                                              buf + buf_len));
+    server_crt_parse_us = micros() - start;
     /* Validate the certificate chain and set the verification results. */
     MBEDTLS_SSL_PROC_CHK(ssl_tls13_validate_certificate(ssl));
 

@@ -23,6 +23,8 @@ extern unsigned long ed25519_sign_us;
 extern unsigned long mldsa44_verify_us;
 extern unsigned long mldsa44_sign_us;
 
+extern unsigned long server_crt_parse_us;
+
 extern unsigned long total_handshake_us;
 
 
@@ -35,13 +37,13 @@ extern unsigned long total_handshake_us;
 #define X25519_SK_SIZE 32
 
 // This branch only works with the HW for the PQ and CLASSIC
-// and the SW implementation for the CLassic
+// and the SW implementation for the Classic
 // The SW Implementation for PQ is in the branch SW_ONLY
-#define HW_IMPLEMENTATION 0 //1=ON, 0=OFF
+#define HW_IMPLEMENTATION 1 //1=ON, 0=OFF
 #define SCP03			  1 //1=ON, 0=OFF
 
 // OPTIONS: CERTS_PQ_44, CERTS_CLASSIC
-#define CERTS_CLASSIC
+#define CERTS_PQ_44
 
 #define SWAP_ORDER
 
@@ -57,7 +59,6 @@ extern unsigned long total_handshake_us;
 #endif
 // Force a CRL revocation check
 #define FORCE_CRL_CHECK 0
-
 
 #define MQTT_PORT		"8884"
 

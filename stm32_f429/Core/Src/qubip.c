@@ -23,6 +23,8 @@ unsigned long ed25519_sign_us = 0;
 unsigned long mldsa44_verify_us = 0;
 unsigned long mldsa44_sign_us = 0;
 
+unsigned long server_crt_parse_us = 0;
+
 unsigned long total_handshake_us = 0;
 
 extern char mbedtls_root_certificate;

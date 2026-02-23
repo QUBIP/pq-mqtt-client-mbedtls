@@ -178,6 +178,7 @@ void MqttClientPubTask(void const *argument) {
 		printf("#############################################\n");
 		printf("Benchmarks %s %s\n", CLASSIC_OR_PQ, HW_OR_SW);
 		printf("Connected in %lu us\n", total_handshake_us);
+		printf("Server Cert parsing %lu us\n", server_crt_parse_us);
 		printf("X25519 Gen Keys %lu us\n", x25519_keygen_us);
 		printf("X25519 KEM %lu us\n", x25519_kem_us);
 		printf("MLKEM768 Gen Keys %lu us\n", mlkem768_keygen_us);
@@ -201,11 +202,12 @@ void MqttClientPubTask(void const *argument) {
 				"  \"Ed25519_verify\": %lu,\n"
 				"  \"Ed25519_sign\": %lu,\n"
 				"  \"MLDSA44_verify\": %lu,\n"
-				"  \"MLDSA44_sign\": %lu\n"
+				"  \"MLDSA44_sign\": %lu,\n"
+				"  \"server_crt_parsing\": %lu\n"
 				"}", DEVICE_NAME "+" HW_OR_SW, total_handshake_us,
 				x25519_keygen_us, x25519_kem_us, mlkem768_keygen_us,
 				mlkem768_kem_us, ed25519_verify_us, ed25519_sign_us,
-				mldsa44_verify_us, mldsa44_sign_us);
+				mldsa44_verify_us, mldsa44_sign_us, server_crt_parse_us);
 
 		message.payload = (void*) benchmark_str;
 		message.payloadlen = strlen(benchmark_str);
