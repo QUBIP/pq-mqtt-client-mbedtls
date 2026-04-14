@@ -664,6 +664,71 @@ const char client_44_key[] = "-----BEGIN PRIVATE KEY-----\r\n"
 
 const size_t client_key_44_len = sizeof(client_44_key);
 
+const char mbedtls_crl[] =
+"-----BEGIN X509 CRL-----\r\n"
+"MIILETCCATkCAQEwDQYLYIZIAYb6a1AIAQMwRzELMAkGA1UEBhMCRVUxDjAMBgNV\r\n"
+"BAoMBVFVQklQMSgwJgYDVQQDDB9RVUJJUCBNQ1UgQ2VydGlmaWNhdGUgQXV0aG9y\r\n"
+"aXR5Fw0yNTExMTgxMzMzMjVaFw0yNTExMTkxMzMzMjVaMDUwMwIUEIln1I4CE3Bz\r\n"
+"0Nm3GET8UT9/0EUXDTI1MTExODEzMzAyNFowDDAKBgNVHRUEAwoBAaCBhjCBgzAf\r\n"
+"BgNVHSMEGDAWgBRgbQTTcyXwsMSOiELzMFXlyRHGRzBUBggrBgEFBQcBAQRIMEYw\r\n"
+"RAYIKwYBBQUHMAKGOGh0dHBzOi8vY2EuYWxsLnF1YmlwLmV1L3BraS00NC9xdWJp\r\n"
+"cC1yb290LWNhL2NlcnRpZmljYXRlMAoGA1UdFAQDAgEDMA0GC2CGSAGG+mtQCAED\r\n"
+"A4IJwQAwggm8A4IJdQAJlxrBWV4mUm7PIT1KuWOF792tsZVyVONpKNdTI7DEEK0M\r\n"
+"Aii+GFDjnUFh+H91grMC7dKnGRZVMM+IkR4g3U8IQuTNsCS40tfTVqjSbxRbwr5x\r\n"
+"MdA3NItTR3cViGBoVWMnNbh4fkYbLBK1FF/wvp6S8e73edEfj9gI7iHqmYXCgYNk\r\n"
+"bjSeCGyNfg0UbRdV6U4WR91lLgZYfc4su6hbRZzXmKvibG3WA1zVVESoHS5UQsFo\r\n"
+"Nbi9tdjEc4H6Q5KZ7bafvT+IHnvAnyMqJMgev1zIh52uFfUDt5qxa+6lEj1EIkQQ\r\n"
+"aNro5gTiMHfNVYTXF+w9im0ufp0KV1G2DVruvILfRI5JRrFvMAVz98DIlQDI4WT3\r\n"
+"8SXsrpzO7SP3GooLCLyW2Br3CsdbNHKJrNA7PGQCkJ7wZRTCRQQojxHJAHBo4ghS\r\n"
+"uWPHLT7CoUQ2g8wVy5QO837HdUVI5VJIh8xNQpRz2vG0bht17fzrps6kaQWEYToQ\r\n"
+"Q33hlOqrs1IDz3HJ4mzMCgdYuVtBzyWJRRGZZXkYIMq+qiEAcGYHypZ5mrsWnfR8\r\n"
+"q1SVZ6Iuj4eBmk5Bj7JJUMKNBzDwLdWB4/SNGl6qndpqPCd88zQuBPZvDU2hop2V\r\n"
+"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\r\n"
+"mOCwtA8=\r\n"
+"-----END X509 CRL-----\r\n";
+const size_t mbedtls_crl_len = sizeof(mbedtls_crl);
+
 /* CLASSIC CERTIFICATES */
 
 const char root_certificate_classic[] = "-----BEGIN CERTIFICATE-----\r\n"
@@ -697,6 +762,15 @@ const char client_key_classic[] = "-----BEGIN PRIVATE KEY-----\r\n"
 
 const size_t client_key_classic_len = sizeof(client_key_classic);
 
+const char crl_classic[] = "-----BEGIN X509 CRL-----\r\n" \
+"MIHTMIGGAgEBMAUGAytlcDAiMSAwHgYDVQQDDBdTTUFSVEZBQ1RPUlktQ0xBU1NJ\r\n" \
+"Qy1DQRcNMjYwMzI2MTMxOTI1WhcNMjYwNDI1MTMxOTI1WjAnMCUCFHhPjzpL/umL\r\n" \
+"TYtxLSrRvuM8lj8PFw0yNjAzMjYxMzE5MjVaoA8wDTALBgNVHRQEBAICEAAwBQYD\r\n" \
+"K2VwA0EAetbOtCmrDJu0sw1jpgjXsmhxIuVTe6jTEUmIwpnyJjJvY0sA38M+qK5t\r\n" \
+"ff/b57Af37BPzcmWhkDleKdBAOclAQ==\r\n" \
+"-----END X509 CRL-----\r\n";
+const size_t crl_classic_len = sizeof(crl_classic);
+
 void write_certificates_to_spi() {
 	printf("Writing CLASSIC and MLDSA44 Certificates to SPI FLASH\n");
 
@@ -720,6 +794,11 @@ void write_certificates_to_spi() {
 			.key_len = 0, .name = "CA_MLDSA44" };
 	save_cert_to_spi(&root44);
 
+
+	SPICert crl = { .cert_bytes = mbedtls_crl, .cert_len = mbedtls_crl_len,
+			.cert_spi_addr = CRL_CERT_44_SPI_ADDR, .key_len = 0, .name = "CRL_MLDSA44" };
+	save_cert_to_spi(&crl);
+
 	printf(
 			"CLIENT CERT CLASSIC: %d bytes SPI ADDR: 0x%x, KEY: %d bytes ROOT CA: %d\n",
 			client_cert_classic_len, CLIENT_CERT_CLASSIC_SPI_ADDR,
@@ -736,6 +815,10 @@ void write_certificates_to_spi() {
 			root_certificate_classic_len, .cert_spi_addr =
 	ROOT_CA_CLASSIC_CERT_SPI_ADDR, .key_len = 0, .name = "CA_CLASSIC" };
 	save_cert_to_spi(&rootClassic);
+
+	SPICert crlClassic = { .cert_bytes = crl_classic, .cert_len = crl_classic_len,
+				.cert_spi_addr = CRL_CERT_CLASSIC_SPI_ADDR, .key_len = 0, .name = "CRL_CLASSIC" };
+		save_cert_to_spi(&crlClassic);
 
 	printf("Done!\n");
 
