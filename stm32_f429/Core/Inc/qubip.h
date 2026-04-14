@@ -27,6 +27,10 @@ extern unsigned long server_crt_parse_us;
 
 extern unsigned long total_handshake_us;
 
+extern unsigned long root_load_us;
+extern unsigned long client_load_us;
+extern unsigned long crl_verify_us;
+
 
 // Public key size
 #define KYBER768_PK_SIZE 1184
@@ -58,7 +62,7 @@ extern unsigned long total_handshake_us;
 	#define BROKER_HOSTNAME "broker.dm.qubip.eu"
 #endif
 // Force a CRL revocation check
-#define FORCE_CRL_CHECK 0
+#define FORCE_CRL_CHECK 1
 
 #define MQTT_PORT		"8884"
 
@@ -81,6 +85,54 @@ extern unsigned long total_handshake_us;
 // Ultra verbose logs, deactivate in prod as they massively interfere with MQTT timeouts
 //#define MQTT_INTERFACE_DEBUG
 
+#ifdef CERTS_CLASSIC
+
+#define ROOT_CERTIFICATE_CLASSIC \
+"-----BEGIN CERTIFICATE-----\r\n" \
+"MIIBWTCCAQugAwIBAgIUduZv4RD2gXkOG6ee0OdqOTc6zPUwBQYDK2VwMCIxIDAe\r\n" \
+"BgNVBAMMF1NNQVJURkFDVE9SWS1DTEFTU0lDLUNBMB4XDTI2MDIxNjA4MTQ0NFoX\r\n" \
+"DTM2MDIxNDA4MTQ0NFowIjEgMB4GA1UEAwwXU01BUlRGQUNUT1JZLUNMQVNTSUMt\r\n" \
+"Q0EwKjAFBgMrZXADIQCi7VLC/mNr3rwXxuYOO2ygoF8cfIqy0dirA5/97e+v/qNT\r\n" \
+"MFEwHQYDVR0OBBYEFE6zifORurJ1t4LxDCvD8xiTKcymMB8GA1UdIwQYMBaAFE6z\r\n" \
+"ifORurJ1t4LxDCvD8xiTKcymMA8GA1UdEwEB/wQFMAMBAf8wBQYDK2VwA0EAcL41\r\n" \
+"RNfP8JfH6xpTBc3s93oWm3cW5KBJBZz+enLFCSQDSpDGfBww88osAKSvEkWYkfN/\r\n" \
+"im/sV7YLzrSkpZMeBw==\r\n" \
+"-----END CERTIFICATE-----\r\n"
+
+#define ROOT_CERTIFICATE_CLASSIC_LEN sizeof(ROOT_CERTIFICATE_CLASSIC)
+
+#define CLIENT_CERT_CLASSIC \
+"-----BEGIN CERTIFICATE-----\r\n" \
+"MIIBNTCB6KADAgECAhR4T486S/7pi02LcS0q0b7jPJY/EDAFBgMrZXAwIjEgMB4G\r\n" \
+"A1UEAwwXU01BUlRGQUNUT1JZLUNMQVNTSUMtQ0EwHhcNMjYwMjE2MDkyNjM4WhcN\r\n" \
+"MjcwMjE2MDkyNjM4WjAQMQ4wDAYDVQQDDAVtY3UwMTAqMAUGAytlcAMhABHHtgOl\r\n" \
+"KZWXb3GA6z5u6znQ6feVIoPW/SzuYxLjrzX8o0IwQDAdBgNVHQ4EFgQUxJC34N/z\r\n" \
+"A3oUWNSq6tSbpYOnveMwHwYDVR0jBBgwFoAUTrOJ85G6snW3gvEMK8PzGJMpzKYw\r\n" \
+"BQYDK2VwA0EASpoad1w506PorRhpodsBAU5NA3w7lTaoDOvLLfLoB89PgcFfyLCk\r\n" \
+"le68FRkqc0AYAYgjhudTWffqEVmIq5TOBA==\r\n" \
+"-----END CERTIFICATE-----\r\n"
+
+#define CLIENT_CERT_CLASSIC_LEN sizeof(CLIENT_CERT_CLASSIC)
+
+#define CLIENT_KEY_CLASSIC \
+"-----BEGIN PRIVATE KEY-----\r\n" \
+"MC4CAQAwBQYDK2VwBCIEII6los10uQa6AkeczxIlxoQyWbWuCOHqxqBAvyOkcEFS\r\n" \
+"-----END PRIVATE KEY-----\r\n"
+
+#define CLIENT_KEY_CLASSIC_LEN sizeof(CLIENT_KEY_CLASSIC)
+
+#define CRL_CLASSIC "-----BEGIN X509 CRL-----\r\n" \
+"MIHTMIGGAgEBMAUGAytlcDAiMSAwHgYDVQQDDBdTTUFSVEZBQ1RPUlktQ0xBU1NJ\r\n" \
+"Qy1DQRcNMjYwMzI2MTMxOTI1WhcNMjYwNDI1MTMxOTI1WjAnMCUCFHhPjzpL/umL\r\n" \
+"TYtxLSrRvuM8lj8PFw0yNjAzMjYxMzE5MjVaoA8wDTALBgNVHRQEBAICEAAwBQYD\r\n" \
+"K2VwA0EAetbOtCmrDJu0sw1jpgjXsmhxIuVTe6jTEUmIwpnyJjJvY0sA38M+qK5t\r\n" \
+"ff/b57Af37BPzcmWhkDleKdBAOclAQ==\r\n" \
+"-----END X509 CRL-----\r\n"
+
+#define CRL_CLASSIC_LEN sizeof(CRL_CLASSIC);
+
+#endif
+
 typedef enum {
 	ROOT_CA, CLIENT, CRL
 } CertType;
@@ -95,8 +147,8 @@ typedef enum {
 #define CLIENT_KEY_CLASSIC_SIZE_BYTES 123
 #define CLIENT_KEY_CLASSIC_SPI_ADDR 0xD000
 
-#define CRL_CERT_CLASSIC_SIZE_BYTES 0x0000
-#define CRL_CERT_CLASSIC_SPI_ADDR 	0x0000
+#define CRL_CERT_CLASSIC_SIZE_BYTES 349
+#define CRL_CERT_CLASSIC_SPI_ADDR 	0xE000
 
 // MLDSA44
 #define ROOT_CA_CERT_44_SIZE_BYTES 5871

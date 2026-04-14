@@ -2544,6 +2544,7 @@ static int x509_crt_check_ee_locally_trusted(
  *  - 0 is the chain was successfully built and examined,
  *      even if it was found to be invalid
  */
+extern unsigned long crl_verify_us;
 static int x509_crt_verify_chain(
     mbedtls_x509_crt *crt,
     mbedtls_x509_crt *trust_ca,
@@ -2713,7 +2714,9 @@ find_parent:
 
 #if defined(MBEDTLS_X509_CRL_PARSE_C)
         /* Check trusted CA's CRL for the given crt */
+        uint32_t start = micros();
         *flags |= x509_crt_verifycrl(child, parent, ca_crl, profile, &now);
+        crl_verify_us += (micros() - start);
 #else
         (void) ca_crl;
 #endif

@@ -521,9 +521,10 @@ int mbedtls_ssl_tls13_parse_certificate(mbedtls_ssl_context *ssl,
         }
 
         MBEDTLS_SSL_CHK_BUF_READ_PTR(p, certificate_list_end, cert_data_len);
+        uint32_t secpat_tim1 = micros();
         ret = mbedtls_x509_crt_parse_der(ssl->session_negotiate->peer_cert,
                                          p, cert_data_len);
-
+        uint32_t secpat_tim2 = micros() - secpat_tim1;
         switch (ret) {
             case 0: /*ok*/
                 break;
@@ -827,12 +828,14 @@ int mbedtls_ssl_tls13_process_certificate(mbedtls_ssl_context *ssl)
                              &buf, &buf_len));
 
     /* Parse the certificate chain sent by the peer. */
-    uint32_t start = micros();
+
     MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_tls13_parse_certificate(ssl, buf,
                                                              buf + buf_len));
-    server_crt_parse_us = micros() - start;
+
     /* Validate the certificate chain and set the verification results. */
+    uint32_t start = micros();
     MBEDTLS_SSL_PROC_CHK(ssl_tls13_validate_certificate(ssl));
+    server_crt_parse_us = micros() - start;
 
     MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_add_hs_msg_to_checksum(
                              ssl, MBEDTLS_SSL_HS_CERTIFICATE, buf, buf_len));

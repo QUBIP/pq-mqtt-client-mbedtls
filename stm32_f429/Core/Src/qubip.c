@@ -27,6 +27,10 @@ unsigned long server_crt_parse_us = 0;
 
 unsigned long total_handshake_us = 0;
 
+unsigned long root_load_us = 0;
+unsigned long client_load_us = 0;
+unsigned long crl_verify_us = 0;
+
 extern char mbedtls_root_certificate;
 extern char client_cert;
 extern char client_key;

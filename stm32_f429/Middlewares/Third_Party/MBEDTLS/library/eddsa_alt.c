@@ -227,7 +227,7 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 		end_time = micros();
 		ed25519_sign_us = end_time - start_time;
 		printf("HW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-				ed25519_sign_us);
+				end_time - start_time);
 
 		memcpy(out_sig, out_sig_buf, 64);
 		vPortFree(out_sig_buf);
@@ -242,10 +242,26 @@ int mbedtls_eddsa_sign_secpat(mbedtls_ecp_group *grp,
 		start_time = micros();
 		mbedtls_eddsa(grp, r, s, d, buf, blen, eddsa_id, ed_ctx, ed_ctx_len,
 				f_rng, p_rng);
+
+//		unsigned char hash[32] = {0};
+//		mbedtls_eddsa(grp, r, s, d, hash, 32, eddsa_id, ed_ctx, ed_ctx_len,
+//				f_rng, p_rng);
+
+//	    size_t key_len = mbedtls_mpi_size(d);
+//	    unsigned char priv_key[key_len];
+//	    unsigned char *sig;
+//	    unsigned int slen;
+//		MBEDTLS_MPI_CHK(mbedtls_mpi_write_binary(&ctx->d, priv_key, key_len));
+//
+//		EDDSA25519_SIGN(sha_buf, 64, priv_key, key_len, &sig, &slen);
+////		memcpy(out_sig, out_sig_buf, 64);
+//		MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(r, sig, 32));
+//		MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(s, sig + 32, 32));
+
 		end_time = micros();
 		ed25519_sign_us = end_time - start_time;
 		printf("SW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-				ed25519_sign_us);
+				end_time - start_time);
 #endif
 
 		printf("EDDSA25519 signature completed!\n");
@@ -323,9 +339,9 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	eddsa25519_verify_hw(buf, blen, pub_key, 32, sig, sig_len, &ret,
 			external_key, &unused, 0);
 	end_time = micros();
-	ed25519_verify_us += (end_time - start_time);
+	ed25519_verify_us = (end_time - start_time);
 	printf("HW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-			ed25519_verify_us);
+			end_time - start_time);
 
 	ret = !ret;
 #else
@@ -340,9 +356,9 @@ int mbedtls_eddsa_verify_secpat(mbedtls_ecp_group *grp,
 	start_time = micros();
 	EDDSA25519_VERIFY(buf, blen, pub_key, 32, sig, sig_len, &ret);
 	end_time = micros();
-	ed25519_verify_us += (end_time - start_time);
+	ed25519_verify_us = (end_time - start_time);
 	printf("SW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-			ed25519_verify_us);
+			end_time - start_time);
 #endif
 	printf("EDDSA25519 verify completed!\n");
 	printf("##########################################################\n\n");

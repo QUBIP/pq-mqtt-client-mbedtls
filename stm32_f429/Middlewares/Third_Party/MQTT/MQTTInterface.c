@@ -247,8 +247,13 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 	// Reading certs from SPI Flash
 
 	SPICert *root_ca = make_certificate(ROOT_CA);
-	//root_ca->cert_bytes = mbedtls_root_certificate;
+#if defined(CERTS_CLASSIC) && HW_IMPLEMENTATION == 0
+	root_ca->cert_bytes = ROOT_CERTIFICATE_CLASSIC;
+#else
+	uint32_t start = micros();
 	load_cert_from_spi(root_ca, false, true);
+	root_load_us = micros() - start;
+#endif
 
 	// Processi SSL/TLS
 	ret = mbedtls_x509_crt_parse(&cacert,
@@ -261,10 +266,19 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 		return -1;
 	}
 
+#if !defined(CERTS_CLASSIC) || HW_IMPLEMENTATION == 1
 	free_certificate(root_ca);
+#endif
 
 	SPICert *client_certificate = make_certificate(CLIENT);
+#if defined(CERTS_CLASSIC) && HW_IMPLEMENTATION == 0
+	client_certificate->cert_bytes = CLIENT_CERT_CLASSIC;
+	client_certificate->key_bytes = CLIENT_KEY_CLASSIC;
+#else
+	start = micros();
 	load_cert_from_spi(client_certificate, true, true);
+	client_load_us = micros() - start;
+#endif
 
 	// START
 	// TLS V1.3
@@ -289,12 +303,20 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 		return -1;
 	}
 
+#if !defined(CERTS_CLASSIC) || HW_IMPLEMENTATION == 1
 	free_certificate(client_certificate);
+#endif
 
 #if FORCE_CRL_CHECK == 1
 	SPICert *crl_cert = make_certificate(CRL);
+
+#if defined(CERTS_CLASSIC) && HW_IMPLEMENTATION == 0
+	crl_cert->cert_bytes = CRL_CLASSIC;
+	crl_cert->cert_len = CRL_CLASSIC_LEN;
+#else
 	load_cert_from_spi(crl_cert, false, true);
 
+#endif
 	ret = mbedtls_x509_crl_parse(&crl,
 			(const unsigned char*) crl_cert->cert_bytes, crl_cert->cert_len);
 
@@ -304,7 +326,9 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 		return -1;
 	}
 
+#if !defined(CERTS_CLASSIC) || HW_IMPLEMENTATION == 1
 	free_certificate(crl_cert);
+#endif
 
 #endif
 
@@ -408,6 +432,7 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 
 			if (ret == MBEDTLS_ERR_X509_CERT_VERIFY_FAILED) {
 				printf("CRL Verification failed - Certificate Revoked!\n");
+				printf("CRL verified in %lu us\n", crl_verify_us);
 			}
 
 			MQTT_INTERFACE_DEBUG_LOG(

@@ -355,6 +355,8 @@ int main(void) {
 			reset_cause_get_name(reset_cause));
 	print_title_demo();
 
+	HAL_Delay(40000);
+
 //#define TEST_SE
 #ifdef TEST_SE
 	//demo_mlkem_hw(768, 3, 0);
