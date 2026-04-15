@@ -136,3 +136,87 @@ The remote server IP and hostname can be configured as:
 
 The STM32 prints its output onto its serial port on PIN PD8 which can be found on the back of the board
 
+
+# QUBIP Benchmark Configuration and Output
+
+This document explains how to configure the QUBIP C project for benchmarking and describes the expected output formats.
+
+## Configuration
+
+The project configuration is managed via macros in the `qubip.h` file. Below are the key settings you can modify:
+
+### Hardware vs Software Implementation
+```c
+#define HW_IMPLEMENTATION 1 // 1 = ON (Hardware), 0 = OFF (Software)
+```
+- **1 (ON):** Uses Hardware acceleration for Post-Quantum (PQ) and Classic cryptography.
+- **0 (OFF):** Uses Software implementation. 
+  *Note: Software implementation for PQ is currently available in the `SW_ONLY` branch.*
+
+### Secure Channel Protocol (SCP03)
+```c
+#define SCP03 1 // 1 = ON, 0 = OFF
+```
+Enables or disables the SCP03 protocol for secure communication with the hardware security module.
+
+### Cryptographic Algorithms (Certificates)
+You can choose between Classic and Post-Quantum configurations by defining one of the following:
+```c
+#define CERTS_CLASSIC // Use Classic certificates (Ed25519 / X25519)
+//#define CERTS_PQ_44  // Use Post-Quantum certificates (ML-DSA-44 / ML-KEM-768)
+```
+
+### Broker Connection
+The MQTT broker details are automatically selected based on the certificate type, but can be overridden:
+- **Classic:** Defaults to `broker.smartfactory.it`
+- **PQ:** Defaults to `broker.dm.qubip.eu`
+
+### Additional Options
+- `SWAP_ORDER`: Defined to handle specific byte-ordering requirements.
+- `FORCE_CRL_CHECK`: Set to `1` to mandate a Certificate Revocation List (CRL) check during the handshake.
+
+---
+
+## CRL Validation Benchmarking
+
+When `FORCE_CRL_CHECK` is enabled, the system is configured to trigger a CRL validation process where the server's certificate is intentionally revoked. 
+
+**Important Behavior:**
+- **Handshake Failure:** Because the certificate is revoked, the TLS handshake will **not** complete successfully.
+- **MQTT Limitation:** Since the handshake fails, the device cannot establish a secure connection to the MQTT broker. Consequently, **benchmark data for CRL validation is not published to the MQTT channel.**
+- **Data Collection:** To obtain the CRL validation benchmark, you must monitor the **Serial/Terminal output** directly.
+
+### Implementation Notes & Limitations
+- **Software PQ (Post-Quantum):** Does not support CRL validation. The memory footprint required to store all necessary data in flash memory exceeds available capacity.
+
+---
+
+## Output
+
+The benchmark results are delivered through two channels: MQTT and the Terminal.
+
+### MQTT Output
+The MQTT client connects to the configured broker and publishes benchmark data to a dedicated channel:
+- **Topic:** `<DEVICE_NAME>/benchmark` (e.g., `sfc10002/benchmark`)
+- **Payload:** Contains the benchmark metrics collected during the TLS handshake and cryptographic operations.
+
+If the publication fails, the client will close the session and attempt to reconnect.
+
+### Terminal Output
+The benchmark results are also printed to the terminal in the following format:
+
+```text
+#############################################
+Benchmarks <Classic|Hybrid PQ> <HW|SW>
+Connected in <total_handshake_us> us
+Server Cert parsing <server_crt_parse_us> us
+CRL verified in <crl_verify_us> us
+#############################################
+```
+
+#### Field Descriptions:
+- **Benchmarks Type:** Displays whether the execution used Classic or Hybrid PQ algorithms, and whether it was Hardware (HW) or Software (SW) accelerated.
+- **Connected in:** Total time taken for the TLS handshake in microseconds.
+- **Server Cert parsing:** Time spent parsing the server's certificate.
+- **CRL verified in:** Time spent performing the Certificate Revocation List check.
+
