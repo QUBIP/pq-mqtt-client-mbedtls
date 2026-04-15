@@ -35,7 +35,7 @@
 
 #include "mbedtls/qubip.h"
 
-#include "mbedtls/eddsa.h" 
+#include "mbedtls/eddsa.h" //DAVIDE: TEST SIGNATURE WITH KEY
 #include "mbedtls/psa_util.h"
 #include "pk_wrap.h"
 
@@ -56,41 +56,37 @@ mbedtls_pk_context pkey;
 
 #ifdef CERTS_CLASSIC
 const char mbedtls_root_certificate[] =
-	"-----BEGIN CERTIFICATE-----\r\n"
-"MIIBwTCCAXOgAwIBAgIUbgQY6Rpt26pZ+MYlBMtF4lGaeMkwBQYDK2VwMFYxCzAJ\r\n"
-"BgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5l\r\n"
-"dCBXaWRnaXRzIFB0eSBMdGQxDzANBgNVBAMMBlRFU1RDQTAeFw0yNDA5MjcxMjM3\r\n"
-"NTFaFw0zNDA5MjUxMjM3NTFaMFYxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21l\r\n"
-"LVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxDzANBgNV\r\n"
-"BAMMBlRFU1RDQTAqMAUGAytlcAMhAMDXLhb6KLllMI+Y8rFniDDKCETPwoDmxqUb\r\n"
-"Z0qUWz4Uo1MwUTAdBgNVHQ4EFgQUzXcyEKGEnqslVrDt11E0g//t4s0wHwYDVR0j\r\n"
-"BBgwFoAUzXcyEKGEnqslVrDt11E0g//t4s0wDwYDVR0TAQH/BAUwAwEB/zAFBgMr\r\n"
-"ZXADQQDH+r4zWG9jloZnP22fIPzihvwyqVyzQqsL6X46KYkNR0VRJ1ITs3at3etc\r\n"
-"eAvrbiDenKJb5YfQV6ul1KGuPTAC\r\n"
-"-----END CERTIFICATE-----\r\n";
+		"-----BEGIN CERTIFICATE-----\r\n"
+		"MIIBWTCCAQugAwIBAgIUduZv4RD2gXkOG6ee0OdqOTc6zPUwBQYDK2VwMCIxIDAe\r\n"
+		"BgNVBAMMF1NNQVJURkFDVE9SWS1DTEFTU0lDLUNBMB4XDTI2MDIxNjA4MTQ0NFoX\r\n"
+		"DTM2MDIxNDA4MTQ0NFowIjEgMB4GA1UEAwwXU01BUlRGQUNUT1JZLUNMQVNTSUMt\r\n"
+		"Q0EwKjAFBgMrZXADIQCi7VLC/mNr3rwXxuYOO2ygoF8cfIqy0dirA5/97e+v/qNT\r\n"
+		"MFEwHQYDVR0OBBYEFE6zifORurJ1t4LxDCvD8xiTKcymMB8GA1UdIwQYMBaAFE6z\r\n"
+		"ifORurJ1t4LxDCvD8xiTKcymMA8GA1UdEwEB/wQFMAMBAf8wBQYDK2VwA0EAcL41\r\n"
+		"RNfP8JfH6xpTBc3s93oWm3cW5KBJBZz+enLFCSQDSpDGfBww88osAKSvEkWYkfN/\r\n"
+		"im/sV7YLzrSkpZMeBw==\r\n"
+		"-----END CERTIFICATE-----\r\n";
 
 const size_t mbedtls_root_certificate_len = sizeof(mbedtls_root_certificate);
 
 
 const char client_cert[] =
-	"-----BEGIN CERTIFICATE-----\r\n"
-"MIIBZjCCARgCFCqeMuJic+LcAiPxEW1F4CbgTXAzMAUGAytlcDBWMQswCQYDVQQG\r\n"
-"EwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lk\r\n"
-"Z2l0cyBQdHkgTHRkMQ8wDQYDVQQDDAZURVNUQ0EwHhcNMjUwMzE5MDgxNjQ5WhcN\r\n"
-"MzUwMzE3MDgxNjQ5WjBVMQswCQYDVQQGEwJJVDETMBEGA1UECAwKU29tZS1TdGF0\r\n"
-"ZTEZMBcGA1UECgwQU2VjdXJpdHkgUGF0dGVybjEWMBQGA1UEAwwNc2VjcGF0LWNs\r\n"
-"aWVudDAqMAUGAytlcAMhAK6bJJLXcB8JpfdUgN23vAoMLvHxyeGkJNB3RmYz2FGT\r\n"
-"MAUGAytlcANBAM/kLJdedAzUPmDTgFviis10CR7F2qjM8Ks+XUyig8VMvYNOqcWm\r\n"
-"YmeFehNlQly/cYC3szQzXL+7xLQ2o0EuOA4=\r\n"
-"-----END CERTIFICATE-----\r\n";
+		"-----BEGIN CERTIFICATE-----\r\n"
+		"MIIBNTCB6KADAgECAhR4T486S/7pi02LcS0q0b7jPJY/EDAFBgMrZXAwIjEgMB4G\r\n"
+		"A1UEAwwXU01BUlRGQUNUT1JZLUNMQVNTSUMtQ0EwHhcNMjYwMjE2MDkyNjM4WhcN\r\n"
+		"MjcwMjE2MDkyNjM4WjAQMQ4wDAYDVQQDDAVtY3UwMTAqMAUGAytlcAMhABHHtgOl\r\n"
+		"KZWXb3GA6z5u6znQ6feVIoPW/SzuYxLjrzX8o0IwQDAdBgNVHQ4EFgQUxJC34N/z\r\n"
+		"A3oUWNSq6tSbpYOnveMwHwYDVR0jBBgwFoAUTrOJ85G6snW3gvEMK8PzGJMpzKYw\r\n"
+		"BQYDK2VwA0EASpoad1w506PorRhpodsBAU5NA3w7lTaoDOvLLfLoB89PgcFfyLCk\r\n"
+		"le68FRkqc0AYAYgjhudTWffqEVmIq5TOBA==\r\n"
+		"-----END CERTIFICATE-----\r\n";
 
 const size_t client_cert_len = sizeof(client_cert);
 
 
-const char client_key[] =
------BEGIN PRIVATE KEY-----\r\n"
-MC4CAQAwBQYDK2VwBCIEIFw25wrDf6ammAOqv1+TOCPxnHxmg4R53dBJ260wcyvL\r\n"
------END PRIVATE KEY-----\r\n";
+const char client_key[] = "-----BEGIN PRIVATE KEY-----\r\n"
+		"MC4CAQAwBQYDK2VwBCIEII6los10uQa6AkeczxIlxoQyWbWuCOHqxqBAvyOkcEFS\r\n"
+		"-----END PRIVATE KEY-----\r\n";
 
 const size_t client_key_len = sizeof(client_key);
 #else
@@ -1003,7 +999,7 @@ int mqtt_network_connect(Network *n, char *ip, char *port) {
 				"[MQTT_INTERFACE] ERROR: mbedtls_pk_parse_key failed.\n");
 		return -1;
 	}
-	// Extract public from client cert: Not a perfect solution but as of now we don't have a way to derive the public from the private
+	//DAVIDE Extract public from client cert: Not a perfect solution but as of now we don't have a way to derive the public from the private
 	// Private and Public for MLDSA are inside the key, for the x25519 we can derive it. For now we import the one from cert (need to check the two keys match) and later we can derive it
 	if (pkey.private_pk_info->type == MBEDTLS_PK_ED25519_MLDSA65) {
 		mbedtls_ed25519_mlds65_ctx *pk_ctx =

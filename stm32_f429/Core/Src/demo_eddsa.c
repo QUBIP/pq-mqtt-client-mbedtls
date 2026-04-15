@@ -109,8 +109,8 @@ void demo_eddsa_hw(unsigned int mode, unsigned int verb, INTF interface) {
 		 unsigned char** sig,
 		 unsigned int* sig_len)
 		 */
-		eddsa25519_sign(msg, strlen((const char*) msg), pri_key, pri_len, &sig, &sig_len);
-
+		eddsa25519_sign(msg, strlen((const char*) msg), pri_key, pri_len, &sig,
+				&sig_len);
 
 		//eddsa25519_sign_hw(msg, strlen((const char*) msg), pri_key, pri_len, pub_key, pub_len, &sig, &sig_len, interface);
 
@@ -138,8 +138,9 @@ void demo_eddsa_hw(unsigned int mode, unsigned int verb, INTF interface) {
 
 		 */
 
-		// eddsa25519_verify(msg, strlen((const char*) msg), pub_key, pub_len, sig, 64, &result);
-		// print_result_valid("EdDSA-25519 SW", !result);
+		eddsa25519_verify(msg, strlen((const char*) msg), pub_key, pub_len, sig,
+				64, &result);
+		print_result_valid("EdDSA-25519 SW", !result);
 	} else {
 		/*
 		 unsigned char* pub_key;

@@ -20,7 +20,7 @@
 #include "nanomodbus_interface.h"
 #include "iperf_server.h"
 #include "demo.h"
-
+#include "app_sensor.h"
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
@@ -104,13 +104,12 @@ void print_memory_stats() {
  * @retval None
  */
 void MqttClientPubTask(void const *argument) {
-	char str[256];
+	char temperature_json[256];
 	MQTTMessage message;
 
 	uint32_t ulNotifiedValue = 0;
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 	const TickType_t xFrequency = 1000;
-	float temperature = 31.0;
 
 	// 1) Check the status of the network link:
 	// - If the link is inactive, wait until it becomes active.
@@ -127,6 +126,7 @@ void MqttClientPubTask(void const *argument) {
 	// Note: In case of IP address change, it is necessary to reconnect.
 
 	print_memory_stats();
+	uint8_t error = 0;
 
 	for (;;) {
 		// Is link up?
@@ -163,54 +163,94 @@ void MqttClientPubTask(void const *argument) {
 		MQTTDisconnect(&mqttClient);
 		mqtt_network_disconnect(&mqttNet);
 		mqtt_network_clear();
+		uint32_t start_connect = micros();
+
 		if (MqttConnectAndSubscribe() < 0) {
 			osDelay(250);
 			continue;
 		}
-
+		uint32_t end_connect = micros();
+		total_handshake_us = end_connect - start_connect;
 		need_to_reconnect = 0;
 
-		uint8_t error = 0;
+		printf("#############################################\n");
+		printf("Benchmarks %s %s\n", CLASSIC_OR_PQ, HW_OR_SW);
+		printf("Total Handshake %lu us\n", total_handshake_us);
+		printf("Server Cert parsing %lu us\n", server_crt_parse_us);
+		printf("CRL verified in %lu us\n", crl_verify_us);
+//		printf("X25519 Gen Keys %lu us\n", x25519_keygen_us);
+//		printf("X25519 KEM %lu us\n", x25519_kem_us);
+//		printf("MLKEM768 Gen Keys %lu us\n", mlkem768_keygen_us);
+//		printf("MLKEM768 KEM %lu us\n", mlkem768_kem_us);
+//		printf("Ed255519 Verify %lu us\n", ed25519_verify_us);
+//		printf("Ed255519 Sign %lu us\n", ed25519_sign_us);
+//		printf("MLDSA44 Verify %lu us\n", mldsa44_verify_us);
+//		printf("MLDSA44 Sign %lu us\n", mldsa44_sign_us);
+		printf("#############################################\n");
+
+		char *benchmark_str = pvPortCalloc(500, sizeof(char));
+
+		//Publishing handshake timings
+		snprintf(benchmark_str, 500, "{\n"
+				"  \"device\": \"%s\",\n"
+				"  \"total_handshake\": %lu,\n"
+//				"  \"X25519_gen_key\": %lu,\n"
+//				"  \"X25519_kem\": %lu,\n"
+//				"  \"MLKEM768_gen_key\": %lu,\n"
+//				"  \"MLKEM768_kem\": %lu,\n"
+//				"  \"Ed25519_verify\": %lu,\n"
+//				"  \"Ed25519_sign\": %lu,\n"
+//				"  \"MLDSA44_verify\": %lu,\n"
+//				"  \"MLDSA44_sign\": %lu,\n"
+				"  \"server_crt_parsing\": %lu\n"
+				"  \"crl_verification\": %lu\n"
+				"}", DEVICE_NAME "+" HW_OR_SW, total_handshake_us,
+//				x25519_keygen_us, x25519_kem_us, mlkem768_keygen_us,
+//				mlkem768_kem_us, ed25519_verify_us, ed25519_sign_us,
+//				mldsa44_verify_us, mldsa44_sign_us,
+				server_crt_parse_us, crl_verify_us);
+
+		message.payload = (void*) benchmark_str;
+		message.payloadlen = strlen(benchmark_str);
+		printf("\nMQTT Publish Benchmarks:\n%s\n", benchmark_str);
+		if (MQTTPublish(&mqttClient, DEVICE_NAME "/benchmark", &message)
+				!= MQTT_SUCCESS) {
+			MQTTCloseSession(&mqttClient);
+			mqtt_network_disconnect(&mqttNet);
+			error = 1;
+			continue;
+		}
+
+		vPortFree(benchmark_str);
+
 		do {
-			// Send a mqtt message
-			// Get the PLC holding register value from the other task
-			/*if(xTaskNotifyWait(0, 0, &ulNotifiedValue, 250) != pdTRUE)
-			 {
-			 osDelay(250);
-			 continue;
-			 } */
 
-			//printf("[MQTT_PUB_TASK] INFO: Preparing to send mqtt message\r\n");
 			// Composing the message to be sent
-			memset(str, 0, sizeof(str));
+			memset(temperature_json, 0, sizeof(temperature_json));
 			// Composing the message to be sent
-#if HW_IMPLEMENTATION == 1
-			char *device_name = "STM32+SE";
-#else
-			char *device_name ="STM32";
 
-#endif
-			snprintf(str, sizeof(str), "{\n"
+			float temperature = Sensor_Read_Temperature();
+
+			snprintf(temperature_json, sizeof(temperature_json), "{\n"
 					"  \"device\": \"%s\",\n"
 					"  \"temperature\": %f\n"
-					"}",device_name, temperature);
+					"}", DEVICE_NAME "+" HW_OR_SW, temperature);
 
-			message.payload = (void*) str;
-			message.payloadlen = strlen(str);
-			printf("\nMQTT Publish:\n%s\n", str);
+			message.payload = (void*) temperature_json;
+			message.payloadlen = strlen(temperature_json);
+			printf("\nMQTT Publish Temperature:\n%s\n", temperature_json);
 
-			if (MQTTPublish(&mqttClient, "2025/temperature", &message)
+			if (MQTTPublish(&mqttClient, DEVICE_NAME, &message)
 					!= MQTT_SUCCESS) {
 				MQTTCloseSession(&mqttClient);
 				mqtt_network_disconnect(&mqttNet);
 				error = 1;
 				continue;
 			}
-			print_memory_stats();
 
 			/*MQTT_PUB_TASK_DEBUG_LOG(
-					"[MQTT_PUB_TASK] INFO: [%lu] I've sent a message!\n",
-					ulNotifiedValue);*/
+			 "[MQTT_PUB_TASK] INFO: [%lu] I've sent a message!\n",
+			 ulNotifiedValue);*/
 			leds_blink_on_mqtt_message_sent();
 
 			// The vTaskDelayUntil() suspend a task for up to an absolute amount of time,
@@ -219,15 +259,12 @@ void MqttClientPubTask(void const *argument) {
 			vTaskDelayUntil(&xLastWakeTime, xFrequency);
 			++ulNotifiedValue;
 			temperature += 0.5;
-			osDelay(10000);
+			osDelay(1000);
 
 			/* no error and i'm connected and i don't need to reconnect */
-		} while (!error && mqttClient.isconnected && !need_to_reconnect);
+		} while (!error);
 
-		if (ulNotifiedValue >= 20) {
-			while (1)
-				osDelay(1000);
-		}
+		NVIC_SystemReset();			// Perform a software reset
 
 	}
 }

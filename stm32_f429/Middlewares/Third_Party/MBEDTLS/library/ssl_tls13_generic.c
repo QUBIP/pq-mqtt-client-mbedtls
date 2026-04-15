@@ -26,6 +26,8 @@
 
 #include "psa/crypto.h"
 #include "psa_util_internal.h"
+#include "qubip.h"
+#include "tim_us.h"
 
 #if defined(MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_SOME_EPHEMERAL_ENABLED)
 /* Define a local translating function to save code size by not using too many
@@ -270,6 +272,7 @@ static int ssl_tls13_parse_certificate_verify(mbedtls_ssl_context *ssl,
         goto error;
     }
 
+    //DAVIDE: REMEMBER TO CHECK SIZES AND STUFF WHEN ALG IS MBEDTLS_MD_EDDSA SINCE NO HASH SHOULD BE PERFROMED
     hash_alg = mbedtls_md_psa_alg_from_type(md_alg);
     if (hash_alg == 0) {
         goto error;
@@ -291,6 +294,7 @@ static int ssl_tls13_parse_certificate_verify(mbedtls_ssl_context *ssl,
     p += 2;
     MBEDTLS_SSL_CHK_BUF_READ_PTR(p, end, signature_len);
 
+    //DAVIDE: NECESSARY CAUSE ED DOESN'T HASH
     size_t verify_hash_size;
     if(md_alg == MBEDTLS_MD_EDDSA){
     		verify_hash = malloc(verify_buffer_len);
@@ -825,10 +829,14 @@ int mbedtls_ssl_tls13_process_certificate(mbedtls_ssl_context *ssl)
                              &buf, &buf_len));
 
     /* Parse the certificate chain sent by the peer. */
+
     MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_tls13_parse_certificate(ssl, buf,
                                                              buf + buf_len));
+
     /* Validate the certificate chain and set the verification results. */
+    uint32_t start = micros();
     MBEDTLS_SSL_PROC_CHK(ssl_tls13_validate_certificate(ssl));
+    server_crt_parse_us = micros() - start;
 
     MBEDTLS_SSL_PROC_CHK(mbedtls_ssl_add_hs_msg_to_checksum(
                              ssl, MBEDTLS_SSL_HS_CERTIFICATE, buf, buf_len));

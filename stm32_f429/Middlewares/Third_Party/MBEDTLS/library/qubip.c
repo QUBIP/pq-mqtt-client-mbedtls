@@ -1,14 +1,26 @@
-/*
-Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
-SPDX-License-Identifier: MIT
-*/
-
 #include "mbedtls/qubip.h"
 #include "mbedtls/ecp.h"
 #include "se-qubip.h"
 #include "crypto_api_sw.h"
 
 #include <stdlib.h>
+
+unsigned long x25519_keygen_us = 0;
+unsigned long x25519_kem_us = 0;
+
+unsigned long mlkem768_keygen_us = 0;
+unsigned long mlkem768_kem_us = 0;
+
+unsigned long ed25519_verify_us = 0;
+unsigned long ed25519_sign_us = 0;
+
+unsigned long mldsa44_verify_us = 0;
+unsigned long mldsa44_sign_us = 0;
+
+unsigned long server_crt_parse_us = 0;
+unsigned long crl_verify_us = 0;
+
+unsigned long total_handshake_us = 0;
 
 HybridKeyKEM* hybrid_key_gen() {
 	uint32_t end_time = 0;
@@ -27,26 +39,29 @@ HybridKeyKEM* hybrid_key_gen() {
 
 #if HW_IMPLEMENTATION==1
 	printf("HW Hybrid Gen Key...");
-
+	start_time = micros();
 	mlkem768_genkeys_hw(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk, 0);
 	x25519_genkeys_hw(&out_keys->x25519_sk, &out_keys->x25519_pk, &pri_len,
 			&pub_len, 0);
-
-	printf("\t\t\033[1;32m\u2705\033[0m\n");
+	end_time = micros();
+	printf("MLKEM768 GenKeys HW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+				end_time - start_time);
 
 #else
-	start_time = micros();
-	mlkem768_genkeys(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk);
-	end_time = micros();
-	printf("MLKEM768 GenKeys SW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-				end_time - start_time);
+
 	start_time = micros();
 	x25519_genkeys(&out_keys->x25519_sk, &out_keys->x25519_pk, &pri_len,
 			&pub_len);
 	end_time = micros();
+	x25519_keygen_us = end_time - start_time;
 	printf("X215519 GenKeys SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-				end_time - start_time);
-
+			x25519_keygen_us);
+	start_time = micros();
+	mlkem768_genkeys(out_keys->mlkem_768_pk, out_keys->mlkem_768_sk);
+	end_time = micros();
+	mlkem768_keygen_us = end_time - start_time;
+	printf("MLKEM768 GenKeys SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			mlkem768_keygen_us);
 
 #endif
 
@@ -71,6 +86,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 		size_t key_buffer_size, uint8_t *shared_secret,
 		size_t shared_secret_size, size_t *shared_secret_length) {
 
+	uint32_t end_time = 0;
+	uint32_t start_time = micros();
+
 	uint8_t *server_ecdh_key = malloc(32);
 	uint8_t *server_kyber_ct = malloc(peer_key_length - 32);
 	uint8_t *ssecret_kem = malloc(32);
@@ -78,9 +96,6 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	unsigned int out_len;
 	HybridKeyKEM *private_key = (HybridKeyKEM*) key_buffer;
 	unsigned int result = 0;
-	uint32_t end_time = 0;
-	uint32_t start_time = micros();
-
 	printf("#############################################\n");
 
 	printf("Starting X25519_MLKEM768 key agreement...\n");
@@ -121,9 +136,9 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	mlkem768_dec(ssecret_kem, server_kyber_ct, private_key->mlkem_768_sk,
 			&result);
 	end_time = micros();
+	mlkem768_kem_us = end_time - start_time;
 	printf("MLKEM768 Decapsulate SW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
-
+			mlkem768_kem_us);
 	//printf("Result: %d\n", result);
 
 #endif
@@ -135,13 +150,13 @@ int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
 	printf("\t\t\033[1;32m\u2705\033[0m\n");
 
 #else
-
 	start_time = micros();
 	x25519_ss_gen(&ssecret_x25519, &out_len, server_ecdh_key, 32,
 			private_key->x25519_sk, private_key->x25519_sk);
 	end_time = micros();
-	printf("HW x25519 SS GEN SW - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
-			end_time - start_time);
+	x25519_kem_us = end_time - start_time;
+	printf("x25519 SS GEN SW - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
+			x25519_kem_us);
 
 #endif
 

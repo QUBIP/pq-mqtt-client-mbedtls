@@ -1203,6 +1203,7 @@ const mbedtls_pk_info_t mbedtls_ecdsa_info = { .type = MBEDTLS_PK_ECDSA, .name =
 #endif /* MBEDTLS_PK_CAN_ECDSA_SOME */
 #endif /* MBEDTLS_PK_HAVE_ECC_KEYS */
 
+//DAVIDE EDDSA
 #define PRINTFNAME(NAME) \
 	printf("[CUSTOM MBEDTLS] Inside " NAME " Function\n");
 #define CREATE_STUB(NAME,RET) \
@@ -1270,7 +1271,7 @@ static void eddsa_rs_free(void *ctx) {
 	CREATE_STUB("eddsa_rs_free", NULL)
 }
 
-const mbedtls_pk_info_t mbedtls_eddsa_info = {
+const mbedtls_pk_info_t mbedtls_eddsa_info = { //DAVIDE
 		.type = MBEDTLS_PK_EDDSA, .name = "EDDSA", .get_bitlen =
 				eckey_get_bitlen, /* Compatible key structures */
 		.can_do = eddsa_can_do,
@@ -1302,12 +1303,17 @@ const mbedtls_pk_info_t mbedtls_eddsa_info = {
 				.debug_func = eckey_debug, /* Compatible key structures */
 		};
 
-
+//DAVIDE EDDSA END
+/*#define CREATE_STUB(NAME,RET) \
+	printf("[CUSTOM MBEDTLS] Inside " NAME " Function\n");\
+	return RET;
+ */
 
 static int ed25519_mlds65_sign_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
 		unsigned char *sig, size_t sig_size, size_t *sig_len,
 		int (*f_rng)(void*, unsigned char*, size_t), void *p_rng) {
+//TODO: IMPLEMENTARE FUNC
 	char oid_der[] = "\x06\x0B\x60\x86\x48\x01\x86\xFA\x6B\x50\x08\x01\x0a"; //"\x06\x0B\x60\x86\x48\x01\x86\xFA\x6B\x50\x08\x01\x0a";
 	char prefix[] = "\x30\x82\x09\xBC\x03\x82\x09\x75";
 	char sig_sep[] = "\x03\x41";
@@ -1358,9 +1364,11 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
 		unsigned char *sig, size_t sig_size, size_t *sig_len,
 		int (*f_rng)(void*, unsigned char*, size_t), void *p_rng) {
+//TODO: IMPLEMENTARE FUNC
 	char oid_der[] = "\x06\x0B\x60\x86\x48\x01\x86\xFA\x6B\x50\x08\x01\x03";
 	char prefix[] = "\x30\x82\x09\xBC\x03\x82\x09\x75";
 	char sig_sep[] = "\x03\x41";
+
 	uint32_t end_time = 0;
 	uint32_t start_time = micros();
 
@@ -1385,8 +1393,9 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	mldsa44_sig(msg_to_be_signed, MSG_LEN, ctx->mldsa_pri_key,
 			sig + SIG_PREFIX_SIZE, &mldsa_ssize, NULL, 0);
 	end_time = micros();
-	printf("SW MLDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-				end_time - start_time);
+	mldsa44_sign_us = end_time - start_time;
+	printf("SW MLDSA44 Sign - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 #if HW_IMPLEMENTATION==1
 	printf("HW EDDSA Signature...");
@@ -1400,8 +1409,9 @@ static int ed25519_mlds44_sign_wrap(mbedtls_pk_context *pk,
 	eddsa25519_sign(msg_to_be_signed, MSG_LEN, ctx->ed_pri_key, ctx->ed_prisize,
 			&eddsa_sig, &ed_ssize);
 	end_time = micros();
-	printf("SW EDDSA Signature - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-						end_time - start_time);
+	ed25519_sign_us = end_time - start_time;
+	printf("SW EDDSA Sign - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 
 #endif
 
@@ -1429,7 +1439,7 @@ static int ed25519_mlds65_verify_wrap(mbedtls_pk_context *pk,
 		mbedtls_md_type_t md_alg, const unsigned char *hash, size_t hash_len,
 		const unsigned char *sig, size_t sig_len) {
 	//HARDCODING SHA256
-
+	//TODO: MAKE IT AVAILABLE FROM md_alg;
 	char oid_der[] = "\x06\x0B\x60\x86\x48\x01\x86\xFA\x6B\x50\x08\x01\x0a";
 	((void) md_alg);
 	unsigned int result = 0;
@@ -1472,7 +1482,6 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	unsigned int result = 0;
 	uint32_t end_time = 0;
 	uint32_t start_time = micros();
-
 	mbedtls_ed25519_mlds65_ctx *ctx = (mbedtls_ed25519_mlds65_ctx*) pk->pk_ctx;
 	unsigned char *new_msg = calloc(13 + 64, sizeof(char));
 	mbedtls_sha512(hash, hash_len, new_msg + 13, 0);
@@ -1497,8 +1506,9 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 	eddsa25519_verify(new_msg, 77, ctx->ed_pub_key, ctx->ed_pubsize,
 			sig + sig_len - 64, 64, &result);
 	end_time = micros();
-	printf("SW EDDSA Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-					end_time - start_time);
+	ed25519_verify_us = (end_time - start_time);
+	printf("SW EdDSA Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 	//printf("Result: %d\n", result);
 
 #endif
@@ -1507,13 +1517,13 @@ static int ed25519_mlds44_verify_wrap(mbedtls_pk_context *pk,
 		free(new_msg);
 		return result;
 	}
-
 	start_time = micros();
 	mldsa44_verify(new_msg, 77, ctx->mldsa_pub_key, sig + 9, 2420, &result,
 	NULL, 0);
 	end_time = micros();
-	printf("SW MLDSA44 Verify - %lu us\t\t\t\033[1;32m\u2705\033[0m\n",
-					end_time - start_time);
+	mldsa44_verify_us = (end_time - start_time);
+	printf("SW MLDSA44 Verify - %lu us\t\t\t\t\033[1;32m\u2705\033[0m\n",
+			end_time - start_time);
 	//printf("Result: %d\n", result);
 	printf("MLDSA44 + EDDSA25519 verify completed!\n");
 	printf("#############################################\n\n");
@@ -1696,7 +1706,7 @@ static void ed25519_mlds44_debug(mbedtls_pk_context *pk,
 	//CREATE_STUB("ed25519_mlds44_debug",)
 }
 
-const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info = { 
+const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info = { //DAVIDE
 		.type = MBEDTLS_PK_ED25519_MLDSA65, .name = "ED25519+MLDS65",
 				.get_bitlen = eckey_get_bitlen, /* Compatible key structures */
 				.can_do = ed25519_mlds65_can_do,
@@ -1728,7 +1738,7 @@ const mbedtls_pk_info_t mbedtls_ed25519_mlds65_info = {
 				.debug_func = ed25519_mlds65_debug, /* Compatible key structures */
 		};
 
-const mbedtls_pk_info_t mbedtls_ed25519_mlds44_info = { 
+const mbedtls_pk_info_t mbedtls_ed25519_mlds44_info = { //DAVIDE
 		.type = MBEDTLS_PK_ED25519_MLDSA44, .name = "ED25519+MLDS44",
 				.get_bitlen = eckey_get_bitlen, /* Compatible key structures */
 				.can_do = ed25519_mlds44_can_do,
@@ -1759,7 +1769,7 @@ const mbedtls_pk_info_t mbedtls_ed25519_mlds44_info = {
 #endif /* MBEDTLS_PK_USE_PSA_EC_DATA */
 				.debug_func = ed25519_mlds44_debug, /* Compatible key structures */
 		};
-
+//DAVIDE PQ BEGIN
 
 #if defined(MBEDTLS_PK_RSA_ALT_SUPPORT)
 /*

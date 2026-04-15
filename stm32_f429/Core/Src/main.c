@@ -28,6 +28,7 @@
 #include "leds.h"
 #include "qubip.h"
 #include "mbedtls/gcm.h"
+#include "app_sensor.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -35,7 +36,6 @@
 #include "stdlib.h"
 #include "test_func.h"
 #include "demo.h"
-#include "tim_us.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -299,13 +299,15 @@ int main(void)
   //MX_IWDG_Init();
   MX_I2C1_Init();
   MX_TIM_US_Init();
-
+  Sensor_Init();
   /* USER CODE BEGIN 2 */
   DEBUG_LOG("\nStarting...\n\n");
   // Print the cause of the reboot
   reset_cause_t reset_cause = reset_cause_get();
   DEBUG_LOG("[MAIN]: The system reset cause is \"%s\"\n", reset_cause_get_name(reset_cause));
   print_title_demo();
+
+  HAL_Delay(40000);
 
   osDelay(1000);
 #ifdef TEST_SE

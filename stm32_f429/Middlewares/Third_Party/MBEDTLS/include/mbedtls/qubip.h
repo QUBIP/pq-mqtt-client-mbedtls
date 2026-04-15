@@ -1,14 +1,26 @@
-/*
-Copyright (c) 2016,  2024-2025, Security Pattern srl. All rights reserved.
-SPDX-License-Identifier: MIT
-*/
-
 #ifndef QUBIP_H
 #define QUBIP_H
 
-
 #include <stddef.h>
 #include <stdint.h>
+
+extern unsigned long x25519_keygen_us;
+extern unsigned long x25519_kem_us;
+
+extern unsigned long mlkem768_keygen_us;
+extern unsigned long mlkem768_kem_us;
+
+extern unsigned long ed25519_verify_us;
+extern unsigned long ed25519_sign_us;
+
+extern unsigned long mldsa44_verify_us;
+extern unsigned long mldsa44_sign_us;
+
+extern unsigned long server_crt_parse_us;
+extern unsigned long crl_verify_us;
+
+extern unsigned long total_handshake_us;
+
 
 // Public key size
 #define KYBER768_PK_SIZE 1184
@@ -18,6 +30,7 @@ SPDX-License-Identifier: MIT
 #define X25519_PK_SIZE 32
 #define X25519_SK_SIZE 32
 
+// This repo only works with the SW implementation (HW_IMPLEMENTATION=1) and the Hybrid Certificates (CERTS_PQ_44)
 #define HW_IMPLEMENTATION 0 //1=ON, 0=OFF
 
 // OPTIONS: CERTS_PQ_44, CERTS_PQ_65, CERTS_CLASSIC
@@ -25,29 +38,35 @@ SPDX-License-Identifier: MIT
 
 #define SWAP_ORDER
 
+#define MQTT_PORT		"8884"
 
-//#define BROKER_IP		"192.168.1.12"
-#define BROKER_IP		"broker.dm.qubip.eu"
-#define BROKER_HOSTNAME "broker.dm.qubip.eu"
+#define DEVICE_NAME  "sfc10002"
+
+#if HW_IMPLEMENTATION == 1
+	#define HW_OR_SW "HW"
+#else
+	#define HW_OR_SW "SW"
+#endif
+
+#ifdef CERTS_CLASSIC
+	#define CLASSIC_OR_PQ "Classic"
+#else
+	#define CLASSIC_OR_PQ "Hybrid PQ"
+#endif
+
+#ifdef CERTS_CLASSIC
+	#define BROKER_IP		"broker.smartfactory.it"
+	#define BROKER_HOSTNAME "broker.smartfactory.it"
+#else
+	#define BROKER_IP		"broker.dm.qubip.eu"
+	#define BROKER_HOSTNAME "broker.dm.qubip.eu"
+#endif
 
 // Does not launch FreeRTOS but runs custom test function
 //#define TEST_SE
 
 // Ultra verbose logs, deactivate in prod as they massively interfere with MQTT timeouts
 //#define MQTT_INTERFACE_DEBUG
-
-
-
-#ifdef CERTS_PQ_44
-
-	#define MQTT_PORT		"8884"
-
-#else
-
-	#define MQTT_PORT		"8883"
-
-#endif
-
 
 typedef struct {
 	// Kyber768 Public Key
@@ -68,16 +87,12 @@ typedef struct {
 
 } HybridKeyKEM;
 
-HybridKeyKEM *hybrid_key_gen();
-void hybrid_key_free(HybridKeyKEM *);
+HybridKeyKEM* hybrid_key_gen();
+void hybrid_key_free(HybridKeyKEM*);
 //void print_result_valid(unsigned char* str, unsigned int fail);
-int qubip_pq_x25519_mlkem768_key_agreement(
-    const uint8_t *peer_key,
-    size_t peer_key_length,
-    const uint8_t *key_buffer,
-    size_t key_buffer_size,
-    uint8_t *shared_secret,
-    size_t shared_secret_size,
-    size_t *shared_secret_length);
+int qubip_pq_x25519_mlkem768_key_agreement(const uint8_t *peer_key,
+		size_t peer_key_length, const uint8_t *key_buffer,
+		size_t key_buffer_size, uint8_t *shared_secret,
+		size_t shared_secret_size, size_t *shared_secret_length);
 #endif
 
