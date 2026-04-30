@@ -62,7 +62,7 @@ extern unsigned long crl_verify_us;
 	#define BROKER_HOSTNAME "broker.dm.qubip.eu"
 #endif
 // Force a CRL revocation check
-#define FORCE_CRL_CHECK 1
+#define FORCE_CRL_CHECK 0
 
 #define MQTT_PORT		"8884"
 
@@ -151,10 +151,10 @@ typedef enum {
 #define CRL_CERT_CLASSIC_SPI_ADDR 	0xE000
 
 // MLDSA44
-#define ROOT_CA_CERT_44_SIZE_BYTES 5871
+#define ROOT_CA_CERT_44_SIZE_BYTES 6201
 #define ROOT_CA_CERT_44_SPI_ADDR 0x1000
 
-#define CLIENT_CERT_44_SIZE_BYTES 6295
+#define CLIENT_CERT_44_SIZE_BYTES 6217
 #define CLIENT_CERT_44_SPI_ADDR 0x3000
 
 #define CLIENT_KEY_44_SIZE_BYTES 5523
