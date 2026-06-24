@@ -461,7 +461,12 @@
 //MLDSA44_ED25519
 // OID: 2.16.840.1.114027.80.8.1.3
 // OID Bytes: 06 0B - 60 86 48 01 86 FA 6B 50 08 01 03
-#define MBEDTLS_OID_ED25519_MLDSA44			"\x60" "\x86" "\x48" "\x01" "\x86" "\xFA" "\x6B" "\x50" "\x08" "\x01" "\x03"
+
+// OQS OID
+//#define MBEDTLS_OID_ED25519_MLDSA44			"\x60" "\x86" "\x48" "\x01" "\x86" "\xFA" "\x6B" "\x50" "\x08" "\x01" "\x03"
+
+// AURORA OID
+#define MBEDTLS_OID_ED25519_MLDSA44			    "\x2B\x06\x01\x05\x05\x07\x06\x27"
 
 //MLDSA65_ED25519
 // OID:  2.16.840.1.114027.80.8.1.10

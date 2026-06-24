@@ -797,13 +797,13 @@ int qubip_parse_hybrid_public_key(mbedtls_pk_context *pk, unsigned char **p,
 		mbedtls_ed25519_mlds44_ctx *ctx = pk->pk_ctx;
 		//NOW WE HARDCODE EVERYTHING SINCE THE OFFSETS ARE ALWAYS THE SAME, WE CAN THEN MOVE TO ASN1 PARSING
 
-		*p += 8 + 1;
+		//*p += 8 + 1;
 
 		memcpy(ctx->mldsa_pub_key, *p, ctx->mldsa_pubsize);
 
 		*p += ctx->mldsa_pubsize;
 
-		*p += 2 + 1;
+		//*p += 2 + 1;
 
 		memcpy(ctx->ed_pub_key, *p, ctx->ed_pubsize);
 
